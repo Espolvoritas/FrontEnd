@@ -1,0 +1,17 @@
+.Dice {
+    text-align: center;
+    padding-top: 35%;
+    padding-bottom: 50%;
+    width: 25%;
+    color: white;
+    position: fixed;
+}
+
+.background-image {
+    background: url(../media/MisterioBoard.jpeg) no-repeat center fixed;
+    background-color: black;
+    background-size:contain;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
