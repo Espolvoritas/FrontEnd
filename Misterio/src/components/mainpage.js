@@ -14,7 +14,9 @@ const MainPage = () => {
     return (
         <div className="Title">
             <h1>Bienvenido a Misterio</h1>
-            <button className="GameButton" onClick={CreateGameButton}>Crear Partida</button>
+            <a href="/formcreatingame">
+                <button className="GameButton" onClick={CreateGameButton}>Crear Partida</button>
+            </a>
             <p/>
             <button className="GameButton" onClick={JoinGameButton}>Unirse a Partida</button>
         </div>
