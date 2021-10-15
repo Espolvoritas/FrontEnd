@@ -12,12 +12,14 @@ const MainPage = () => {
     }
 
     return (
-        <div className="Title">
-            <h1>Bienvenido a Misterio</h1>
-            <button className="GameButton" onClick={CreateGameButton}>Crear Partida</button>
-            <p/>
-            <button className="GameButton" onClick={JoinGameButton}>Unirse a Partida</button>
-        </div>
+        <body className="Background">
+            <div className="Box-tittle">
+                <h1>Bienvenido a Misterio</h1>
+                <button className="GameButton" onClick={CreateGameButton}>Crear Partida</button>
+                <p/>
+                <button className="GameButton" onClick={JoinGameButton}>Unirse a Partida</button>
+                </div>
+        </body>
     );
 }
 
