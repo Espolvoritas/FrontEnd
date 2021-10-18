@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+.Rows{
+    font-size: 17px;
+    font-family: 'Josefin Sans', sans-serif;
+    border-bottom: 1px solid #ddd;
+    color: #474944;
+}
 
-.Rows:hover {background-color: yellow;}
+.Rows:nth-child(even) {background-color: #e7e8d0;}
+.Rows:nth-child(odd) {background-color: #d1ccc1;}
+.Rows:hover {
+    background-color: #2f464f;  
+    color: #e7e8d0;
+}
 
 body{
     text-align: center;
     font-family: 'Merriweather', serif;
-    background-color: aquamarine;
-}
 
+    background-image: url(../media/police-car.jpg);
+    background-position: center;
+    background-size: cover;
+}
 
 table { 
     border-collapse: collapse;
@@ -28,11 +40,11 @@ img { border: 0; max-width: 100%; }
 }
 
 #keywords thead {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    font-family: 'IM Fell English SC', serif;
-    background-color: #04AA6D;
-    color: white;
+    font-family: 'Special Elite', serif;
+    background-color:#474944;
+    color: #eae8e8;
 }
 
 #keywords thead tr th { 
@@ -47,22 +59,10 @@ img { border: 0; max-width: 100%; }
     background-position: 100% 100%;
 }
 
-#keywords tbody tr { 
-    font-size: 17px;
-    color: #555;
-    font-family: 'Josefin Sans', sans-serif;
-    border-bottom: 1px solid #ddd;   
-}
-
 #keywords tbody tr td {
     text-align: center;
     padding: 10px;
     cursor: pointer;  
-}
-
-tbody {
-    background-color:white;
-    overflow: auto;
 }
 
 .Wrapper{
@@ -71,4 +71,10 @@ tbody {
     width:700px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.ListGames {
+    color: #e0d3b8;
+    font-size: 110%;
+    font-family: 'IM Fell English SC', serif;
 }
