@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
 
+/** Page structure **/
+
+body {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    background-image: url(../media/police-car.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+/** DisplayJson structure **/
+
 .Rows{
     font-size: 17px;
     font-family: 'Josefin Sans', sans-serif;
@@ -14,24 +26,11 @@
     color: #e7e8d0;
 }
 
-body{
-    text-align: center;
-    font-family: 'Merriweather', serif;
-
-    background-image: url(../media/police-car.jpg);
-    background-position: center;
-    background-size: cover;
-}
-
 table { 
     border-collapse: collapse;
     border-spacing: 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
-
-img { border: 0; max-width: 100%; }
-
-/** page structure **/
 
 #keywords {
     margin: 0 auto;
@@ -42,39 +41,62 @@ img { border: 0; max-width: 100%; }
 #keywords thead {
     font-size: 18px;
     font-weight: bold;
+    width: 700px;
     font-family: 'Special Elite', serif;
     background-color:#474944;
     color: #eae8e8;
 }
 
-#keywords thead tr th { 
-    font-weight: bold;
-    padding: 12px 30px;
-    width: 250px;
+#keywords thead, tbody{
+    display: block;
 }
 
-#keywords thead tr th span { 
-    padding-right: 20px;
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
+#keywords tbody{
+    overflow-y: auto;
+    height:415px;
+    width:700px;
+}
+
+#keywords thead tr th { 
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+#keywords tr, th, td{
+    width: 175px;
 }
 
 #keywords tbody tr td {
     text-align: center;
-    padding: 10px;
+    padding: 8.1px;
     cursor: pointer;  
 }
 
-.Wrapper{
-    overflow-y:scroll;
-    height:500px;
-    width:700px;
-    margin-left: auto;
-    margin-right: auto;
+.RefreshButton{
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-family: 'IM Fell English SC', serif;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    color: #eae8e8;
+    background-color: #6b5d58;
 }
+
+.RefreshButton:focus {     
+    background-color:#2f2830;
+}
+
+/** ListGames structure **/
 
 .ListGames {
     color: #e0d3b8;
     font-size: 110%;
     font-family: 'IM Fell English SC', serif;
+}
+
+.Warning{
+    color: tomato;
 }
