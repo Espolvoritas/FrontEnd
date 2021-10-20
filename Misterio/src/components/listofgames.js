@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../css/listofgames.css';
 
 const ListGames = () => {
@@ -6,8 +6,20 @@ const ListGames = () => {
     const [listGame, setListGame] = useState([]);
     const [isEmptyList, setIsEmptyList] = useState(false);
 
+    // load the list of games when the page loads
+    useEffect(() => {
+        const firstCall = setTimeout(handleGames, 0);
+        return () => clearTimeout(firstCall);
+    }, []);
+        
+    // refresh the page every ten seconds automagically
+    useEffect(() => {
+        const autoRefresh = setInterval(handleGames, 10000);
+        return () => clearInterval(autoRefresh);
+    }, []);
+
+    // establish connection with the backend
     async function handleGames(){
-        console.log("test")
         const response = await fetch('http://127.0.0.1:8000/game/availableGames', {
             headers: {
             'Accept': 'application/json',
@@ -22,9 +34,9 @@ const ListGames = () => {
         else {
             setListGame([])
             setIsEmptyList(true)
-            // Advertencia de que no hay partidas creadas
         }
     }
+    // process and display the received json
     function DisplayJson() {
         return (
         <div>
@@ -44,7 +56,7 @@ const ListGames = () => {
                         <td>{block.host}</td>
                         <td>{block.players}/6</td>
                         {
-                            // Check if game has password
+                            // check if game has password
                             (!block.password) ? <td>🔓</td> : <td>🔐</td> 
                         }
                     </tr>
@@ -56,11 +68,10 @@ const ListGames = () => {
         )
     }
 
-    
     return (
         <div className="ListGames">
             <h1>Selecciona la partida</h1>
-            {(isEmptyList) ? <p className="Warning">⚠️No hay partidas disponibles. Prueba creando una⚠️</p> : <p/>}
+            {(isEmptyList) ? <p className="Warning">⚠️No hay partidas disponibles. Prueba actualizar o crear una partida⚠️</p> : <p/>}
             {DisplayJson()}
         </div>
     );
