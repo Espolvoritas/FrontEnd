@@ -29,7 +29,6 @@ body {
 table { 
     border-collapse: collapse;
     border-spacing: 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 #keywords {
@@ -93,10 +92,12 @@ table {
 
 .ListGames {
     color: #e0d3b8;
-    font-size: 110%;
+    font-size: 18px;
     font-family: 'IM Fell English SC', serif;
 }
 
 .Warning{
-    color: tomato;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(252, 64, 31);
 }
