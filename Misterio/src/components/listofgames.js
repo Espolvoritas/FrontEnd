@@ -51,11 +51,11 @@ const ListGames = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const nickNameData = {
-            "nickname": nickname,
-            "gameid": gameid
+            "gameId": gameid,
+            "playerNickname": nickname
         }
         try {
-            const joinChecked = await fetch('http://127.0.0.1:8000/game/checkJoin', {
+            const joinChecked = await fetch('http://127.0.0.1:8000/game/joinCheck', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -64,11 +64,14 @@ const ListGames = () => {
                 },
                 body: JSON.stringify(nickNameData)
             })
-            if (joinChecked.status === 200){
-                const state = {"player_id": await joinChecked.json()}
+            console.log(joinChecked)
+            const response = await joinChecked.json()
+            if (joinChecked.status === 200 && response["nicknameIsValid"]){
+                const state = {"player_id": response["playerId"]}
                 history.push("/lobby", state);
             } else {
-                setIsRepeated(true)
+                setIsRepeated(!response["nicknameIsValid"])
+                console.log("Error en joinChecked")
             }
         }
         catch(error) {
@@ -77,7 +80,9 @@ const ListGames = () => {
     }
 
     const settingid = (i) => {
+        console.log(listGame[i]["id"])
         setGameID(listGame[i]["id"])
+        setIsRepeated(false)
     }
 
     // process and display the received json
@@ -97,13 +102,13 @@ const ListGames = () => {
                         {listGame.map((block, i) => (
                             <Popup trigger= {
                                 <tr key={block.id} className="Rows">
-                                    <td onClick={() => {settingid(i);setIsRepeated(false);}}>{block.name} </td>
-                                    <td onClick={() => {settingid(i);setIsRepeated(false);}}>{block.host}</td>
-                                    <td onClick={() => {settingid(i);setIsRepeated(false);}}>{block.players}/6</td>
+                                    <td onClick={() => {settingid(i)}}>{block.name} </td>
+                                    <td onClick={() => {settingid(i)}}>{block.host}</td>
+                                    <td onClick={() => {settingid(i)}}>{block.players}/6</td>
                                     {
                                         // check if game has password
-                                        (!block.password) ? <td onClick={() => {settingid(i);setIsRepeated(false);}}>🔓</td>
-                                        : <td onClick={() => {settingid(i);setIsRepeated(false);}} >🔐</td>
+                                        (!block.password) ? <td onClick={() => {settingid(i)}}>🔓</td>
+                                        : <td onClick={() => {settingid(i)}} >🔐</td>
                                     }
                                 </tr>
                             } modal>
@@ -120,7 +125,7 @@ const ListGames = () => {
                                                 }
                                                 <label>
                                                     <p/>
-                                                     <input type="text" name="nickname"
+                                                     <input type="text" name="nickname" onClick={() => setIsRepeated(false)}
                                                         onChange={e => setNickName(e.target.value)}/>
                                                 </label>
                                                 <input type="submit" value="enviar" onClick={handleSubmit}/>
