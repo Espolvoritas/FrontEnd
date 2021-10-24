@@ -115,20 +115,20 @@ const ListGames = () => {
                                 {close => (
                                     <div className="modal">
                                         <button className="close" onClick={close}>&times;</button>
-                                        <div className="header"> Ingrese su apodo </div>
+                                        <div className="popupheader"> Ingrese su apodo </div>
                                         <div className="content">
+                                            {
+                                                (isRepeated)
+                                                ? <label className="takensign"> Apodo tomado </label>
+                                                : <p/>
+                                            }
                                             <form>
-                                                {
-                                                    (isRepeated)
-                                                    ? <label> El apodo ya esta en uso, ingrese otro </label>
-                                                    : <p/>
-                                                }
                                                 <label>
                                                     <p/>
-                                                     <input type="text" name="nickname" onClick={() => setIsRepeated(false)}
+                                                     <input className="nicknameinput" type="text" name="nickname" onClick={() => setIsRepeated(false)}
                                                         onChange={e => setNickName(e.target.value)}/>
                                                 </label>
-                                                <input type="submit" value="enviar" onClick={handleSubmit}/>
+                                                <input className="sendbutton" type="submit" value="->" onClick={handleSubmit}/>
                                             </form>
                                         </div>
                                     </div>
