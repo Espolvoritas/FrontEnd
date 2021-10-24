@@ -25,20 +25,20 @@ const CreatingFrom = () => {
     return (
         <div className="Form">
             <h1>Crear la partida</h1>
-            <form>
+            <form data-testid="form" >
                 <label>
-                    Nombre de la partida
+                    Nombre de partida
                     <p/>
-                    <input type="text" name="name" onChange={e => setName(e.target.value)} />
+                    <input type="text" name="name" autoComplete="off" placeholder="Nombre de partida" onChange={e => setName(e.target.value)} />
                 </label>
                 <p/>
                 <label>
                     Apodo
                     <p/>
-                    <input type="text" name="host"onChange={e => setHost(e.target.value)} />
+                    <input type="text" name="host" autoComplete="off" placeholder="Apodo" onChange={e => setHost(e.target.value)} />
                 </label>
                 <p/>
-                <input type="submit" value="Crear" onClick={EPcreategame}/>
+                <input type="submit" value="Crear" onSubmit={EPcreategame}/>
             </form>
         </div>
     );
