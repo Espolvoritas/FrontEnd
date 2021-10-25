@@ -4,21 +4,20 @@ import { useHistory } from "react-router-dom";
 
 const Lobby = () => {
 
-    const [listPlayers, setListPlayers] = useState([]);
-    let statusNextPage = useRef(false);
+    const [listPlayers, setListPlayers] = useState([]); 
+    let statusNextPage = useRef(false); 
     const ws = useRef(null);
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"]}
+    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"]} // Data to next page
 
+    // WebSocket recieve and close connection
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/game/getPlayers/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
-          history.push("/gameboard", state);
-          ws.current.close();
         }else{
           setListPlayers(JSON.parse(event.data));
         }
@@ -27,10 +26,14 @@ const Lobby = () => {
       ws.current.onclose = () => {
         if(!statusNextPage.current){
           history.push("/listofgames")
+        }else{
+          history.push("/gameboard", state);
+          ws.current.close();
         }
       };
     }, []);
 
+    // Inform to back through endpoint to push gameboard page
     const clickNextPage = async (e) => {
       e.preventDefault();
       const response = await fetch('http://127.0.0.1:8000/game/startGame', {
@@ -42,11 +45,17 @@ const Lobby = () => {
                 },
                 body: datahost["player_id"]
       })
+
+      if(response.status == 200){
+        history.push("/gameboard", state);
+        ws.current.close();
+      }
     }
 
+    // Pushing to list of games page and closing WebSocket
     const clickExitLobby = () => {
       history.push("/listofgames");
-      ws.current.close()
+      ws.current.close();
     }
 
     return (
