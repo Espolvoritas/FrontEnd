@@ -111,8 +111,8 @@ table {
 }
 
 .modal {
-    width: 250px;
-    height: 150px;
+    width: 275px;
+    height: 200px;
     background-color: #e7e8d0;
     font-size: 12px;
     border-radius: 25px;
@@ -142,9 +142,10 @@ table {
 }
 
 .popupheader{
+    margin-top: 15px;
     margin-right: 20px;
     color: black;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
