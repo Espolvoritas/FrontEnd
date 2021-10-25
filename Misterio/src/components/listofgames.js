@@ -141,7 +141,7 @@ const ListGames = () => {
                                                         onClick={() => {setIsRepeated(false); setNotFormated(false)}}
                                                         onChange={e => setNickName(e.target.value)} required autoComplete = "off"/>
                                                 </label>
-                                                <input className="sendbutton" type="submit" value="->" onClick={handleSubmit}/>
+                                                <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
                                             </form>
                                         </div>
                                     </div>
