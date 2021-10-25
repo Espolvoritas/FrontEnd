@@ -4,14 +4,14 @@ import { useHistory } from "react-router-dom";
 
 const CreatingFrom = () => {
 
-    const [id, setId] = useState(0);
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
     const [isRepeated, setIsRepeated] = useState(false);
     const history = useHistory();
+    const [emptyInput, setEmptyInput] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
+        
         const gameData = {
             "name": name,
             "host": host
@@ -26,42 +26,61 @@ const CreatingFrom = () => {
             body: JSON.stringify(gameData)
         })
 
-        setId(await response.json())
+        const res = await response.json()
 
         setIsRepeated(response.status === 400)
 
         if (response.status === 201){
-            const state = {"gameId": id, "gameName": name, "gameHost": host }
+            const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "gameHost": host }
             history.push("/lobby", state);
         }
 
     }
 
+    const EraseError = () => {
+        setIsRepeated(false);
+        setEmptyInput(false);
+    }
+
+    const nicknameEmpty = (e) => {
+        e.preventDefault();
+        if(name === "" || host === ""){
+            setEmptyInput(true)
+        }else{
+            handleSubmit()
+        }
+    }
+
+
     return (
-        <div className="Form">
-            <h1 >Crear la partida </h1>
-            <form onSubmit={handleSubmit}>
-                {
-                    // Check if game name is repeated
-                    (isRepeated)
-                    ? <label> The game name is repeated </label> 
-                    : <p/> 
-                }
-                <p/>
-                <label>
-                    Nombre de la partida
+        <div className="Background-formgame">
+            <div id="form">
+                <h1 >Crear la partida </h1>
+                <form onSubmit={e => nicknameEmpty(e)} data-testid="form">
+                    {
+                        // Check if game name is repeated
+                        (isRepeated)
+                        ? <label className="Error">⚠️Ya existe una partida con ese nombre. Por favor elige otro⚠️</label>
+                        : ((emptyInput)
+                        ? <label className="Error">⚠️Por favor complete todos los campos para continuar⚠️</label> 
+                        : <p/>) 
+                    }
                     <p/>
-                    <input type="text" name="name" autoComplete="off" placeholder="Nombre de partida" onChange={e => setName(e.target.value)} />
-                </label>
-                <p/>
-                <label>
-                    Apodo
+                    <label>
+                        Nombre de la partida
+                        <p/>
+                        <input type="text" name="name" autoComplete="off" placeholder="Nombre de partida" onClick={EraseError} onChange={e => setName(e.target.value)} />
+                    </label>
                     <p/>
-                    <input type="text" name="host" autoComplete="off" placeholder="Apodo" onChange={e => setHost(e.target.value)} />
-                </label>
-                <p/>
-                <input type="submit" value="Crear" />
-            </form>
+                    <label>
+                        Apodo
+                        <p/>
+                        <input type="text" name="host" autoComplete="off" placeholder="Apodo" onClick={EraseError} onChange={e => setHost(e.target.value)} />
+                    </label>
+                    <p/>
+                    <button className="GameButton" type="submit" value="Crear">Crear</button>
+                </form>
+            </div>
         </div>
     );
 
