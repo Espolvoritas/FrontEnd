@@ -17,11 +17,12 @@ const GameBoard = () => {
         <div className="DiceRoll">
             <Dice placement="botton-left" faceBg="black" size="70" onRoll={(value) => ws.send(value)}/>
         </div>
-        <span className="Turn">
-            <h1>Es el turno de {actualTurn}</h1>
-        </span>
+        <div className="Turn">
+            <h1>Esta jugando el detective: {actualTurn}</h1>
+        </div>
     </div>
     )
 }
+
 export default GameBoard;
 

@@ -1,9 +1,9 @@
 import './App.css';
-import MainPage from './components/mainpage';
+import GameBoard from './components/gameboard';
 
 function App() {
   return (
-    <MainPage/>
+    <GameBoard/>
   );
 }
 export default App;
