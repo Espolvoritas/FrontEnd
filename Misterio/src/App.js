@@ -3,7 +3,6 @@ import MainPage from './components/mainpage';
 import CreatingFrom from './components/formcreatingame';
 import ListGames from './components/listofgames';
 import Lobby from './components/lobby';
-import  { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
 function App() {
