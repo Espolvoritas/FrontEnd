@@ -4,7 +4,7 @@ import '../css/mainpage.css';
 const MainPage = () => {
 
     return (
-        <body className="Background">
+        <div className="Background">
             <div className="Box-tittle">
                 <h1>Bienvenido a Misterio</h1>
                 <a href="/formcreatingame">
@@ -15,7 +15,7 @@ const MainPage = () => {
                     <button className="GameButton">Unirse a Partida</button>
                 </a>
             </div>
-        </body>
+        </div>
     );
 }
 
