@@ -12,11 +12,13 @@ function App() {
       <Switch>
         <Route exact path="/" component={MainPage}></Route>
         <Route exact path="/formcreatingame" component={CreatingFrom}></Route>
-        <Route exact path="/lobby" component={Lobby}></Route>
         <Route exact path="/listofgames" component={ListGames}></Route>
         <Route exact path="/gameboard" component={GameBoard}></Route>
+        <Route exact path="/lobby" component={Lobby}></Route>
+
       </Switch>
     </Router>
   );
 }
+
 export default App;
