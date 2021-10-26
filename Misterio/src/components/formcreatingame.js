@@ -9,6 +9,7 @@ const CreatingFrom = () => {
     const [isRepeated, setIsRepeated] = useState(false);
     const history = useHistory();
     const [emptyInput, setEmptyInput] = useState(false);
+    const [notFormated, setNotFormated] = useState(false);
 
     const handleSubmit = async () => {
         
@@ -46,6 +47,8 @@ const CreatingFrom = () => {
         e.preventDefault();
         if(name === "" || host === ""){
             setEmptyInput(true)
+        }else if(!((name.length < 21) && (name.length > 4)) || !((host.length < 21) && (host.length > 4))){
+            setNotFormated(true)
         }else{
             handleSubmit()
         }
@@ -63,7 +66,10 @@ const CreatingFrom = () => {
                         ? <label className="Error">⚠️Ya existe una partida con ese nombre. Por favor elige otro⚠️</label>
                         : ((emptyInput)
                         ? <label className="Error">⚠️Por favor complete todos los campos para continuar⚠️</label> 
-                        : <p/>) 
+                        : ((notFormated)
+                        ? <label className="Error">⚠️El apodo o nombre de la partida no tiene el formato correcto⚠️</label> 
+                        : <p/>
+                        )) 
                     }
                     <p/>
                     <label>
