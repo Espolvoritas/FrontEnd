@@ -13,3 +13,11 @@
     height: 100vh; 
     position: relative;
 }
+
+.Turn{
+    border-radius: 8px;
+    color: white;
+    border: solid 2px white;
+    width: 450px;
+    height: 100px;
+}
