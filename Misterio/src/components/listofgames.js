@@ -96,7 +96,7 @@ const ListGames = () => {
     function DisplayJson() {
         return (
             <div>
-                <table id="keywords" cellSpacing="0" cellPadding="0">
+                <table id="key-list" cellSpacing="0" cellPadding="0">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -108,7 +108,7 @@ const ListGames = () => {
                     <tbody>
                         {listGame.map((block, i) => (
                             <Popup trigger= {
-                                <tr key={block.id} className="Rows">
+                                <tr key={block.id} className="Rows-List">
                                     <td onClick={() => {settingid(i)}}>{block.name} </td>
                                     <td onClick={() => {settingid(i)}}>{block.host}</td>
                                     <td onClick={() => {settingid(i)}}>{block.players}/6</td>
@@ -156,12 +156,14 @@ const ListGames = () => {
     }
 
     return (
-        <div className="ListGames">
-            <h1>Selecciona la partida</h1>
-            {(isEmptyList) ? <p className="Warning">⚠️No hay partidas disponibles. 
-            Prueba actualizar o crear una partida⚠️</p> : <p/>}
-            {DisplayJson()}
+        <div className="Background-List">
+            <div id="key-screen">
+                <h1>Selecciona la partida</h1> 
+                {(isEmptyList) ? <div className="Warning">⚠️No hay partidas disponibles. Prueba actualizar o crear una partida⚠️</div> : <p/>}
+                {DisplayJson()}
+            </div>
         </div>
+        
     );
 }
 

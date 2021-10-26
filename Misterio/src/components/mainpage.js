@@ -11,7 +11,7 @@ const MainPage = () => {
                     <button className="GameButton">Crear Partida</button>
                 </a>
                 <p/>
-                <a href="listofgames">
+                <a href="/listofgames">
                     <button className="GameButton">Unirse a Partida</button>
                 </a>
             </div>

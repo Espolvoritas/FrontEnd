@@ -1,27 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
 
-/** Page structure **/
-
-body {
-    text-align: center;
-    font-family: 'Merriweather', serif;
-    background-image: url(../media/police-car.jpg);
-    background-position: center;
-    background-size: cover;
-}
-
 /** DisplayJson structure **/
 
-.Rows{
+.Rows-List{
     font-size: 17px;
     font-family: 'Josefin Sans', sans-serif;
     border-bottom: 1px solid #ddd;
     color: #474944;
 }
 
-.Rows:nth-child(even) {background-color: #e7e8d0;}
-.Rows:nth-child(odd) {background-color: #d1ccc1;}
-.Rows:hover {
+.Rows-List:nth-child(even) {background-color: #e7e8d0;}
+.Rows-List:nth-child(odd) {background-color: #d1ccc1;}
+.Rows-List:hover {
     background-color: #2f464f;  
     color: #e7e8d0;
 }
@@ -31,41 +21,41 @@ table {
     border-spacing: 0;
 }
 
-#keywords {
+#key-list {
     margin: 0 auto;
     font-size: 1.2em;
     margin-bottom: 15px;
 }
 
-#keywords thead {
+#key-list thead {
     font-size: 18px;
     font-weight: bold;
     width: 700px;
     font-family: 'Special Elite', serif;
-    background-color:#969991;
+    background-color:#474944;
     color: #eae8e8;
 }
 
-#keywords thead, tbody{
+#key-list thead, tbody{
     display: block;
 }
 
-#keywords tbody{
+#key-list tbody{
     overflow-y: auto;
     height:415px;
     width:700px;
 }
 
-#keywords thead tr th { 
+#key-list thead tr th { 
     padding-bottom: 12px;
     padding-top: 12px;
 }
 
-#keywords tr, th, td{
+#key-list tr, th, td{
     width: 175px;
 }
 
-#keywords tbody tr td {
+#key-list tbody tr td {
     text-align: center;
     padding: 8.1px;
     cursor: pointer;  
@@ -84,25 +74,39 @@ table {
     background-color: #6b5d58;
 }
 
-.RefreshButton:focus {     
+.RefreshButton:active {     
     background-color:#2f2830;
 }
 
 /** ListGames structure **/
 
-.ListGames {
+#key-screen h1{
     color: #e0d3b8;
-    font-size: 18px;
+    font-weight: bold;
     font-family: 'IM Fell English SC', serif;
+    text-align: center;
+}
+
+.Background-List{
+    background: url(../media/police-car.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    text-align: center;
 }
 
 .Warning{
+    font-family: 'IM Fell English SC', serif;
     font-weight: bold;
     font-size: 20px;
     color: rgb(252, 64, 31);
+    margin-bottom: 15px;
 }
 
-/*Pop up*/
+/** Pop up **/
+
 .takensign{
     margin-right: 20px;
     font-size: 12px;

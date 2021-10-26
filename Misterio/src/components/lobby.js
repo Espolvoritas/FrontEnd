@@ -46,7 +46,7 @@ const Lobby = () => {
                 body: datahost["player_id"]
       })
 
-      if(response.status == 200){
+      if(response.status === 200){
         history.push("/gameboard", state);
         ws.current.close();
       }
@@ -59,9 +59,9 @@ const Lobby = () => {
     }
 
     return (
-        <div className="background-lobby">
+        <div className="Background-Lobby">
           <div className="Title">Sala: {datahost["gameName"]}
-            <table id="keywords" cellSpacing="0" cellPadding="0">
+            <table id="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -70,7 +70,7 @@ const Lobby = () => {
                 </thead>
                 <tbody>            
                     {Object.keys(listPlayers).map((block, i) => (
-                      <tr key={i} className="Rows">
+                      <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]} </td> 
                           <td></td>
                       </tr>
@@ -79,14 +79,14 @@ const Lobby = () => {
             </table>
 
             <div id="LobbyChat" >
-              <p>Chat próximo sprint</p>
-                
+              <div className="GameButton-lobby">
                 {
                   (datahost["game_id"] !== undefined)
                   ? <button className="GameButton-lobby" onClick={e => clickNextPage(e)}>Iniciar partida</button>
                   : <p/>
                 }
                 <button className="GameButton-lobby" onClick={() => clickExitLobby()}>Salir de la sala</button>
+              </div>
             </div>
           </div>
         </div>
