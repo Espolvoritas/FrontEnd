@@ -48,7 +48,7 @@ const ListGames = () => {
     const [gameid, setGameID] = useState(-1);
     const [isRepeated, setIsRepeated] = useState(false);
     const [notFormated, setNotFormated] = useState(false);
-
+    const [gameName, setGameName] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ const ListGames = () => {
                 console.log(joinChecked)
                 const response = await joinChecked.json()
                 if (joinChecked.status === 200 && response["nicknameIsValid"]){
-                    const state = {"player_id": response["playerId"]}
+                    const state = {"game_id": gameid, "player_id": response["playerId"], "gameName": gameName}
                     history.push("/lobby", state);
                 } else {
                     setIsRepeated(!response["nicknameIsValid"])
@@ -86,7 +86,7 @@ const ListGames = () => {
     }
 
     const settingid = (i) => {
-        console.log(listGame[i]["id"])
+        setGameName(listGame[i]["name"])
         setGameID(listGame[i]["id"])
         setIsRepeated(false)
         setNotFormated(false)
@@ -158,12 +158,11 @@ const ListGames = () => {
     return (
         <div className="Background-List">
             <div id="key-screen">
-                <h1>Selecciona la partida</h1> 
+                <h1>Selecciona la partida</h1>
                 {(isEmptyList) ? <div className="Warning">⚠️No hay partidas disponibles. Prueba actualizar o crear una partida⚠️</div> : <p/>}
                 {DisplayJson()}
             </div>
         </div>
-        
     );
 }
 
