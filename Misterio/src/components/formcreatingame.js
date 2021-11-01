@@ -32,7 +32,7 @@ const CreatingFrom = () => {
         setIsRepeated(response.status === 400)
 
         if (response.status === 201){
-            const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "gameHost": host }
+            const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "player_name": host }
             history.push("/lobby", state);
         }
 
