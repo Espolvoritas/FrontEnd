@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
+
+.Form{
+    text-align: center;
+}
+
+.Background-formgame {
+    background: url(../media/police-car.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+#form{
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color:  #d6d1c5;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 45%;
+    padding: 15px;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+}
+.Error{
+    color: tomato;
+}
+#form form{
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.GameButton{
+    text-align: center;
+    padding: 10px 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'IM Fell English SC', serif;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.GameButton:focus {     
+    background-color: #2f464f;   
+    color: #e7e8d0; 
+}

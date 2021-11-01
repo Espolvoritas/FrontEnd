@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
+
+/** DisplayJson structure **/
+
+.Rows-List{
+    font-size: 17px;
+    font-family: 'Josefin Sans', sans-serif;
+    border-bottom: 1px solid #ddd;
+    color: #474944;
+}
+
+.Rows-List:nth-child(even) {background-color: #e7e8d0;}
+.Rows-List:nth-child(odd) {background-color: #d1ccc1;}
+.Rows-List:hover {
+    background-color: #2f464f;  
+    color: #e7e8d0;
+}
+
+table { 
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#key-list {
+    margin: 0 auto;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+#key-list thead {
+    font-size: 18px;
+    font-weight: bold;
+    width: 700px;
+    font-family: 'Special Elite', serif;
+    background-color:#474944;
+    color: #eae8e8;
+}
+
+#key-list thead, tbody{
+    display: block;
+}
+
+#key-list tbody{
+    overflow-y: auto;
+    height:415px;
+    width:700px;
+}
+
+#key-list thead tr th { 
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+#key-list tr, th, td{
+    width: 175px;
+}
+
+#key-list tbody tr td {
+    text-align: center;
+    padding: 8.1px;
+    cursor: pointer;  
+}
+
+.RefreshButton{
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-family: 'IM Fell English SC', serif;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    color: #eae8e8;
+    background-color: #6b5d58;
+}
+
+.RefreshButton:active {     
+    background-color:#2f2830;
+}
+
+/** ListGames structure **/
+
+#key-screen h1{
+    color: #e0d3b8;
+    font-weight: bold;
+    font-family: 'IM Fell English SC', serif;
+    text-align: center;
+}
+
+.Background-List{
+    background: url(../media/police-car.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    text-align: center;
+}
+
+.Warning{
+    font-family: 'IM Fell English SC', serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(252, 64, 31);
+    margin-bottom: 15px;
+}
+
+/** Pop up **/
+
+.takensign{
+    margin-right: 20px;
+    font-size: 12px;
+    color: red;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.modal {
+    width: 275px;
+    height: 200px;
+    background-color: #e7e8d0;
+    font-size: 12px;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;}
+
+.close {
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    display: right;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-left: 220px;
+}
+
+.close:hover{
+    color: red;
+    background-color: #969991;
+}
+
+.send{
+    color: red;
+    font-size: 15px;
+    margin-top: 50px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.popupheader{
+    margin-top: 15px;
+    margin-right: 20px;
+    color: black;
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.nicknameinput{
+    width: 70%;
+    height: 30px;
+    color: #222;
+    border: 1px solid #dfe1e5;
+    font-size: 14px;
+    border-radius: 24px;
+    outline: none;
+}
+
+.sendbutton{
+    margin-left: 20px;
+    height: 30px;
+    background-color: white;
+    border-radius: 24px;
+}
+
+.sendbutton:hover{
+    color: red;
+    background-color: #969991;
+}
