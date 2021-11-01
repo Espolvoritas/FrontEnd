@@ -8,8 +8,8 @@ const GameBoard = () => {
     const history = useHistory()
     const datahost = history.location.state
     const ws = useRef(null);
-
     const [actualTurn, setData] = useState("")
+    const isPlaying = (datahost["player_name"] === actualTurn)
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/" 
@@ -22,8 +22,8 @@ const GameBoard = () => {
     return (
     <div className="background-image">
         <div className="DiceRoll">
-            <Dice placement="botton-left" faceBg="black" size="70" 
-                onRoll={(value) => ws.current.send(value)}/>
+            <Dice placement="botton-left" faceBg="black" size="70"  
+                disabled={!isPlaying} onRoll={(value) => ws.current.send(value)}/>
         </div>
         <div className="Turn">
             <h1>Esta jugando el detective: {actualTurn}</h1>
