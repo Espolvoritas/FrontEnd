@@ -19,6 +19,8 @@ const GameBoard = () => {
     const [card, setCard] = useState("");
     const [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
+    const [actualTurn, setData] = useState("")
+    const isPlaying = (datahost["player_name"] === actualTurn)
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
