@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import '../css/lobby.css';
 import { useHistory } from "react-router-dom";
 
 const Lobby = () => {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import '../css/formcreatingame.css';
 import { useHistory } from "react-router-dom";
 
 const CreatingFrom = () => {
