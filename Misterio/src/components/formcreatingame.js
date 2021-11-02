@@ -17,7 +17,7 @@ const CreatingFrom = () => {
             "name": name,
             "host": host
         }
-        const response = await fetch('http://127.0.0.1:8000/game/createNew', {
+        const response = await fetch('http://127.0.0.1:8000/lobby/createNew', {
             method: 'POST',
             headers: {
             'Accept': 'application/json',

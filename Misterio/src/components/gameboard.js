@@ -10,10 +10,12 @@ const GameBoard = () => {
     const ws = useRef(null);
     const [actualTurn, setData] = useState("")
     const isPlaying = (datahost["player_name"] === actualTurn)
+    console.log("Si: " + datahost["player_name"])
+    console.log("No: " + datahost["player_name"])
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/" 
-                                + String(datahost["player_id"]) + "/rollDice")
+                                + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
             setData(JSON.parse(event.data));
         };
