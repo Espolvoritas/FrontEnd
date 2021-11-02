@@ -24,7 +24,7 @@ const ListGames = () => {
     // establish connection with the backend
     async function handleGames(){
         try {
-            const response = await fetch('http://127.0.0.1:8000/game/availableGames', {
+            const response = await fetch('http://127.0.0.1:8000/lobby/availableGames', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const ListGames = () => {
         }
         if ((nickname !== "") && (nickname.length < 21) && (nickname.length > 4)){
             try {
-                const joinChecked = await fetch('http://127.0.0.1:8000/game/joinCheck', {
+                const joinChecked = await fetch('http://127.0.0.1:8000/lobby/joinCheck', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

@@ -13,7 +13,7 @@ const GameBoard = () => {
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/" 
-                                + String(datahost["player_id"]) + "/rollDice")
+                                + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
             setData(JSON.parse(event.data));
         };
