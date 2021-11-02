@@ -1,0 +1,76 @@
+.suspicion-button{
+
+}
+
+/** Pop up **/
+
+.takensign{
+    margin-right: 20px;
+    font-size: 12px;
+    color: red;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.modal {
+    width: 100%;
+    height: 95px;
+    background-color: #e7e8d0;
+    font-size: 12px;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;}
+
+.close {
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    display: right;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 531px;
+    cursor: pointer;
+}
+
+.close:hover{
+    color: red;
+    background-color: #969991;
+}
+
+.send{
+    color: red;
+    font-size: 15px;
+    margin-top: 50px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.popupheader{
+    margin-top: 15px;
+    margin-right: 20px;
+    color: black;
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.nicknameinput{
+    width: 70%;
+    height: 30px;
+    color: #222;
+    border: 1px solid #dfe1e5;
+    font-size: 14px;
+    border-radius: 24px;
+    outline: none;
+}
+
+.sendbutton{
+    margin-left: 20px;
+    height: 30px;
+    background-color: white;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
+.sendbutton:hover{
+    color: red;
+    background-color: #969991;
+}
