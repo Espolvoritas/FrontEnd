@@ -21,6 +21,8 @@ const GameBoard = () => {
     let arriveSus = useRef(false)
     const [actualTurn, setData] = useState("")
     const isPlaying = (datahost["player_name"] === actualTurn)
+    console.log("Si: " + datahost["player_name"])
+    console.log("No: " + datahost["player_name"])
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
