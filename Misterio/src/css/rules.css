@@ -1,0 +1,42 @@
+.rules-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 25px;
+    transform: translate(330px,500px);
+}
+
+.rules-content {
+    width: 850px;
+    height: 420px;
+    background-color: #e7e8d0;
+    font-size: 12px;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;
+}
+
+.rules-text{
+    text-align: justify;
+    padding-right: 10px;
+    padding-left: 10px;
+
+}
+
+.close-rules {
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(810px, 20%);
+    cursor: pointer;
+    position: fixed;
+}
+
+.close-rules:hover {
+    color: red;
+    background-color: #969991;
+}
