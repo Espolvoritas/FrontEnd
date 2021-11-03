@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import '../css/lobby.css';
 import { useHistory } from "react-router-dom";
 
 const Lobby = () => {
@@ -10,11 +9,11 @@ const Lobby = () => {
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"]} // Data to next page
+    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
 
     // WebSocket recieve and close connection
     useEffect(() => {
-      ws.current = new WebSocket("ws://localhost:8000/game/getPlayers/" + String(datahost["player_id"]))
+      ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
@@ -36,7 +35,7 @@ const Lobby = () => {
     // Inform to back through endpoint to push gameboard page
     const clickNextPage = async (e) => {
       e.preventDefault();
-      const response = await fetch('http://127.0.0.1:8000/game/startGame', {
+      const response = await fetch('http://127.0.0.1:8000/lobby/startGame', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
