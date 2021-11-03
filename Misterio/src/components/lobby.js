@@ -54,10 +54,9 @@ const Lobby = () => {
       ws.current.onmessage = (event) => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
-        }else if(JSON.parse(event.data)['Code'] === "STATUS_COLOR_LIST"){
-          setlistColors(JSON.parse(event.data)["colors"])
         }else{
-          setListPlayers(JSON.parse(event.data));
+          setListPlayers(JSON.parse(event.data)["players"]);
+          setlistColors(JSON.parse(event.data)["colors"]);
         }
         console.log(event.data)
       };
