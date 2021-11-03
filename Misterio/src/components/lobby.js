@@ -13,13 +13,13 @@ const Lobby = () => {
     const ws = useRef(null);
     const colors = {
       '1': "#d0021b",
-      '2': "#417505",
+      '2': "#00c98d",
       '3': "#4a90e2",
       '4': "#ffffff",
       '5': "#000000",
-      '6': "#f2ff03",
+      '6': "#ffca08",
       '7': "#ff03fb",
-      '8': "#ffaa03"
+      '8': "#ff6208"
     }
 
     const clrtostr = {
@@ -127,24 +127,21 @@ const Lobby = () => {
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 
-                          <td><div style={{backgroundColor: colors[listPlayers[block]['Color']], width: '100px', height: '20px'}}> </div> </td>
-                          <td></td>
+                          <td><div className="player-color" style={{backgroundColor: colors[listPlayers[block]['Color']]}}></div> </td>
                       </tr>
                     ))}
                 </tbody>
             </table>
-            <Dropdown options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
+            <Dropdown className="drop-colors" options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
 
-            <div id="LobbyChat" >
               <div className="GameButton-lobby">
                 {
                   (datahost["game_id"] !== undefined)
-                  ? <button className="GameButton-lobby" onClick={e => clickNextPage(e)}>Iniciar partida</button>
+                  ? <button onClick={e => clickNextPage(e)}>Iniciar partida</button>
                   : <p/>
                 }
-                <button className="GameButton-lobby" onClick={() => clickExitLobby()}>Salir de la sala</button>
+                <button onClick={() => clickExitLobby()}>Salir de la sala</button>
               </div>
-            </div>
           </div>
         </div>
   );
