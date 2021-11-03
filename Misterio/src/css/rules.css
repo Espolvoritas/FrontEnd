@@ -6,12 +6,15 @@
     overflow: hidden;
     outline: none;
     font-size: 25px;
-    transform: translate(330px,500px);
+    transform: translate(1010%,1650%);
+    position: fixed;
 }
 
 .rules-content {
-    width: 850px;
-    height: 420px;
+    max-width: 850px;
+    width: auto;
+    max-height: 490px;
+    height: auto;
     background-color: #e7e8d0;
     font-size: 12px;
     border-radius: 25px;
@@ -22,7 +25,6 @@
     text-align: justify;
     padding-right: 10px;
     padding-left: 10px;
-
 }
 
 .close-rules {
@@ -31,9 +33,10 @@
     color: black;
     background-color: white;
     border-radius: 25px;
-    transform: translate(810px, 20%);
     cursor: pointer;
-    position: fixed;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 94%;
 }
 
 .close-rules:hover {
