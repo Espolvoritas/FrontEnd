@@ -98,7 +98,7 @@ function ChooseCard(deck){
                         {deck.map((card, i) => (
                             <img key={i} className="card-pick" src={CardsImg[card]} alt="pickable-card" onClick={() => setPickedCard(card)}/>
                         ))}
-                        <input disabled={validInput} className="send-card" type="submit" value="Enviar" onClick={close}/>
+                       <br/><input disabled={validInput} className="send-card" type="submit" value="Enviar" onClick={close}/>
                     </div>
                 )}
             </Popup>

@@ -108,6 +108,7 @@
     cursor: pointer;
     color: #ffffff;
     background-color: #005956;
+    position: relative;
 }
 
 .card-pick:hover{
