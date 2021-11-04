@@ -15,12 +15,13 @@ function Suspicion(place) {
         e.preventDefault();
         console.log(victim, monster, place);
 
-    }
 
-    return (
-    <Popup 
-        trigger={<button className="suspicion-button"> Sospechar🔎 </button>}
+
+    }
+    return(
+        <Popup 
         modal
+        open={true}
         onClose={handleSubmit}
         closeOnDocumentClick = {false}
         >
@@ -56,12 +57,53 @@ function Suspicion(place) {
     )
 }
 
-                <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+function ShowSuspicion(nickname, cardname) {
+    return(
+        <Popup 
+        modal
+        open={true}
+        >
+        {close => (
+            <div className="show-sus">
+                <button className="close-show" onClick={close}>✖</button> <br/>
+                <div className="header-sus">{nickname} tiene esta carta</div>
+                <img className="card-sus" src={CardsImg[cardname]} alt="sus-answer"/>
             </div>
         )}
-    </Popup>
+        </Popup>
     )
 }
 
 
-export default Suspicion;
+function ChooseCard(deck){
+    const [pickedCard, setPickedCard] = useState(0);
+    const validInput = pickedCard === 0;
+
+    const handleCard = async (e) => {
+        e.preventDefault();
+        console.log(pickedCard);
+    }
+
+    return(
+        <div>
+            <Popup 
+            modal
+            open={true}
+            onClose={handleCard}
+            closeOnDocumentClick={false}
+            >
+                {close => (
+                    <div className="choose-card">
+                        <div className="header-sus">Elige una carta para mostrar</div>
+                        {deck.map((card, i) => (
+                            <img key={i} className="card-pick" src={CardsImg[card]} alt="pickable-card" onClick={() => setPickedCard(card)}/>
+                        ))}
+                        <input disabled={validInput} className="send-card" type="submit" value="Enviar" onClick={close}/>
+                    </div>
+                )}
+            </Popup>
+        </div>
+    )
+}
+
+export {Suspicion, ShowSuspicion, ChooseCard}
