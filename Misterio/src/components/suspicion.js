@@ -31,22 +31,22 @@ function Suspicion(place) {
 
                 <select onChange={(e) => setMonster(e.target.value)}>
                     <option value="" selected disabled hidden>Elige un monstruo</option>
-                    <option value="Dr. Jekyll Mr. Hyde">Dr. Jekyll Mr. Hyde</option>
-                    <option value="Dracula">Drácula</option>
-                    <option value="Fantasma">Fantasma</option>
-                    <option value="Frankenstein">Frankenstein</option>
-                    <option value="Hombre Lobo">Hombre Lobo</option>
-                    <option value="Momia">Momia</option>
+                    <option value={6}>Dr. Jekyll Mr. Hyde</option>
+                    <option value={1}>Drácula</option>
+                    <option value={4}>Fantasma</option>
+                    <option value={2}>Frankenstein</option>
+                    <option value={3}>Hombre Lobo</option>
+                    <option value={5}>Momia</option>
                 </select>
                 asesinó al/a la
                 <select onChange={(e) => setVictim(e.target.value)}>
                     <option value="" selected disabled hidden>Elige una víctima</option>
-                    <option value="Ama de Llaves">Ama de Llaves</option>
-                    <option value="Conde">Conde</option>
-                    <option value="Condesa">Condesa</option>
-                    <option value="Doncella">Doncella</option>
-                    <option value="Jardinero">Jardinero</option>
-                    <option value="Mayordomo">Mayordomo</option>
+                    <option value={9}>Ama de Llaves</option>
+                    <option value={7}>Conde</option>
+                    <option value={8}>Condesa</option>
+                    <option value={11}>Doncella</option>
+                    <option value={12}>Jardinero</option>
+                    <option value={10}>Mayordomo</option>
                 </select>
                 en el/la {place}
                 <input disabled={validInput} className="send-sus" type="submit" value="➤" onClick={close}/>

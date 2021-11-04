@@ -1,29 +1,29 @@
 const CardsImg = {
     //Monsters
-    'Dr. Jekyll Mr. Hyde': require('../media/cards/Jekyll_hyde.png').default,
-    'Dracula': require('../media/cards/dracula.png').default,
-    'Fantasma': require('../media/cards/fantasma.png').default,
-    'Frankenstein': require('../media/cards/frankenstein.png').default,
-    'Hombre Lobo': require('../media/cards/hombre_lobo.png').default,
-    'Momia': require('../media/cards/momia.png').default,
+    1: require('../media/cards/dracula.png').default,
+    2: require('../media/cards/frankenstein.png').default,
+    3: require('../media/cards/hombre_lobo.png').default,
+    4: require('../media/cards/fantasma.png').default,
+    5: require('../media/cards/momia.png').default,
+    6: require('../media/cards/Jekyll_hyde.png').default,
     //Victims
-    'Ama de Llaves': require('../media/cards/ama_de_llaves.png').default,
-    'Conde': require('../media/cards/conde.png').default,
-    'Condesa': require('../media/cards/condesa.png').default,
-    'Doncella': require('../media/cards/doncella.png').default,
-    'Jardinero': require('../media/cards/jardinero.png').default,
-    'Mayordomo': require('../media/cards/mayordomo.png').default,
+    7: require('../media/cards/conde.png').default,
+    8: require('../media/cards/condesa.png').default,
+    9: require('../media/cards/ama_de_llaves.png').default,
+    10: require('../media/cards/mayordomo.png').default,
+    11: require('../media/cards/doncella.png').default,
+    12: require('../media/cards/jardinero.png').default,
     //Places
-    'Alcoba': require('../media/cards/alcoba.png').default,
-    'Biblioteca': require('../media/cards/biblioteca.png').default,
-    'Bodega': require('../media/cards/bodega.png').default,
-    'Cochera': require('../media/cards/cochera.png').default,
-    'Laboratorio': require('../media/cards/laboratorio.png').default,
-    'Panteon': require('../media/cards/panteon.png').default,
-    'Salon': require('../media/cards/salon.png').default,
-    'Vestibulo': require('../media/cards/vestibulo.png').default,
+    13: require('../media/cards/vestibulo.png').default,
+    14: require('../media/cards/laboratorio.png').default,
+    15: require('../media/cards/biblioteca.png').default,
+    16: require('../media/cards/bodega.png').default,
+    17: require('../media/cards/alcoba.png').default,
+    18: require('../media/cards/panteon.png').default,
+    19: require('../media/cards/salon.png').default,
+    20: require('../media/cards/cochera.png').default,
     //Salem Witch
-    'Bruja de Salem': require('../media/cards/bruja_salem.png').default
+    21: require('../media/cards/bruja_salem.png').default
 }
 
 export default CardsImg;
