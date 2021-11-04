@@ -6,8 +6,9 @@
     overflow: hidden;
     outline: none;
     font-size: 25px;
-    transform: translate(1010%,1650%);
-    position: fixed;
+    position: absolute;
+    top: 93.8%;
+    left: 24.5%;
 }
 
 .rules-content {
