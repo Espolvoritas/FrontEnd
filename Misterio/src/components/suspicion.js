@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Popup from "reactjs-popup";
+import CardsImg from "./cards-img";
 
-function Suspicion() {
+
+function Suspicion(place) {
 
     const [victim, setVictim] = useState("");
     const [monster, setMonster] = useState("");
-    const [place, setPlace] = useState("");
+    const validInput = victim === "" || monster === "";
+    /* const [place, setPlace] = useState(""); */
 
 
     const handleSubmit = async (e) => {
@@ -18,11 +21,14 @@ function Suspicion() {
     <Popup 
         trigger={<button className="suspicion-button"> Sospechar🔎 </button>}
         modal
-    >
+        onClose={handleSubmit}
+        closeOnDocumentClick = {false}
+        >
         {close => (
-            <div className="modal">
-                <button className="close" onClick={close}>&times;</button> <br/>
- 
+            <div className="suspicion-dropdown">
+                <button className="close-sus" onClick={close}>&times;</button> <br/>
+                <div className="header-sus">Realiza una sospecha</div>
+
                 <select onChange={(e) => setMonster(e.target.value)}>
                     <option value="" selected disabled hidden>Elige un monstruo</option>
                     <option value="Dr. Jekyll Mr. Hyde">Dr. Jekyll Mr. Hyde</option>
@@ -42,18 +48,13 @@ function Suspicion() {
                     <option value="Jardinero">Jardinero</option>
                     <option value="Mayordomo">Mayordomo</option>
                 </select>
-                en el/la
-                <select onChange={(e) => setPlace(e.target.value)}>
-                    <option value="" selected disabled hidden>Elige un recinto</option>
-                    <option value="Alcoba">Alcoba</option>
-                    <option value="Biblioteca">Biblioteca</option>
-                    <option value="Bodega">Bodega</option>
-                    <option value="Cochera">Cochera</option>
-                    <option value="Laboratorio">Laboratorio</option>
-                    <option value="Panteón">Panteón</option>
-                    <option value="Salon">Salón</option>
-                    <option value="Vestibulo">Vestíbulo</option>
-                </select>
+                en el/la {place}
+                <input disabled={validInput} className="send-sus" type="submit" value="➤" onClick={close}/>
+            </div>
+        )}
+        </Popup>
+    )
+}
 
                 <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
             </div>

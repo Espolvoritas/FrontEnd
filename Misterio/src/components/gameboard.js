@@ -2,6 +2,7 @@ import {React, useState, useRef, useEffect} from "react";
 import '../css/gameboard.css';
 import Dice from 'react-dice-roll';
 import { useHistory } from "react-router-dom";
+import {Suspicion, ShowSuspicion} from "./suspicion"
 
 const GameBoard = () => {
 
