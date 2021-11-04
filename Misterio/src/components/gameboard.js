@@ -7,6 +7,8 @@ import {Suspicion, ShowSuspicionResult, ChooseCard, ShowStatus, NotifySend, Noti
 import { emitCustomEvent } from 'react-custom-events';
 import { useCustomEventListener } from 'react-custom-events';
 
+import PlayerOnGrid from "./playerongrid";
+
 const GameBoard = () => {
 
     const history = useHistory()
@@ -21,8 +23,6 @@ const GameBoard = () => {
     let arriveSus = useRef(false)
     const [actualTurn, setData] = useState("")
     const isPlaying = (datahost["player_name"] === actualTurn)
-    console.log("Si: " + datahost["player_name"])
-    console.log("No: " + datahost["player_name"])
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
@@ -85,6 +85,9 @@ const GameBoard = () => {
             </div>
             <div>
                 {Cards(cards)}
+            </div>
+            <div>
+                {PlayerOnGrid(ws)}
             </div>
         </div>
     );

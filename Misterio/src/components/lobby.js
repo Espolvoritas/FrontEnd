@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import '../css/lobby.css';
 import { useHistory } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-
 
 const Lobby = () => {
 
@@ -43,9 +43,42 @@ const Lobby = () => {
       "Naranja": '8'
     }
 
+    const colors = {
+      '1': "#d0021b",
+      '2': "#417505",
+      '3': "#4a90e2",
+      '4': "#ffffff",
+      '5': "#000000",
+      '6': "#f2ff03",
+      '7': "#ff03fb",
+      '8': "#ffaa03"
+    }
+
+    const clrtostr = {
+      '1': "Rojo",
+      '2': "Verde",
+      '3': "Azul",
+      '4': "Blanco",
+      '5': "Negro",
+      '6': "Amarillo",
+      '7': "Rosa",
+      '8': "Naranja"
+    }
+
+    const strtoclr = {
+      "Rojo": '1',
+      "Verde": '2',
+      "Azul": '3',
+      "Blanco": '4',
+      "Negro": '5',
+      "Amarillo": '6',
+      "Rosa": '7',
+      "Naranja": '8'
+    }
+
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
+    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"]} // Data to next page
 
     // WebSocket recieve and close connection
     useEffect(() => {
@@ -90,7 +123,6 @@ const Lobby = () => {
     }
 
     const chooseColor = async (value) => {
-      console.log(value)
       const colordata = {
         "player_id": datahost["player_id"], 
         "color": value
@@ -126,7 +158,7 @@ const Lobby = () => {
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 
-                          <td><div className="player-color" style={{backgroundColor: colors[listPlayers[block]['Color']]}}></div> </td>
+                          <td><div style={{backgroundColor: colors[listPlayers[block]['Color']], width: '100px', height: '20px'}}> </div> </td>
                       </tr>
                     ))}
                 </tbody>
