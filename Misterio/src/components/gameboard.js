@@ -1,6 +1,8 @@
 import {React, useState, useRef, useEffect} from "react";
 import Dice from 'react-dice-roll';
 import { useHistory } from "react-router-dom";
+import Rules from "./rules";
+
 
 const GameBoard = () => {
 
@@ -29,6 +31,7 @@ const GameBoard = () => {
         <div className="Turn">
             <h1>Esta jugando el detective: {actualTurn}</h1>
         </div>
+        {Rules()}
     </div>
     );
 }
