@@ -106,4 +106,22 @@ function ChooseCard(deck){
     )
 }
 
-export {Suspicion, ShowSuspicion, ChooseCard}
+function ShowStatus(nickname, hasCard){
+    return(
+        <Popup 
+        modal
+        open={true}
+        closeOnDocumentClick={false}
+        >
+        {close => (
+            <div className="show-status">
+                <button className="close-status" onClick={close}>✖</button> <br/>
+                {(hasCard) ? <div className="notice-card">{nickname} respondió a la sospecha</div> 
+                    : <div className="notice-card">{nickname} no tiene cartas para responder</div>}
+            </div>
+        )}
+        </Popup>
+    )
+}
+
+export {Suspicion, ShowSuspicionResult, ChooseCard, ShowStatus}

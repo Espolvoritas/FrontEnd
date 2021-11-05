@@ -19,19 +19,22 @@
     margin-left: 63px;
     width: 60%;
     height: 80%;
-   
 }
 
 /** Pop up Form Suspicion **/
 
-.suspicion-dropdown{
-    width: 570px;
-    height: 95px;
+.suspicion-box{
+    width: 550px;
+    height: 90px;
     background-color: #e7e8d0;
     font-size: 13px;
     border-radius: 25px;
     border: 2px solid #d1ccc1;
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.suspicion-dropdown{
+    text-align: center;
 }
 
 .header-sus{
@@ -87,7 +90,7 @@
 
 .choose-card{
     width: 500px;
-    height: 370px;
+    height: 385px;
     background-color: #e7e8d0;
     border-radius: 25px;
     border: 2px solid #d1ccc1;
@@ -96,11 +99,12 @@
 
 .card-pick{
     width: 32%;
-    height: 73%;
+    height: 68%;
     cursor: pointer;
 }
 
 .send-card{
+    margin-top: 4px;
     padding: 5px 12px;
     font-family: 'IM Fell English SC', serif;
     font-weight: bold;
@@ -112,5 +116,33 @@
 }
 
 .card-pick:hover{
-    border: 0.1px solid blue;
+    border: 0.1px solid #005956;
+}
+
+.notice-card{
+    color: black;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'IM Fell English SC', serif;
+}
+
+/** Pop up Show Status **/
+.show-status{
+    width: 450px;
+    height: 60px;
+    background-color: #e7e8d0;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1; 
+}
+
+.close-status{
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(415px, 20%);
+    cursor: pointer;
+    position: fixed;
 }
