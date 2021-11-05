@@ -26,4 +26,32 @@ const CardsImg = {
     21: require('../media/cards/bruja_salem.png').default
 }
 
-export default CardsImg;
+const CardsName = {
+    //Monsters
+    1:'Dracula',
+    2:'Frankenstein',
+    3:'Hombre Lobo',
+    4:'Fantasma',
+    5:'Momia',
+    6:'Dr. Jekyll Mr. Hyde',
+    //Victims
+    7:'Conde',
+    8:'Condesa',
+    9:'Ama de Llaves',
+    10:'Mayordomo',
+    11:'Doncella',
+    12:'Jardinero',
+    //Places
+    13:'Vestibulo',
+    14:'Laboratorio',
+    15:'Biblioteca',
+    16:'Bodega',
+    17:'Alcoba',
+    18:'Panteon',
+    19:'Salon',
+    20:'Cochera',
+    //Salem Witch
+    21:'Bruja de Salem'
+}
+
+export {CardsImg, CardsName};
