@@ -1,6 +1,7 @@
 import {React, useState, useRef, useEffect} from "react";
 import Dice from 'react-dice-roll';
 import { useHistory } from "react-router-dom";
+import Cards from "./cards";
 import Rules from "./rules";
 
 
@@ -10,17 +11,22 @@ const GameBoard = () => {
     const datahost = history.location.state
     const ws = useRef(null);
     const [actualTurn, setData] = useState("")
+    const [currentPlayer, setTurn] = useState("")
+    const [cards, setCards] = useState([])
     const isPlaying = (datahost["player_name"] === actualTurn)
     console.log("Si: " + datahost["player_name"])
     console.log("No: " + datahost["player_name"])
 
     useEffect(() => {
-        ws.current = new WebSocket("ws://localhost:8000/gameBoard/" 
+        ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
                                 + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
-            setData(JSON.parse(event.data));
+            if(JSON.parse(event.data)["code"] == ) {
+                setTurn(JSON.parse(event.data)["currentPlayer"]);
+                setCards(JSON.parse(event.data)["cards"]);
+            }
         };
-    }, []);
+    }, [])
 
     return (
     <div className="background-image">
@@ -31,7 +37,12 @@ const GameBoard = () => {
         <div className="Turn">
             <h1>Esta jugando el detective: {actualTurn}</h1>
         </div>
-        {Rules()}
+        <div>
+            {Rules()}
+        </div>
+        <div>
+            {Cards()}
+        </div>
     </div>
     );
 }
