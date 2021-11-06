@@ -6,6 +6,8 @@ import Rules from "./rules";
 import {Suspicion, ShowSuspicionResult, ChooseCard, ShowStatus, NotifySend, NotifySuspicion} from "./suspicion"
 import { emitCustomEvent } from 'react-custom-events';
 import { useCustomEventListener } from 'react-custom-events';
+import { useHistory } from "react-router-dom";
+import logo from "../media/MisterioBoard.jpeg"
 
 import PlayerOnGrid from "./playerongrid";
 
@@ -37,7 +39,8 @@ const GameBoard = () => {
                 arriveSus = true
             }
         };
-    }, [])
+
+    }, []);
 
     console.log(arriveSus)
 
@@ -62,8 +65,9 @@ const GameBoard = () => {
         setCard(resSus[1])
     })
 
-    return (
-        <div className="background-image">
+    return(
+        <div className="background-image" >
+            <img src={logo} className="gameboard-img"></img>
             <div className="DiceRoll">
                 <Dice placement="botton-left" faceBg="black" size="70"  
                     disabled={!isPlaying} onRoll={(value) => handleDice(value)}/>
@@ -89,6 +93,7 @@ const GameBoard = () => {
             <div>
                 {PlayerOnGrid(ws)}
             </div>
+            {PlayerOnGrid(datahost["player"], datahost["player_id"])}
         </div>
     );
 }

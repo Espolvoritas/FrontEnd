@@ -78,7 +78,8 @@ const Lobby = () => {
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"]} // Data to next page
+    const [player, setPlayer] = useState("")
+    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player": player} // Data to next page
 
     // WebSocket recieve and close connection
     useEffect(() => {
@@ -87,6 +88,7 @@ const Lobby = () => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
         }else{
+          setPlayer(JSON.parse(event.data))
           setListPlayers(JSON.parse(event.data)["players"]);
           setlistColors(JSON.parse(event.data)["colors"]);
         }
@@ -136,6 +138,9 @@ const Lobby = () => {
                 },
                 body: JSON.stringify(colordata)
       })
+      if(response.status === 200){
+        console.log("si")
+      }
     }
 
     // Pushing to list of games page and closing WebSocket
