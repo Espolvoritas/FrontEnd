@@ -1,0 +1,14 @@
+.gridContainer {
+    width: 25%;
+    height: 31%;
+    display: grid;
+    transform: translate(300%,180%);
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    position: fixed;
+}
+
+.cardsImage{
+    width: 110%;
+    height: 120%;
+}
