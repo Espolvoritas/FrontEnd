@@ -98,9 +98,10 @@ function NotifySuspicion(){
         closeOnDocumentClick={false}
         >
         {close => (
-            <div className="show-status">
-                <button className="close-show" onClick={close}>✖</button> <br/>
-            <div className="header-sus">{player} sospechó de {CardsName[monster]}, {CardsName[victim]} en {CardsName[place]}</div>
+            <div className="not-sus">
+                <button className="close-not-sus" onClick={close}>✖</button> <br/>
+            <div className="header-sus">La sospecha de {player} fue: {CardsName[monster]}
+                asesinó {CardsName[victim]} en {CardsName[place]}</div>
             </div>
         )}
         </Popup>

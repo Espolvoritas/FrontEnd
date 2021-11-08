@@ -1,4 +1,4 @@
-const CardsImg = {
+export const CardsImg = {
     //Monsters
     1: require('../media/cards/dracula.png').default,
     2: require('../media/cards/frankenstein.png').default,
@@ -26,7 +26,7 @@ const CardsImg = {
     21: require('../media/cards/bruja_salem.png').default
 }
 
-const CardsName = {
+export const CardsName = {
     //Monsters
     1:'Dracula',
     2:'Frankenstein',
@@ -54,4 +54,4 @@ const CardsName = {
     21:'Bruja de Salem'
 }
 
-export {CardsImg, CardsName};
+export default CardsImg;

@@ -10,6 +10,7 @@
     width: 100%;
     height: 100vh;
     position: absolute;
+    text-align: center;
 }
 
 .Title {
@@ -23,22 +24,22 @@
 /** Lobby structure **/
 
 .Rows-Lobby{
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Josefin Sans', sans-serif;
     color: #474944;
 }
 
-.Rows-Lobby:nth-child(even) {background-color: #ffe8dd;}
+.Rows-Lobby:nth-child(even) {background-color: #ffccb4;}
 .Rows-Lobby:nth-child(odd) {background-color: #ffdbca;}
 
 table { 
     border-collapse: collapse;
     border-spacing: 0;
-    position: sticky;
 }
 
 #key-lobby {
-    margin-top: 3%;
+    margin: 0 auto;
+    margin-top: 4%;
     margin-left: 2.5%;
     font-size: 1.2em; 
 }
@@ -46,9 +47,19 @@ table {
 #key-lobby thead {
     font-size: 23px;
     font-weight: bold;
+    width: 650px;
     font-family: 'Special Elite', serif;
     background-color:#6c232f;
     color: #eae8e8;
+}
+
+#key-lobby thead, tbody{
+    display: block;
+}
+
+#key-lobby tbody{
+    height: 420px;
+    width: 650px;
 }
 
 #key-lobby thead tr th { 
@@ -56,16 +67,15 @@ table {
     padding-top: 12px;
 }
 
-#key-lobby thead, tbody, tr, th, td {
-    width: 343px;
+#key-lobby tr, th, td {
+    width: 330px;
 }
 
 #key-lobby tbody tr td {
-    text-align: center;
-    padding: 25px;
+    padding: 12px;
 }
 
-.GameButton-lobby button {
+.GameButton-lobby button{
     padding: 15px 40px;
     margin-right: 2.5%;
     font-family: 'IM Fell English SC', serif;
@@ -75,9 +85,23 @@ table {
     color: #fdf8d4;
     background-color: #9c2f3b;
 
-    transform: translate(215%, 250%);
+    transform: translate(215%, -50%);
 }
 
 .GameButton-lobby:active {     
     background-color:#3b051f;
+}
+
+.drop-colors{
+    width: 15%;
+    font-size: 18px;
+    transform: translate(260px, -530px);
+}
+
+.player-color{
+    height: 40px;
+    width: 40px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
 }
