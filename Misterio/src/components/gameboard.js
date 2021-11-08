@@ -7,8 +7,10 @@ import {Suspicion, ShowSuspicionResult, ChooseCard, ShowStatus, NotifySend, Noti
 import { emitCustomEvent } from 'react-custom-events';
 import { useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
-import logo from "../media/MisterioBoard.jpeg"
+import logo from "../media/MisterioBoard.jpeg";
+import { emitCustomEvent } from 'react-custom-events';
 
+import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 
 const GameBoard = () => {
@@ -25,6 +27,8 @@ const GameBoard = () => {
     let arriveSus = useRef(false)
     const [actualTurn, setData] = useState("")
     const isPlaying = (datahost["player_name"] === actualTurn)
+    const [actualTurn, setTurn] = useState("")
+
 
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
@@ -39,6 +43,7 @@ const GameBoard = () => {
                 arriveSus = true
             }
         };
+        
 
     }, []);
 
@@ -92,8 +97,14 @@ const GameBoard = () => {
             </div>
             <div>
                 {PlayerOnGrid(ws)}
+            {RollDice(datahost["player_id"], actualTurn)}
+            <div className="Turn">
+                {((datahost["player_name"] === actualTurn))
+                ? <h1>Es tu turno</h1>
+                : <h1>Es el turno de: {actualTurn}</h1>
+                }   
             </div>
-            {PlayerOnGrid(datahost["player"], datahost["player_id"])}
+            {PlayerOnGrid(datahost["player_id"])}
         </div>
     );
 }

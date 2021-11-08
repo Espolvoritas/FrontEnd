@@ -78,8 +78,7 @@ const Lobby = () => {
 
     const history = useHistory()
     const datahost = history.location.state
-    const [player, setPlayer] = useState("")
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player": player} // Data to next page
+    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
 
     // WebSocket recieve and close connection
     useEffect(() => {
@@ -88,7 +87,6 @@ const Lobby = () => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
         }else{
-          setPlayer(JSON.parse(event.data))
           setListPlayers(JSON.parse(event.data)["players"]);
           setlistColors(JSON.parse(event.data)["colors"]);
         }
@@ -129,7 +127,7 @@ const Lobby = () => {
         "player_id": datahost["player_id"], 
         "color": value
       }
-      const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
+      await fetch('http://127.0.0.1:8000/lobby/pickColor', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -138,9 +136,7 @@ const Lobby = () => {
                 },
                 body: JSON.stringify(colordata)
       })
-      if(response.status === 200){
-        console.log("si")
-      }
+
     }
 
     // Pushing to list of games page and closing WebSocket
@@ -159,7 +155,7 @@ const Lobby = () => {
                         <th>Color</th>
                     </tr>
                 </thead>
-                <tbody>            
+                <tbody>
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 

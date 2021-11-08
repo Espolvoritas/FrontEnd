@@ -1,15 +1,26 @@
-import {React, useRef, useState} from "react";
+import {React, useState} from "react";
+import { useCustomEventListener } from 'react-custom-events';
 
-
-
-const PlayerOnGrid = (player, player_id) => {
+const PlayerOnGrid = (player_id) => {
 
     let component = []
-    const [cost, setCost] = useState(0);
-    const players = useState(player)
+    const [available, setAvailable] = useState([])
+    const [positions, setPositions] = useState([])
 
-    console.log(players["players"])
+    useCustomEventListener('websocket', data => {
+        if((data)["code"] & 64) {
+            setAvailable((data)["moves"]);
+        }
+        if((data)["code"] & 128) {
+            setPositions((data)["positions"]);
+        }
+        if((data)["code"] & 256) {
+            console.log(data)
+        }
+    });
 
+    //console.log("hola " + message)
+    
     const colors = {
         '1': "#d0021b",
         '2': "#417505",
@@ -21,30 +32,43 @@ const PlayerOnGrid = (player, player_id) => {
         '8': "#ffaa03"
     }
 
-    const x = 14;
-    const y = 8;
-
-    for (let i = 0; i < 22; i++){
+    for (let i = 0; i < 21; i++){
         for(let j = 0; j < 22; j++){
-            const position = i.toString() + " " + j.toString();
+            const matrix = i.toString() + " " + j.toString();
             if(i !== 7 && i !== 14 && j !== 7 && j !== 14){
-                component.push(<div className="box-gameboard" id={position} key={position} onClick={() => move(i, j)}></div>)
+                component.push(<div className="box-gameboard" id={matrix} key={matrix} onClick={() => move(i, j)}></div>)
             }else if(j === 7 || j === 14 || i === 7 || i === 14){
-                component.push(<div className="box-gameboard" id={position} key={position} onClick={() => move(i, j)}></div>)
+                component.push(<div className="box-gameboard" id={matrix} key={matrix} onClick={() => move(i, j)}></div>)
+            }else{
+                component.push(<div className="box-gameboard" id={matrix} key={matrix} onClick={() => move(i, j)}></div>)
             }
         }
     }     
 
     async function move(i, j) {
         console.log(i.toString() + " " + j.toString())
-        /*
+
+        let remaining = 0
+        let allowMovement = false
+
+        Object.keys(available).map(
+            index => (available[index]["x"] === i && available[index]["y"] === j) ? remaining = available[index]["remaining"] : 0)
+        
+        Object.keys(available).map(
+            index => (available[index]["x"] === i && available[index]["y"] === j) ? allowMovement = true : 0)
+        
+        if(!allowMovement){
+            return
+        }
+
         const moveData = {
             "player_id": player_id, 
             "x": j,
             "y": i,
-            "cost": cost
-          }
-        const response = await fetch('http://127.0.0.1:8000/lobby/startGame', {
+            "remaining": remaining
+        }
+        //console.log(moveData)
+        const response = await fetch('http://127.0.0.1:8000/gameBoard/moves', {
                   method: 'POST',
                   headers: {
                       'Accept': 'application/json',
@@ -53,21 +77,35 @@ const PlayerOnGrid = (player, player_id) => {
                   },
                   body: JSON.stringify(moveData)
         })
-  
+        const res = await response.json()
+
         if(response.status === 200){
-            setCost(response["cost"])
+            
+            setAvailable(res["moves"])
+            
         }
-        */
+
       }
 
     return (
         
         <div className="playerOnGrid">
-            <div className="player" style={{
-                gridRow: x+1,
-                gridColumn: y+1,
-                backgroundColor: "white"
-            }} onClick={() => move(x, y)}></div>
+            <div className="player-position">
+                {Object.keys(positions).map((i) => (
+                    <div key={i} className="player" style={{
+                        gridRow: positions[i]["x"]+1,
+                        gridColumn: positions[i]["y"]+1,
+                        backgroundColor: colors[positions[i]["color"]]
+                    }}></div>
+                ))}
+                {Object.keys(available).map((i) => (
+                    <div key={i} className="available-cell" style={{
+                        gridRow: available[i]["x"]+1,
+                        gridColumn: available[i]["y"]+1,
+                        backgroundColor: "black"
+                    }}></div>
+                ))}
+            </div>
             {component}
         </div> 
     );
