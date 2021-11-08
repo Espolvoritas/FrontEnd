@@ -11,9 +11,8 @@ function Suspicion(place, playerID) {
     const [monster, setMonster] = useState(0);
     const validInput = victim !== 0 && monster !== 0;
 
-    const handleSubmit = async (e) => {  //SE LLAMA CUANDO SE CIERRA LA POPUP
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        /* emitCustomEvent('suspicionArrived', true); */
         const sus = {
             "playerId": playerID,
             "victimId": parseInt(victim),
@@ -53,7 +52,7 @@ function Suspicion(place, playerID) {
                         <option value={3}>Hombre Lobo</option>
                         <option value={5}>Momia</option>
                     </select>
-                    asesinó al/a la
+                    asesinó a
                     <select onChange={(e) => setVictim(e.target.value)}>
                         <option value="" selected disabled hidden>Elige una víctima</option>
                         <option value={9}>Ama de Llaves</option>
@@ -63,7 +62,7 @@ function Suspicion(place, playerID) {
                         <option value={12}>Jardinero</option>
                         <option value={10}>Mayordomo</option>
                     </select>
-                    en el/la {CardsName[place]}
+                    en {CardsName[place]}
                     {(validInput) ? <input className="send-sus" type="submit" value="➤" onClick={close}/> : <b/>}
                 </div>
             </div>
@@ -71,7 +70,7 @@ function Suspicion(place, playerID) {
         </Popup>
     )
 }
-// TODO: hacerle clases propias
+
 function NotifySuspicion(){
     
     const [player, setPlayer] = useState(0);
@@ -80,7 +79,6 @@ function NotifySuspicion(){
     const [place, setPlace] = useState(0);
 
     useCustomEventListener('websocket', data => {
-        console.log("hola susana")
         if ((data["code"] & 4)){
             setPlayer(data["currentPlayer"]);
             setVictim(data["victim"]);
@@ -100,8 +98,10 @@ function NotifySuspicion(){
         {close => (
             <div className="not-sus">
                 <button className="close-not-sus" onClick={close}>✖</button> <br/>
-            <div className="header-sus">La sospecha de {player} fue: {CardsName[monster]}
-                asesinó {CardsName[victim]} en {CardsName[place]}</div>
+            <div className="header-sus">La sospecha de {player} fue:
+                <div className="sus-text">{CardsName[monster]} asesinó {CardsName[victim]} en {CardsName[place]}</div>
+            </div>
+            
             </div>
         )}
         </Popup>
@@ -138,7 +138,6 @@ function ChooseCard(ws){
 
     const handleCard = () => {
         ws.send(JSON.stringify({'code': 'PICK_CARD', 'card': pickedCard}));
-        console.log(pickedCard);
     }
 
     if (deck.length <= 1) return 
@@ -191,7 +190,7 @@ function ShowStatus(){
         {close => (
             <div className="show-status">
                 <button className="close-status" onClick={close}>✖</button> <br/>
-                {(hasCard) ? <div className="notice-card">{nickname} respondió a la sospecha a {sus}</div> 
+                {(hasCard) ? <div className="notice-card">{nickname} respondió a la sospecha de {sus}</div> 
                     : <div className="notice-card">{nickname} no tiene cartas para responderle a {sus}</div>}
             </div>
         )}
@@ -221,7 +220,7 @@ function NotifySend(){
         {close => (
             <div className="notify-send">
                 <button className="close-notify" onClick={close}>✖</button> <br/>
-                <div className="header-sus">Le enviaste esta carta a {nickname}</div>
+                <div className="header-not-send">Le enviaste esta carta a {nickname}</div>
                 <img className="card-notify" src={CardsImg[card]} alt={CardsName[card]}/>
             </div>
         )}

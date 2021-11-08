@@ -35,8 +35,6 @@ const GameBoard = () => {
         };
     }, [])
 
-    console.log(arriveSus)
-
     async function handleDice(value) {
         const diceValue = {
             "playerId": datahost["player_id"], 
@@ -68,14 +66,15 @@ const GameBoard = () => {
                 <h1>Esta jugando el detective: {currentPlayer}</h1>
             </div>
             <div>
-                {(datahost["player_id"] === 1) ? Suspicion(13,1) : <b/> }
+                {Suspicion(roomId, datahost["player_id"])}
                 {NotifySuspicion()}
                 {arriveSus ? ChooseCard(ws.current): <b/> }
                 {ShowStatus()}
                 {NotifySend()}
                 {(accused !== "" && card !== "") ? ShowSuspicionResult(accused, card) : <b/>}
-                {(message === "") ? <b/> : <Rules message={message}/>}
             </div>
+                {(message === "") ? <b/> : <Rules message={message}/>}
+            
             <div>
                 {Rules()}
             </div>
