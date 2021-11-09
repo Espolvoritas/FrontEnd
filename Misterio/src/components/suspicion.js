@@ -11,8 +11,10 @@ function Suspicion(place, playerID) {
     const [monster, setMonster] = useState(0);
     const validInput = victim !== 0 && monster !== 0;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    if(place === 0) return 
+
+    const handleSubmit = async () => { 
+        
         const sus = {
             "playerId": playerID,
             "victimId": parseInt(victim),
@@ -28,8 +30,12 @@ function Suspicion(place, playerID) {
                   body: JSON.stringify(sus)
                   
         })
+        
         const res = await response.json();
-        emitCustomEvent('res-sus', [res["responsePlayer"],res["suspicionCard"]]);
+        emitCustomEvent('res-sus', [res["responsePlayer"], res["suspicionCard"]]);
+        setVictim(0);
+        setMonster(0);
+
     }
     return(
         <Popup
@@ -72,7 +78,7 @@ function Suspicion(place, playerID) {
 }
 
 function NotifySuspicion(){
-    
+
     const [player, setPlayer] = useState(0);
     const [victim, setVictim] = useState(0);
     const [monster, setMonster] = useState(0);
@@ -96,19 +102,24 @@ function NotifySuspicion(){
         closeOnDocumentClick={false}
         >
         {close => (
-            <div className="not-sus">
-                <button className="close-not-sus" onClick={close}>✖</button> <br/>
+
+        <div className="not-sus">
+            <button className="close-not-sus" onClick={close}>✖</button> <br/>
             <div className="header-sus">La sospecha de {player} fue:
                 <div className="sus-text">{CardsName[monster]} asesinó {CardsName[victim]} en {CardsName[place]}</div>
             </div>
-            
-            </div>
+        </div>
         )}
         </Popup>
     )
 }
 
 function ShowSuspicionResult(nickname, card) {
+
+    if(nickname === "" || card === 0){
+        return
+    }
+
     return(
         <Popup 
         modal
@@ -125,7 +136,7 @@ function ShowSuspicionResult(nickname, card) {
     )
 }
 
-function ChooseCard(ws){
+function ChooseCard(ws, arriveSus){
     const [deck, setDeck] = useState("")
     const [pickedCard, setPickedCard] = useState(0);
     const validInput = pickedCard !== 0;
@@ -133,8 +144,16 @@ function ChooseCard(ws){
     useCustomEventListener('websocket', data => {
         if ((data["code"] & 8)){
             setDeck(data["matchingCards"]);
+        }else{
+            if(deck !== ""){
+                setDeck("")
+            }
         }
     });
+
+    if(!arriveSus){
+        return
+    }
 
     const handleCard = () => {
         ws.send(JSON.stringify({'code': 'PICK_CARD', 'card': pickedCard}));
@@ -142,28 +161,28 @@ function ChooseCard(ws){
 
     if (deck.length <= 1) return 
 
-        return(
-            <div>
-                <Popup 
-                modal
-                open={true}
-                onClose={handleCard}
-                closeOnDocumentClick={false}
-                >
-                    {close => (
-                        <div className="choose-card">
-                            <div className="header-sus">Elige una carta para mostrar</div>
-                            {Object.keys(deck).map((i) => (
-                                <img key={i} className="card-pick" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}
-                                    onClick={() => setPickedCard(deck[i])}/>
-                            ))}
-                            {(validInput) ? <div className="notice-card">Elegiste esta carta: {CardsName[pickedCard]}<br/>
-                                <input className="send-card" type="submit" value="Enviar" onClick={close}/></div>: <b/>}
-                        </div>
-                    )}
-                </Popup>
-            </div>
-        )
+    return(
+        <div>
+            <Popup 
+            modal
+            open={true}
+            onClose={handleCard}
+            closeOnDocumentClick={false}
+            >
+                {close => (
+                    <div className="choose-card">
+                        <div className="header-sus">Elige una carta para mostrar</div>
+                        {Object.keys(deck).map((i) => (
+                            <img key={i} className="card-pick" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}
+                                onClick={() => setPickedCard(deck[i])}/>
+                        ))}
+                        {(validInput) ? <div className="notice-card">Elegiste esta carta: {CardsName[pickedCard]}<br/>
+                            <input className="send-card" type="submit" value="Enviar" onClick={close}/></div>: <b/>}
+                    </div>
+                )}
+            </Popup>
+        </div>
+    )
 }
 
 function ShowStatus(){
@@ -173,9 +192,16 @@ function ShowStatus(){
 
     useCustomEventListener('websocket', data => {
         if (data["code"] & 16){
+
             setHasCard(data["responded"])
             setNickname(data["responsePlayer"])
             setSus(data["suspicionPlayer"])
+        }else{
+            if(nickname !== "" || sus !== ""){
+                setHasCard(false)
+                setNickname("")
+                setSus("")
+            }
         }
     });
 
@@ -206,9 +232,14 @@ function NotifySend(){
         if (data["code"] & 32){
             setCard(data["card"])
             setNickname(data["suspicionPlayer"])
+        }else{
+            if (nickname !== "" || card !== 0){
+                setCard(0)
+                setNickname("")
+            }
         }
     });
-
+    
     if (nickname === "" || card === 0) return
     
     return(

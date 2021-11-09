@@ -5,15 +5,15 @@
   "dependencies": {
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
-    "react-custom-events": "^1.0.5",
     "react-dice-roll": "^1.2.2",
     "react-dom": "^17.0.2",
     "react-dropdown": "^1.9.2",
-    "react-perfect-scrollbar": "^1.5.8",
+    "react-grid-system": "^7.3.1",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "reactjs-popup": "^2.0.5",
+    "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -43,7 +43,10 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
+    "react-custom-events": "^1.0.5",
+    "react-perfect-scrollbar": "^1.5.8"
     "jest-websocket-mock": "^2.2.1",
     "mock-socket": "^9.0.7"
+
   }
 }

@@ -1,0 +1,46 @@
+.playerOnGrid, .player-position{
+
+    display: grid;
+    grid-template-columns: [line1] 6.6% [line2] 4.4% [line3] 3.9% [line4] 4.2% [line5] 4.2% [line6] 4.2% [line7] 4.2% [line8] 6.1% [line9] 4.2% [line10] 4.3% [line11] 4.1% [line12] 4.4% [line13] 4% [line14] 4.1% [line15] 6.1% [line16] 4.2% [line17] 4.1% [line18] 4% [line19] 4.2% [line20] 4.2% [line21] 4.2% [line22] 4.6%;
+    grid-template-rows: [line1] 6.6% [line2] 4.4% [line3] 3.9% [line4] 4.2% [line5] 4.2% [line6] 4.2% [line7] 4.2% [line8] 6.1% [line9] 4.2% [line10] 4.3% [line11] 4% [line12] 3.9% [line13] 4.1% [line14] 4.1% [line15] 5.9% [line16] 4.3% [line17] 4.4% [line18] 4.2% [line19] 4.2% [line20] 4% [line21] 4.2% [line22] 4.6%; 
+
+}
+
+.playerOnGrid{
+    width: 50%;
+    height: 100%; 
+    left: 25%;
+    position: absolute;
+    z-index: 1;
+}
+
+.player-position{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    
+}
+
+.player{
+    height: 50%;
+    width: 50%;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(50%,50%);
+    z-index: 1;
+    align-items: center;
+}
+
+.available-cell{
+
+    height: 50%;
+    width: 50%;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(50%,50%);
+    z-index: 1;
+    align-items: center;
+}

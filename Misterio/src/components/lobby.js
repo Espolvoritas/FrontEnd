@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import '../css/lobby.css';
 import { useHistory } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-
 
 const Lobby = () => {
 
@@ -44,6 +44,7 @@ const Lobby = () => {
       "Naranja": '8'
     }
 
+
     const history = useHistory()
     const datahost = history.location.state
     const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
@@ -58,7 +59,6 @@ const Lobby = () => {
           setListPlayers(JSON.parse(event.data)["players"]);
           setlistColors(JSON.parse(event.data)["colors"]);
         }
-        console.log(event.data)
       };
 
       ws.current.onclose = () => {
@@ -104,6 +104,7 @@ const Lobby = () => {
                 },
                 body: JSON.stringify(colordata)
       })
+
     }
 
     // Pushing to list of games page and closing WebSocket
@@ -122,11 +123,11 @@ const Lobby = () => {
                         <th>Color</th>
                     </tr>
                 </thead>
-                <tbody>            
+                <tbody>
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 
-                          <td><div className="player-color" style={{backgroundColor: colors[listPlayers[block]['Color']]}}></div> </td>
+                          <td><div style={{backgroundColor: colors[listPlayers[block]['Color']], width: '100px', height: '20px'}}> </div> </td>
                       </tr>
                     ))}
                 </tbody>
