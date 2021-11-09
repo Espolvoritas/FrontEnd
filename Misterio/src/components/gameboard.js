@@ -15,6 +15,7 @@ const GameBoard = () => {
     const [currentPlayer, setTurn] = useState("")
     const [cards, setCards] = useState([])
     const isPlaying = (datahost["player_name"] === currentPlayer)
+
     const [message, setMessage] = useState("")
     const [card, setCard] = useState("");
     const [accused, setAccused] = useState("");
@@ -50,11 +51,12 @@ const GameBoard = () => {
             body: JSON.stringify(diceValue)   
         })
     }
+  
     useCustomEventListener('res-sus', resSus => {
         setAccused(resSus[0])
         setCard(resSus[1])
     })
-
+  
     return (
         <div className="background-image">
             <div className="DiceRoll">
