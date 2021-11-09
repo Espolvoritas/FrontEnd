@@ -1,5 +1,6 @@
 import {React, useState} from "react";
 import { useCustomEventListener } from 'react-custom-events';
+import { emitCustomEvent } from 'react-custom-events';
 
 const PlayerOnGrid = (player_id) => {
 
@@ -14,12 +15,11 @@ const PlayerOnGrid = (player_id) => {
         if((data)["code"] & 128) {
             setPositions((data)["positions"]);
         }
-        if((data)["code"] & 256) {
-            console.log(data)
-        }
     });
 
-    //console.log("hola " + message)
+    useCustomEventListener('init_moves', data => {
+        setAvailable(data["moves"])
+    });
     
     const colors = {
         '1': "#d0021b",
@@ -46,8 +46,6 @@ const PlayerOnGrid = (player_id) => {
     }     
 
     async function move(i, j) {
-        console.log(i.toString() + " " + j.toString())
-
         let remaining = 0
         let allowMovement = false
 
@@ -67,7 +65,6 @@ const PlayerOnGrid = (player_id) => {
             "y": i,
             "remaining": remaining
         }
-        //console.log(moveData)
         const response = await fetch('http://127.0.0.1:8000/gameBoard/moves', {
                   method: 'POST',
                   headers: {
@@ -80,9 +77,8 @@ const PlayerOnGrid = (player_id) => {
         const res = await response.json()
 
         if(response.status === 200){
-            
             setAvailable(res["moves"])
-            
+            emitCustomEvent('room', res["room"]);
         }
 
       }
@@ -102,7 +98,8 @@ const PlayerOnGrid = (player_id) => {
                     <div key={i} className="available-cell" style={{
                         gridRow: available[i]["x"]+1,
                         gridColumn: available[i]["y"]+1,
-                        backgroundColor: "black"
+                        backgroundColor: "#643624",
+                        opacity: 0.8
                     }}></div>
                 ))}
             </div>

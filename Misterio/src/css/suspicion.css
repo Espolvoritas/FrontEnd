@@ -15,12 +15,6 @@
     background-color:#002234;
 }
 
-.card-sus{
-    margin-left: 63px;
-    width: 60%;
-    height: 80%;
-}
-
 /** Pop up Form Suspicion **/
 
 .suspicion-box{
@@ -61,7 +55,7 @@
     background-color: #969991;
 }
 
-/** Pop up Show Suspicion **/
+/** Pop up Show Suspicion Result **/
 .show-sus{
     width: 300px;
     height: 350px;
@@ -86,6 +80,11 @@
     background-color: #969991;
 }
 
+.card-sus{
+    margin-left: 63px;
+    width: 60%;
+    height: 80%;
+}
 /** Pop up choose card **/
 
 .choose-card{
@@ -145,4 +144,69 @@
     transform: translate(415px, 20%);
     cursor: pointer;
     position: fixed;
+}
+
+/** Pop up Notify Send **/
+.notify-send{
+    width: 300px;
+    height: 350px;
+    background-color: #e7e8d0;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;
+    text-align: center;
+}
+
+.header-not-send{
+    margin-top: 20px;
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'IM Fell English SC', serif;
+}
+
+.close-notify{
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(110px, 20%);
+    cursor: pointer;
+    position: fixed;
+}
+
+.card-notify{
+    width: 50%;
+    height: 73%;
+}
+
+/** Pop Up Notify Suspicion **/
+.not-sus{
+    width: 500px;
+    height: 100px;
+    background-color: #e7e8d0;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1; 
+    text-align: center;
+}
+
+.close-not-sus{
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(215px, 20%);
+    cursor: pointer;
+    position: fixed;
+}
+
+.close-not-sus:hover{
+    color: red;
+    background-color: #969991;
+}
+
+.sus-text{
+    color: #e40303;
 }
