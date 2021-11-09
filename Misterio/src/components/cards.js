@@ -6,8 +6,8 @@ import CardsImg from "./cardReference";
 const Cards = (cards) => {
     return(
         <PerfectScrollbar className = "gridContainer">
-            {cards.map((card) => (
-                <img className = "cardsImage" src={CardsImg[card]} alt=""/>
+            {cards.map((card, i) => (
+                <img key={i} className = "cardsImage" src={CardsImg[card]} alt=""/>
             ))}
         </PerfectScrollbar>
     );
