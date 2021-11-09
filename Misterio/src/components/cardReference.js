@@ -28,7 +28,7 @@ export const CardsImg = {
 
 export const CardsName = {
     //Monsters
-    1:'Dracula',
+    1:'Drácula',
     2:'Frankenstein',
     3:'Hombre Lobo',
     4:'Fantasma',
@@ -42,13 +42,13 @@ export const CardsName = {
     11:'Doncella',
     12:'Jardinero',
     //Places
-    13:'Vestibulo',
+    13:'Vestíbulo',
     14:'Laboratorio',
     15:'Biblioteca',
     16:'Bodega',
     17:'Alcoba',
-    18:'Panteon',
-    19:'Salon',
+    18:'Panteón',
+    19:'Salón',
     20:'Cochera',
     //Salem Witch
     21:'Bruja de Salem'

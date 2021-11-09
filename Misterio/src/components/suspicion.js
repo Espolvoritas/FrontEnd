@@ -13,7 +13,7 @@ function Suspicion(place, playerID) {
 
     if(place === 0) return 
 
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async () => { 
         
         const sus = {
             "playerId": playerID,
@@ -58,7 +58,7 @@ function Suspicion(place, playerID) {
                         <option value={3}>Hombre Lobo</option>
                         <option value={5}>Momia</option>
                     </select>
-                    asesinó al/a la
+                    asesinó a
                     <select onChange={(e) => setVictim(e.target.value)}>
                         <option value="" selected disabled hidden>Elige una víctima</option>
                         <option value={9}>Ama de Llaves</option>
@@ -68,7 +68,7 @@ function Suspicion(place, playerID) {
                         <option value={12}>Jardinero</option>
                         <option value={10}>Mayordomo</option>
                     </select>
-                    en el/la {CardsName[place]}
+                    en {CardsName[place]}
                     {(validInput) ? <input className="send-sus" type="submit" value="➤" onClick={close}/> : <b/>}
                 </div>
             </div>
@@ -85,7 +85,6 @@ function NotifySuspicion(){
     const [place, setPlace] = useState(0);
 
     useCustomEventListener('websocket', data => {
-        
         if ((data["code"] & 4)){
             setPlayer(data["currentPlayer"]);
             setVictim(data["victim"]);
@@ -103,6 +102,7 @@ function NotifySuspicion(){
         closeOnDocumentClick={false}
         >
         {close => (
+
         <div className="not-sus">
             <button className="close-not-sus" onClick={close}>✖</button> <br/>
             <div className="header-sus">La sospecha de {player} fue:
@@ -251,7 +251,7 @@ function NotifySend(){
         {close => (
             <div className="notify-send">
                 <button className="close-notify" onClick={close}>✖</button> <br/>
-                <div className="header-sus">Le enviaste esta carta a {nickname}</div>
+                <div className="header-not-send">Le enviaste esta carta a {nickname}</div>
                 <img className="card-notify" src={CardsImg[card]} alt={CardsName[card]}/>
             </div>
         )}

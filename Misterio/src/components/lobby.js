@@ -10,6 +10,7 @@ const Lobby = () => {
     const [listColors, setlistColors] = useState([]); 
     let statusNextPage = useRef(false); 
     const ws = useRef(null);
+    
     const colors = {
       '1': "#d0021b",
       '2': "#00c98d",

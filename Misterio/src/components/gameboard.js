@@ -20,6 +20,9 @@ const GameBoard = () => {
     const [cards, setCards] = useState([])
     let [card, setCard] = useState(0);
     let [accused, setAccused] = useState("");
+
+    const isPlaying = (datahost["player_name"] === currentPlayer)
+
     let arriveSus = useRef(false)
     let [roomId, setRoomId] = useState(0)
 
@@ -44,7 +47,6 @@ const GameBoard = () => {
             }
 
         };
-
     }, []);
 
     useCustomEventListener('res-sus', resSus => {
@@ -68,6 +70,8 @@ const GameBoard = () => {
                 {ShowStatus()}
                 {NotifySend()}
                 {ShowSuspicionResult(accused, card)}
+            </div>
+            <div>
                 {Rules()}
             </div>
             <div>

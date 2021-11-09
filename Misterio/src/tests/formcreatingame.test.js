@@ -2,8 +2,11 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent, screen } from '@testing-library/react'
 import CreatingFrom from '../components/formcreatingame'
+import {createMemoryHistory} from 'history'
+import { Router } from "react-router-dom";
+import userEvent from '@testing-library/user-event'
 
-test('test', async () => {
+test('Render components and inputs expected', async () => {
 
     const component = render(<CreatingFrom />);
     
@@ -23,5 +26,25 @@ test('test', async () => {
 
     expect(screen.getByPlaceholderText(/Nombre de partida/i)).toHaveValue('Sala');
     expect(screen.getByPlaceholderText(/Apodo/i)).toHaveValue('Jugadorhost'); 
+
+})
+
+test('Recieving data from prev page', () => {
+
+    const history = createMemoryHistory();
+
+    render(
+      <Router history={history}>
+        <CreatingFrom />
+      </Router>
+    );
+  
+    const aboutItem = screen.getByText('Crear');
+    expect(aboutItem).toBeInTheDocument();
+  
+    userEvent.click(aboutItem);
+    expect(history.length).toBe(1);
+    expect(history.location.pathname).toBe('/');
+    
 
 })
