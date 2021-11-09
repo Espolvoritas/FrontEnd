@@ -10,6 +10,7 @@ const Lobby = () => {
     const [listColors, setlistColors] = useState([]); 
     let statusNextPage = useRef(false); 
     const ws = useRef(null);
+    
     const colors = {
       '1': "#d0021b",
       '2': "#00c98d",
@@ -90,12 +91,11 @@ const Lobby = () => {
     }
 
     const chooseColor = async (value) => {
-      console.log(value)
       const colordata = {
         "player_id": datahost["player_id"], 
         "color": value
       }
-      const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
+      await fetch('http://127.0.0.1:8000/lobby/pickColor', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',

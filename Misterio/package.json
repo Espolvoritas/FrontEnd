@@ -41,7 +41,9 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7"
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^11.2.7",
+    "jest-websocket-mock": "^2.2.1",
+    "mock-socket": "^9.0.7"
   }
 }
