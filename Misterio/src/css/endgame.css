@@ -1,0 +1,34 @@
+.Background {
+    background: url(../media/detective.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    text-align: center;
+}
+
+.endGameBox{
+    width: 30%;
+    height: 20%;
+    background-color: #e7e8d0;
+    font-size: 40px;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;
+    font-family: 'Josefin Sans', sans-serif;
+    transform: translate(120%, 120%);
+    position: fixed;
+}
+
+.gobackButton{
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-family: 'IM Fell English SC', serif;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    color: #eae8e8;
+    background-color: #6b5d58;
+}

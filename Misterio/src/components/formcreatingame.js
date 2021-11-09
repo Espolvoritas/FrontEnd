@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import '../css/formcreatingame.css';
 import { useHistory } from "react-router-dom";
 
 const CreatingFrom = () => {
@@ -17,7 +16,7 @@ const CreatingFrom = () => {
             "name": name,
             "host": host
         }
-        const response = await fetch('http://127.0.0.1:8000/game/createNew', {
+        const response = await fetch('http://127.0.0.1:8000/lobby/createNew', {
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -32,10 +31,9 @@ const CreatingFrom = () => {
         setIsRepeated(response.status === 400)
 
         if (response.status === 201){
-            const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "gameHost": host }
+            const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "player_name": host }
             history.push("/lobby", state);
         }
-
     }
 
     const EraseError = () => {
@@ -53,7 +51,6 @@ const CreatingFrom = () => {
             handleSubmit()
         }
     }
-
 
     return (
         <div className="Background-formgame">

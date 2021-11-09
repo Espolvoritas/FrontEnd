@@ -4,6 +4,8 @@ import CreatingFrom from './components/formcreatingame';
 import ListGames from './components/listofgames';
 import Lobby from './components/lobby';
 import GameBoard from './components/gameboard';
+import EndGame from './components/endgame';
+
 import './App.css';
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
         <Route exact path="/listofgames" component={ListGames}></Route>
         <Route exact path="/gameboard" component={GameBoard}></Route>
         <Route exact path="/lobby" component={Lobby}></Route>
+        <Route exact path="/endgame" component={EndGame}></Route>
 
       </Switch>
     </Router>

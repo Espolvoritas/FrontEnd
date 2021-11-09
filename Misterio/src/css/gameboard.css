@@ -21,3 +21,32 @@
     width: 450px;
     height: 100px;
 }
+
+/** Acusation **/
+
+.acusationResult{
+    width: 450px;
+    height: 60px;
+    background-color: #e7e8d0;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1; 
+}
+
+.acusationText{
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'IM Fell English SC', serif;
+}
+
+.close-result{
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(410px, 20%);
+    cursor: pointer;
+    position: fixed;
+}
