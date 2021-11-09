@@ -50,7 +50,6 @@ const GameBoard = () => {
             body: JSON.stringify(diceValue)   
         })
     }
-
     useCustomEventListener('res-sus', resSus => {
         setAccused(resSus[0])
         setCard(resSus[1])
@@ -71,7 +70,7 @@ const GameBoard = () => {
                 {arriveSus ? ChooseCard(ws.current): <b/> }
                 {ShowStatus()}
                 {NotifySend()}
-                {(accused !== "" && card !== "") ? ShowSuspicionResult(accused, card) : <b/>}
+                {(accused !== "" && card !== 0) ? ShowSuspicionResult(accused, card) : <b/>}
             </div>
                 {(message === "") ? <b/> : <Rules message={message}/>}
             
