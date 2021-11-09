@@ -6,7 +6,7 @@ import { emitCustomEvent } from 'react-custom-events';
 import { useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
-
+import {Acusation, NotifyAcusation} from "./acusation"
 
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
@@ -22,6 +22,8 @@ const GameBoard = () => {
     let [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
     let [roomId, setRoomId] = useState(0)
+
+    const isPlaying = (datahost["player_name"] === actualTurn)
 
     useCustomEventListener('room', data => {
         setRoomId(data)
@@ -40,6 +42,7 @@ const GameBoard = () => {
             if (JSON.parse(event.data)["code"] & 8){
                 arriveSus = true
             }
+
         };
 
     }, []);
@@ -70,7 +73,6 @@ const GameBoard = () => {
             <div>
                 {Cards(cards)}
             </div>
-
             {RollDice(datahost["player_id"], actualTurn)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
@@ -79,6 +81,10 @@ const GameBoard = () => {
                 }   
             </div>
             {PlayerOnGrid(datahost["player_id"])}
+            <div className="Acusation-main">
+                {Acusation(isPlaying)}
+                {NotifyAcusation()}
+            </div>
         </div>
     );
 }

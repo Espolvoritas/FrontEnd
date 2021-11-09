@@ -91,11 +91,6 @@ function NotifySuspicion(){
             setVictim(data["victim"]);
             setMonster(data["culprit"]);
             setPlace(data["room"]);
-        }else{
-            if(victim !== 0 || monster !== 0){
-                setVictim(0);
-                setMonster(0);
-            }
         }
     });
 

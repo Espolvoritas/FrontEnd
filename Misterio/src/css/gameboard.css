@@ -30,3 +30,8 @@
     position: absolute;
 
 }
+
+.Acusation-main{
+    position: absolute;
+    transform: translate(0%, 200%);
+}
