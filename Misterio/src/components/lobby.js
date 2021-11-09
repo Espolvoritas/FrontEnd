@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import '../css/lobby.css';
 import { useHistory } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+
 
 const Lobby = () => {
 
@@ -10,7 +10,6 @@ const Lobby = () => {
     const [listColors, setlistColors] = useState([]); 
     let statusNextPage = useRef(false); 
     const ws = useRef(null);
-    
     const colors = {
       '1': "#d0021b",
       '2': "#00c98d",
@@ -44,7 +43,6 @@ const Lobby = () => {
       "Naranja": '8'
     }
 
-
     const history = useHistory()
     const datahost = history.location.state
     const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
@@ -53,12 +51,15 @@ const Lobby = () => {
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
+        console.log("recibiendo datos lobby");
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
-        }else{
+        } else{
           setListPlayers(JSON.parse(event.data)["players"]);
+          console.log(listPlayers + "lista");
           setlistColors(JSON.parse(event.data)["colors"]);
         }
+        console.log(event.data)
       };
 
       ws.current.onclose = () => {
@@ -75,15 +76,14 @@ const Lobby = () => {
     const clickNextPage = async (e) => {
       e.preventDefault();
       const response = await fetch('http://127.0.0.1:8000/lobby/startGame', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                body: datahost["player_id"]
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: datahost["player_id"]
       })
-
       if(response.status === 200){
         history.push("/gameboard", state);
         ws.current.close();
@@ -91,11 +91,12 @@ const Lobby = () => {
     }
 
     const chooseColor = async (value) => {
+      console.log(value)
       const colordata = {
-        "player_id": datahost["player_id"], 
+        "player_id": datahost["player_id"],
         "color": value
       }
-      await fetch('http://127.0.0.1:8000/lobby/pickColor', {
+      const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -104,7 +105,6 @@ const Lobby = () => {
                 },
                 body: JSON.stringify(colordata)
       })
-
     }
 
     // Pushing to list of games page and closing WebSocket
@@ -127,7 +127,7 @@ const Lobby = () => {
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 
-                          <td><div style={{backgroundColor: colors[listPlayers[block]['Color']], width: '100px', height: '20px'}}> </div> </td>
+                          <td><div className="player-color" style={{backgroundColor: colors[listPlayers[block]['Color']]}}></div> </td>
                       </tr>
                     ))}
                 </tbody>
