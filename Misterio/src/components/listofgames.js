@@ -112,7 +112,6 @@ const ListGames = () => {
                                     <td onClick={() => {settingid(i)}}>{block.host}</td>
                                     <td onClick={() => {settingid(i)}}>{block.players}/6</td>
                                     {
-                                        // check if game has password
                                         (!block.password) ? <td onClick={() => {settingid(i)}}>🔓</td>
                                         : <td onClick={() => {settingid(i)}} >🔐</td>
                                     }

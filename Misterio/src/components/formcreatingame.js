@@ -34,7 +34,6 @@ const CreatingFrom = () => {
             const state = {"game_id": res["game_id"], "player_id": res["player_id"], "gameName": name, "player_name": host }
             history.push("/lobby", state);
         }
-
     }
 
     const EraseError = () => {
@@ -52,7 +51,6 @@ const CreatingFrom = () => {
             handleSubmit()
         }
     }
-
 
     return (
         <div className="Background-formgame">

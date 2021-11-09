@@ -51,10 +51,12 @@ const Lobby = () => {
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
+        console.log("recibiendo datos lobby");
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
-        }else{
+        } else{
           setListPlayers(JSON.parse(event.data)["players"]);
+          console.log(listPlayers + "lista");
           setlistColors(JSON.parse(event.data)["colors"]);
         }
         console.log(event.data)
@@ -74,15 +76,14 @@ const Lobby = () => {
     const clickNextPage = async (e) => {
       e.preventDefault();
       const response = await fetch('http://127.0.0.1:8000/lobby/startGame', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                body: datahost["player_id"]
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: datahost["player_id"]
       })
-
       if(response.status === 200){
         history.push("/gameboard", state);
         ws.current.close();
@@ -92,7 +93,7 @@ const Lobby = () => {
     const chooseColor = async (value) => {
       console.log(value)
       const colordata = {
-        "player_id": datahost["player_id"], 
+        "player_id": datahost["player_id"],
         "color": value
       }
       const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
@@ -122,7 +123,7 @@ const Lobby = () => {
                         <th>Color</th>
                     </tr>
                 </thead>
-                <tbody>            
+                <tbody>
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
                           <td>{listPlayers[block]['nickName']} </td> 
