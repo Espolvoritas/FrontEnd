@@ -69,7 +69,7 @@ const ListGames = () => {
                 console.log(joinChecked)
                 const response = await joinChecked.json()
                 if (joinChecked.status === 200 && response["nicknameIsValid"]){
-                    const state = {"game_id": gameid, "player_id": response["playerId"], "gameName": gameName, "player_name": nickname}
+                    const state = {"player_id": response["playerId"], "gameName": gameName, "player_name": nickname}
                     history.push("/lobby", state);
                 } else {
                     setIsRepeated(!response["nicknameIsValid"])

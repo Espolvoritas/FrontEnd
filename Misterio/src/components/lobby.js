@@ -45,7 +45,7 @@ const Lobby = () => {
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"game_id": datahost["game_id"], "player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
+    const state = {"player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
 
     // WebSocket recieve and close connection
     useEffect(() => {
