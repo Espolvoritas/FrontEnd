@@ -12,8 +12,7 @@ const Acusation = (isPlaying) => {
 
     const validInput = victim !== "" && monster !== ""  && room !== "";
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         const acusationData = {
             "room": parseInt(room),
             "monster": parseInt(monster),
@@ -29,7 +28,22 @@ const Acusation = (isPlaying) => {
             },
             body: JSON.stringify(acusationData)
         })
+
+        if(response.status === 200){
+            closeCleanup()
+        }
+        
+
     }
+
+    function closeCleanup() {
+        if(victim !== "" || monster !== "" || room !== ""){
+            setVictim("")
+            setMonster("")
+            setRoom("")
+        }
+    }
+
     if (!isPlaying) {
         return
     } else {
@@ -41,7 +55,7 @@ const Acusation = (isPlaying) => {
             >
                 {close => (
                     <div className="acusation-box">
-                        <button className="close-acusation" onClick={close}>✖</button> <br/>
+                        <button className="close-acusation" onClick={(e) => closeCleanup(e)}>✖</button> <br/>
                             <div className="header-acusation">Realiza una acusación</div>
                             <select onChange={(e) => setMonster(e.target.value)}>
                                 <option value="" selected disabled hidden>Elige un monstruo</option>
@@ -99,6 +113,14 @@ const NotifyAcusation = () =>  {
         }
     }
 
+    function closeCleanup() {
+        if(!acusationRes){
+            setAcusationRes(false)
+            setAcusationMade(false)
+            setAcusationPlayer("")
+        }
+    }
+
     useCustomEventListener('websocket', data => {
         if((data)["code"] & 512){
             setAcusationMade(true);
@@ -115,11 +137,11 @@ const NotifyAcusation = () =>  {
             modal 
             open={acusationMade} 
             closeOnDocumentClick = {false}
-            onClose = {closeModal()}
+            onClose = {() => closeModal()}
         >
         {close => (
             <div className = "acusationResult">
-                <button className="close-result" onClick={close}>✖</button> <br/>
+                <button className="close-result" onClick={() => closeCleanup()}>✖</button> <br/>
                 <div className = "acusationText">
                     La acusacion del jugador <b>{acusationPlayer}</b> fue 
                     {(acusationRes) ? <b>acertada, felicitaciones</b>  : <b> erronea</b>}
