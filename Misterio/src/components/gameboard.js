@@ -2,8 +2,7 @@ import {React, useState, useRef, useEffect} from "react";
 import Cards from "./cards";
 import Rules from "./rules";
 import {Suspicion, ShowSuspicionResult, ChooseCard, ShowStatus, NotifySend, NotifySuspicion} from "./suspicion"
-import { emitCustomEvent } from 'react-custom-events';
-import { useCustomEventListener } from 'react-custom-events';
+import { emitCustomEvent,  useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
@@ -29,14 +28,15 @@ const GameBoard = () => {
         setRoomId(data)
     });
 
-
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
                                 + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
             emitCustomEvent('websocket', JSON.parse(event.data));
-            if(JSON.parse(event.data)["code"] & 1)
+            if(JSON.parse(event.data)["code"] & 1){
                 setTurn(JSON.parse(event.data)["currentPlayer"]);
+                emitCustomEvent('dice', false);
+            }
             if (JSON.parse(event.data)["code"] & 2)
                 setCards(JSON.parse(event.data)["cards"]);
             if (JSON.parse(event.data)["code"] & 8){
@@ -74,7 +74,7 @@ const GameBoard = () => {
             <div>
                 {Cards(cards)}
             </div>
-            {RollDice(datahost["player_id"], actualTurn)}
+            {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <h1>Es tu turno</h1>
