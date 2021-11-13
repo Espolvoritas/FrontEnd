@@ -10,8 +10,6 @@ const EndGame = () => {
         e.preventDefault();
         history.push('/');
     }
-
-    const deck = {}
     
     return (
         <div className="Background">
