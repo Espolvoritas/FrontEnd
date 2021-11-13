@@ -82,15 +82,15 @@ const GameBoard = () => {
                 : <h1>Es el turno de: {actualTurn}</h1>
                 } 
             </div>
-                
-            <div>
-            {Report()}
-            </div>
-                
+                  
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying)}
                 {NotifyAcusation()}
+            </div>
+
+            <div>
+                {Report()}
             </div>
         </div>
     );
