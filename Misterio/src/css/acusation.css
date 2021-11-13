@@ -9,6 +9,7 @@
     cursor: pointer;
     color: #ffffff;
     background-color: #005956;
+    transform: translate(90%, 770%);
 }
 
 .acusation-button:active {     
