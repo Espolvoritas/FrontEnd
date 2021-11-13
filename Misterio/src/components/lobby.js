@@ -51,7 +51,6 @@ const Lobby = () => {
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
-        console.log("recibiendo datos lobby");
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
         } else{
@@ -59,7 +58,6 @@ const Lobby = () => {
           console.log(listPlayers + "lista");
           setlistColors(JSON.parse(event.data)["colors"]);
         }
-        console.log(event.data)
       };
 
       ws.current.onclose = () => {
@@ -91,7 +89,6 @@ const Lobby = () => {
     }
 
     const chooseColor = async (value) => {
-      console.log(value)
       const colordata = {
         "player_id": datahost["player_id"],
         "color": value

@@ -93,6 +93,14 @@ function NotifySuspicion(){
         }
     });
 
+    function closeCleanup() {
+        if(victim !== 0 || monster !== 0 || place !== 0){
+            setVictim(0);
+            setMonster(0);
+            setPlace(0);
+        }
+    }
+
     if (victim === 0 || monster === 0) return
 
     return(
@@ -100,6 +108,7 @@ function NotifySuspicion(){
         modal
         open={true}
         closeOnDocumentClick={false}
+        onClose={() => closeCleanup()}
         >
         {close => (
 
@@ -196,15 +205,17 @@ function ShowStatus(){
             setHasCard(data["responded"])
             setNickname(data["responsePlayer"])
             setSus(data["suspicionPlayer"])
-        }else{
-            if(nickname !== "" || sus !== ""){
-                setHasCard(false)
-                setNickname("")
-                setSus("")
-            }
         }
     });
 
+    function closeCleanup() {
+        if(nickname !== "" || sus !== ""){
+            setHasCard(false)
+            setNickname("")
+            setSus("")
+        }
+    }
+    
     if (nickname === "" || sus === "") return
 
     return(
@@ -212,6 +223,7 @@ function ShowStatus(){
         modal
         open={true}
         closeOnDocumentClick={false}
+        onClose={() => closeCleanup()}
         >
         {close => (
             <div className="show-status">
@@ -232,13 +244,15 @@ function NotifySend(){
         if (data["code"] & 32){
             setCard(data["card"])
             setNickname(data["suspicionPlayer"])
-        }else{
-            if (nickname !== "" || card !== 0){
-                setCard(0)
-                setNickname("")
-            }
         }
     });
+
+    function closeCleanup() {
+        if (nickname !== "" || card !== 0){
+            setCard(0)
+            setNickname("")
+        }
+    }
     
     if (nickname === "" || card === 0) return
     
@@ -247,6 +261,7 @@ function NotifySend(){
         modal
         open={true}
         closeOnDocumentClick={false}
+        onClose={() => closeCleanup()}
         >
         {close => (
             <div className="notify-send">
