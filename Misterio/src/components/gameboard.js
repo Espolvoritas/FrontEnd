@@ -9,6 +9,7 @@ import {Acusation, NotifyAcusation} from "./acusation"
 
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
+import Report from "./report";
 
 const GameBoard = () => {
 
@@ -79,8 +80,13 @@ const GameBoard = () => {
                 {((datahost["player_name"] === actualTurn))
                 ? <h1>Es tu turno</h1>
                 : <h1>Es el turno de: {actualTurn}</h1>
-                }   
+                } 
             </div>
+                
+            <div>
+            {Report()}
+            </div>
+                
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying)}
