@@ -55,3 +55,14 @@
     background-color: #2f464f;   
     color: #e7e8d0; 
 }
+
+i {
+    position: absolute;
+    color: black;
+    cursor: pointer;
+    transform: translate(-130%, 15%);
+}
+
+i:hover {
+    color:#155b8e;
+}
