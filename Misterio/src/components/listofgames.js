@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
 
 const ListGames = () => {
 
@@ -16,7 +19,7 @@ const ListGames = () => {
 
     // refresh the page every ten seconds automagically
     useEffect(() => {
-        const autoRefresh = setInterval(handleGames, 10000);
+        const autoRefresh = setInterval(handleGames, 5000);
         return () => clearInterval(autoRefresh);
     }, []);
 
@@ -48,6 +51,11 @@ const ListGames = () => {
     const [isRepeated, setIsRepeated] = useState(false);
     const [notFormated, setNotFormated] = useState(false);
     const [gameName, setGameName] = useState("");
+    const [inputPassword, setInputPassword] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [validPassword, setValidPassword] = useState(true);
+    const eye = <FontAwesomeIcon icon={faEye} />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,6 +93,7 @@ const ListGames = () => {
 
     const settingid = (i) => {
         setGameName(listGame[i]["name"])
+        setPassword(listGame[i]["password"])
         setGameID(listGame[i]["id"])
         setIsRepeated(false)
         setNotFormated(false)
@@ -118,30 +127,38 @@ const ListGames = () => {
                                 </tr>
                             } modal>
                                 {close => (
-                                    <div className="modal">
-                                        <button className="close" onClick={close}>&times;</button>
+                                    <div className="content">
+                                        <button className="close" onClick={close}>✖</button>
                                         <div className="popupheader"> Ingrese un apodo entre 5 y 20 caracteres </div>
-                                        <div className="content">
+                                            <form>
                                             {
                                                 (isRepeated)
                                                 ? <label className="takensign"> Apodo tomado </label>
-                                                : <p/>
-                                            }
-                                            {
-                                                (notFormated) 
+                                                : (notFormated) 
                                                 ?  <label className="takensign"> Apodo mal formateado </label>
-                                                : <p/>
+                                                : (!validPassword)
+                                                ? <label className="takensign">Contraseña incorrecta</label>
+                                                : <b/>
                                             }
-                                            <form>
                                                 <label>
                                                     <p/>
                                                     <input className="nicknameinput" type="text" name="nickname"  
                                                         onClick={() => {setIsRepeated(false); setNotFormated(false)}}
                                                         onChange={e => setNickName(e.target.value)} required autoComplete = "off"/>
                                                 </label>
-                                                <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                {(password) 
+                                                ? 
+                                                <div>
+                                                <label className="popupheader"> Ingrese la contraseña de la partida <p/>
+                                                    <input className="nicknameinput" type={passwordShown ? "text" : "password"} name="password"  
+                                                        onChange={e => setInputPassword(e.target.value)} required autoComplete = "off"/>
+                                                    <e onClick={() => setPasswordShown(passwordShown ? false : true)}>{eye}</e>
+                                                    </label> 
+                                                    <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                </div>
+                                                : <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                }          
                                             </form>
-                                        </div>
                                     </div>
                                 )}
                             </Popup>
