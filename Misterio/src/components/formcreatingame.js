@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-const eye = <FontAwesomeIcon icon={faEye} />;
 
 const CreatingFrom = () => {
+    const eye = <FontAwesomeIcon icon={faEye} />;
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +19,7 @@ const CreatingFrom = () => {
         const gameData = {
             "name": name,
             "host": host,
-            "password": password
+            "password": btoa(password)
         }
         const response = await fetch('http://127.0.0.1:8000/lobby/createNew', {
             method: 'POST',
@@ -100,7 +99,7 @@ const CreatingFrom = () => {
                     <label className="pass-wrapper">
                         Contraseña
                         <p/>
-                        <input type={passwordShown ? "text" : "password"} name="host" autoComplete="off" placeholder="Contraseña (opcional)" onClick={EraseError} onChange={e => setPassword(e.target.value)}/>
+                        <input type={passwordShown ? "text" : "password"} name="host" autoComplete="off" placeholder="Contraseña (opcional)" onChange={e => setPassword(e.target.value)}/>
                        
                     </label>
                     <i onClick={togglePasswordVisiblity}>{eye}</i>
