@@ -1,0 +1,13 @@
+.background-chat{
+    width: 25%;
+    height: 56%;
+    transform: translate(300%,0%);
+    position: fixed;
+    color:darkorange;
+    background-color: darkorchid;
+}
+
+.form-chat{
+    position: sticky;
+    transform: translate(0%, 750%);
+}

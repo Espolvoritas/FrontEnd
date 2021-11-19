@@ -9,6 +9,7 @@
 @import 'css/playerongrid.css';
 @import 'css/acusation.css';
 @import 'css/endgame.css';
+@import 'css/chat.css';
 
 .home-button, .return-button{
     color: white;
@@ -19,3 +20,4 @@
 .home-button{
     left: 40px;
 }
+

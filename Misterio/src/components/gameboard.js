@@ -6,7 +6,7 @@ import { emitCustomEvent,  useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
-
+import Chat from './chat'
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 
@@ -86,6 +86,9 @@ const GameBoard = () => {
             <div className="Acusation-main">
                 {Acusation(isPlaying)}
                 {NotifyAcusation()}
+            </div>
+            <div className="Chat-component">
+                {Chat(ws.current)}
             </div>
         </div>
     );
