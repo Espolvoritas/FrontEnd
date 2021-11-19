@@ -43,10 +43,9 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
-    "react-custom-events": "^1.0.5",
-    "react-perfect-scrollbar": "^1.5.8",
     "jest-websocket-mock": "^2.2.1",
-    "mock-socket": "^9.0.7"
-
+    "mock-socket": "^9.0.8",
+    "react-custom-events": "^1.0.5",
+    "react-perfect-scrollbar": "^1.5.8"
   }
 }
