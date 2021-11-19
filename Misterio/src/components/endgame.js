@@ -1,5 +1,6 @@
 import { React } from "react";
 import { useHistory } from "react-router-dom";
+import {CardsImg, CardsName} from "./cardReference";
 
 const EndGame = () => {
     const history = useHistory()
@@ -10,34 +11,23 @@ const EndGame = () => {
         history.push('/');
     }
 
-    if(datahost["allLost"]){
-        return(
-            <div className="Background">  
-                <div className = "endGameBox">
-                    <div className = "endgameText">
-                            TODOS LOS JUGADORES PERDIERON
-                    </div>
-                    <div className = "gobackButton">
-                        <button onClick = {(e) => goBack(e)}> Volver a jugar!</button> 
-                    </div>
+    const deck = {}
+    
+    return (
+        <div className="Background">
+            <div className="endGameBox">
+                {(datahost["allLost"]) ? <div>☠️Todos los jugadores perdieron☠️ <br/></div> 
+                : <div>🎉Ganó el jugador: {datahost["acusationPlayer"]}🎉 <br/></div>}
+                Las cartas del sobre eran:
+                <div>
+                    {Object.keys(deck).map((i) => (
+                        <img key={i} className="endgame-card" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}/>
+                    ))}
                 </div>
             </div>
-        )
-    } else {
-        return(
-            <div className="Background">  
-                <div className = "endGameBox">
-                    <div className = "endgameText">
-                            GANO EL JUGADOR {datahost["acusationPlayer"]}
-                    </div>
-                    <div className = "gobackButton">
-                        <button onClick = {(e) => goBack(e)}> Volver a jugar!</button> 
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
+            <button className="gobackButton" onClick = {(e) => goBack(e)}> Volver a jugar!</button> 
+        </div>
+    );
 }
 
 export default EndGame;
