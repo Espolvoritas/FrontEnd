@@ -52,8 +52,8 @@ const ListGames = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const nickNameData = {
-            "gameId": gameid,
-            "playerNickname": nickname
+            "lobby_id": gameid,
+            "player_nickname": nickname
         }
         if ((nickname !== "") && (nickname.length < 21) && (nickname.length > 4)){
             try {
@@ -67,8 +67,8 @@ const ListGames = () => {
                     body: JSON.stringify(nickNameData)
                 })
                 const response = await joinChecked.json()
-                if (joinChecked.status === 200 && response["nicknameIsValid"]){
-                    const state = {"player_id": response["playerId"], "gameName": gameName, "player_name": nickname}
+                if (joinChecked.status === 200 && response["nickname_is_valid"]){
+                    const state = {"player_id": response["player_id"], "gameName": gameName, "player_name": nickname}
                     history.push("/lobby", state);
                 } else {
                     setIsRepeated(!response["nicknameIsValid"])

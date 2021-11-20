@@ -123,7 +123,7 @@ const Lobby = () => {
                 <tbody>
                     {Object.keys(listPlayers).map((block, i) => (
                       <tr key={i} className="Rows-Lobby">
-                          <td>{listPlayers[block]['nickName']} </td> 
+                          <td>{listPlayers[block]['nickname']} </td> 
                           <td><div className="player-color" style={{backgroundColor: colors[listPlayers[block]['Color']]}}></div> </td>
                       </tr>
                     ))}

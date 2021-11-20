@@ -12,7 +12,7 @@ const RollDice = (player_id, isPlaying) => {
     const dice = async (value, player_id) => {
 
         const diceData = {
-            "playerId": player_id,
+            "player_id": player_id,
             "roll": value
         }
         const response = await fetch('http://127.0.0.1:8000/gameBoard/rollDice', {

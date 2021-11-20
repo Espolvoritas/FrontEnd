@@ -17,7 +17,7 @@ const Acusation = (isPlaying) => {
             "room": parseInt(room),
             "monster": parseInt(monster),
             "victim": parseInt(victim),
-            "userID": (datahost["player_id"])
+            "player_id": (datahost["player_id"])
         }
         const response = await fetch ('http://127.0.0.1:8000/gameBoard/accuse', {
             method: 'POST',
