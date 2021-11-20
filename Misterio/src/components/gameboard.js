@@ -78,8 +78,8 @@ const GameBoard = () => {
             {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
-                ? <h1>Es tu turno</h1>
-                : <h1>Es el turno de: {actualTurn}</h1>
+                ? <div className="text-turn" >Es tu turno</div>
+                : <div className="text-turn">Es el turno de: {actualTurn}</div>
                 } 
             </div>
                   

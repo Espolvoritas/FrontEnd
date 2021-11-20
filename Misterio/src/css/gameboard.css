@@ -14,13 +14,18 @@
 
 .Turn{
     border-radius: 8px;
-    color: white;
     border: solid 2px white;
     width: 25.5%;
-    max-width: 50%;
-    height: 12%;
+    height: auto;
+    position: fixed;
+}
+
+.text-turn{
+    text-align: left;
+    padding: 3%;
+    color: white;
+    font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
-    position: absolute;
 }
 
 .gameboard-img{
