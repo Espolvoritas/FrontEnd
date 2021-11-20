@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
+import {RiArrowGoBackFill} from 'react-icons/ri';
 
 const ListGames = () => {
 
@@ -93,7 +94,7 @@ const ListGames = () => {
     // process and display the received json
     function DisplayJson() {
         return (
-            <div>
+            <div className="display-json">
                 <table id="key-list" cellSpacing="0" cellPadding="0">
                     <thead>
                         <tr>
@@ -155,11 +156,17 @@ const ListGames = () => {
 
     return (
         <div className="Background-List">
+            <a href="/">
+                <a className="return-button"><RiArrowGoBackFill/></a>
+            </a>
+
             <div id="key-screen">
                 <h1>Selecciona la partida</h1>
                 {(isEmptyList) ? <div className="Warning">⚠️No hay partidas disponibles. Prueba actualizar o crear una partida⚠️</div> : <p/>}
                 {DisplayJson()}
             </div>
+
+            
         </div>
     );
 }

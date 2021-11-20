@@ -9,3 +9,13 @@
 @import 'css/playerongrid.css';
 @import 'css/acusation.css';
 @import 'css/endgame.css';
+
+.home-button, .return-button{
+    color: white;
+    font-size: 225%;
+    position: absolute;
+}
+
+.home-button{
+    left: 40px;
+}
