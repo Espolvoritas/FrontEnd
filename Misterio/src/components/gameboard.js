@@ -33,9 +33,10 @@ const GameBoard = () => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
                                 + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
+            console.log(event.data)
             emitCustomEvent('websocket', JSON.parse(event.data));
             if(JSON.parse(event.data)["code"] & 1){
-                setTurn(JSON.parse(event.data)["currentPlayer"]);
+                setTurn(JSON.parse(event.data)["current_player"]);
                 emitCustomEvent('dice', false);
             }
             if (JSON.parse(event.data)["code"] & 2)

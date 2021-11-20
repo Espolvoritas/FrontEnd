@@ -16,9 +16,9 @@ function Suspicion(place, playerID) {
     const handleSubmit = async () => { 
         
         const sus = {
-            "playerId": playerID,
-            "victimId": parseInt(victim),
-            "culpritId": parseInt(monster)
+            "player_id": playerID,
+            "victim_id": parseInt(victim),
+            "monster_id": parseInt(monster)
         }
         const response = await fetch('http://127.0.0.1:8000/gameBoard/checkSuspicion', {
                   method: 'POST',
@@ -32,7 +32,7 @@ function Suspicion(place, playerID) {
         })
         
         const res = await response.json();
-        emitCustomEvent('res-sus', [res["responsePlayer"], res["suspicionCard"]]);
+        emitCustomEvent('res-sus', [res["response_player"], res["suspicion_card"]]);
         setVictim(0);
         setMonster(0);
 
@@ -86,7 +86,7 @@ function NotifySuspicion(){
 
     useCustomEventListener('websocket', data => {
         if ((data["code"] & 4)){
-            setPlayer(data["currentPlayer"]);
+            setPlayer(data["current_player"]);
             setVictim(data["victim"]);
             setMonster(data["culprit"]);
             setPlace(data["room"]);
@@ -152,7 +152,7 @@ function ChooseCard(ws, arriveSus){
 
     useCustomEventListener('websocket', data => {
         if ((data["code"] & 8)){
-            setDeck(data["matchingCards"]);
+            setDeck(data["matching_cards"]);
         }else{
             if(deck !== ""){
                 setDeck("")
@@ -203,8 +203,8 @@ function ShowStatus(){
         if (data["code"] & 16){
 
             setHasCard(data["responded"])
-            setNickname(data["responsePlayer"])
-            setSus(data["suspicionPlayer"])
+            setNickname(data["response_player"])
+            setSus(data["suspicion_player"])
         }
     });
 
@@ -243,7 +243,7 @@ function NotifySend(){
     useCustomEventListener('websocket', data => {
         if (data["code"] & 32){
             setCard(data["card"])
-            setNickname(data["suspicionPlayer"])
+            setNickname(data["suspicion_player"])
         }
     });
 
