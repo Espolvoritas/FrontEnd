@@ -30,6 +30,7 @@ const Cards = () => {
                     <img key={i} className = "cardsImage" src={CardsImg[cards[i]]} alt=""/>
                     {checkSalem(cards[i])}
                 </div>
+
             ))}
         </PerfectScrollbar>
     );
