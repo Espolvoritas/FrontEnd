@@ -177,13 +177,13 @@ table {
     background-color: #969991;
 }
 
-e {
+.eye {
     position: absolute;
     color: black;
     cursor: pointer;
     transform: translate(-30px, 8px);
 }
 
-e:hover {
+.eye:hover {
     color:#155b8e;
 }
