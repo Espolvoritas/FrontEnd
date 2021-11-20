@@ -54,7 +54,6 @@ const ListGames = () => {
     const [inputPassword, setInputPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
     const [validPassword, setValidPassword] = useState(true);
-    const [positionList, setPosList] = useState(0);
     const eye = <FontAwesomeIcon icon={faEye} />;
 
     const handleSubmit = async (e) => {
@@ -95,7 +94,6 @@ const ListGames = () => {
 
     // set variables to be used in lobby
     const settingid = (i) => {
-        setPosList(i)
         setGameName(listGame[i]["name"])
         setGameID(listGame[i]["id"])
     }
@@ -126,9 +124,10 @@ const ListGames = () => {
                     <tbody>
                         {listGame.map((block, i) => (
                             <Popup 
+                            key={block.id}
                             onClose={() => setPasswordShown(false)}
                             trigger= {
-                                <tr key={block.id} className="Rows-List">
+                                <tr className="Rows-List">
                                     <td onClick={() => {settingid(i)}}>{block.name} </td>
                                     <td onClick={() => {settingid(i)}}>{block.host}</td>
                                     <td onClick={() => {settingid(i)}}>{block.players}/6</td>
@@ -158,7 +157,7 @@ const ListGames = () => {
                                                     <input className="nicknameinput" type="text" name="nickname" onChange={e => setNickName(e.target.value)}
                                                         onBlur={handleNickname} required autoComplete = "off"/>
                                                 </label>
-                                                {(listGame[positionList]["password"])
+                                                {(listGame[i]["password"])
                                                 ? 
                                                 <div>
                                                 <label className="popupheader"> Ingrese la contraseña de la partida <p/>
