@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
+import SalemCard from "./salemcard";
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 
@@ -60,7 +61,7 @@ const GameBoard = () => {
 
     return(
         <div className="background-image" >
-            <img src={logo} className="gameboard-img"></img>
+            <img src={logo} className="gameboard-img" alt = ""></img>
             <div>
                 {Suspicion(roomId, datahost["player_id"])}
                 {NotifySuspicion()}
@@ -89,6 +90,9 @@ const GameBoard = () => {
             </div>
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"])}
+            </div>
+            <div className = "SalemButton">
+                {SalemCard()}
             </div>
         </div>
     );
