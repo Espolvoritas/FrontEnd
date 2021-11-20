@@ -19,13 +19,13 @@ const Report = () => {
     }
   
     return (
-      <text className="Counter"> 
+      <a className="Counter"> 
         <button  onClick={(e) => {
       e.preventDefault(); decrementCounter()}}>➖</button>
         {counter}
         <button onClick={(e) => {
       e.preventDefault(); incrementCounter()}}>➕</button>
-      </text>
+      </a>
     );
   }
 
@@ -69,8 +69,8 @@ const Report = () => {
       
       <div className="solution">
         <h3 className="solution-header">Solución</h3>
-          <select className="select">
-            <option value="" selected disabled hidden>Monstruo</option>
+          <select className="select" defaultValue={'DEFAULT'}>
+            <option value='DEFAULT' disabled hidden>Monstruo</option>
             <option>Dr. Jekyll Mr. Hyde</option>
             <option>Drácula</option>
             <option>Fantasma</option>
@@ -78,8 +78,8 @@ const Report = () => {
             <option>Hombre Lobo</option>
             <option>Momia</option>
           </select> <br/>
-          <select className="select">
-            <option value="" selected disabled hidden>Víctima</option>
+          <select className="select" defaultValue={'DEFAULT'}>
+            <option value='DEFAULT' disabled hidden>Víctima</option>
             <option>Ama de Llaves</option>
             <option>Conde</option>
             <option>Condesa</option>
@@ -87,8 +87,8 @@ const Report = () => {
             <option>Jardinero</option>
             <option>Mayordomo</option>
           </select>  <br/>
-          <select className="select">
-            <option value="" selected disabled hidden>Recinto</option>
+          <select className="select" defaultValue={'DEFAULT'}>
+            <option value='DEFAULT' disabled hidden>Recinto</option>
             <option>Alcoba</option>
             <option>Biblioteca</option>
             <option>Bodega</option>
