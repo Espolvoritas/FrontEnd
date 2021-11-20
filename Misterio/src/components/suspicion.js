@@ -88,7 +88,7 @@ function NotifySuspicion(){
         if ((data["code"] & 4)){
             setPlayer(data["current_player"]);
             setVictim(data["victim"]);
-            setMonster(data["culprit"]);
+            setMonster(data["monster"]);
             setPlace(data["room"]);
         }
     });
