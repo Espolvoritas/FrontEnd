@@ -28,10 +28,8 @@ const Chat = (ws) => {
                 </div>
             ))}
             <form onSubmit={(e) => sendmsg(e)} className="form-chat">
-                <label>
-                    <input placeholder="Escribe aquí..." autoComplete="off" type="text" name="name" onChange={e => setMsg(e.target.value)}/>
-                </label>
-                <input type="submit" value="Submit"/>
+                <input className="send-msg" placeholder="Escribe aquí..." autoComplete="off" type="text" name="name" onChange={e => setMsg(e.target.value)}/>
+                <input className="send-button" type="submit" value="Submit"/>
             </form>
         </div>
         
