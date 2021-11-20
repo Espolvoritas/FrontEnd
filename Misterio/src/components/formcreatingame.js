@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import {BsEyeFill} from 'react-icons/bs';
+import {BsEyeSlashFill} from 'react-icons/bs';
 
 const CreatingFrom = () => {
-    const eye = <FontAwesomeIcon icon={faEye} />;
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
     const [password, setPassword] = useState("");
@@ -102,7 +101,12 @@ const CreatingFrom = () => {
                         <input type={passwordShown ? "text" : "password"} name="host" autoComplete="off" placeholder="Contraseña (opcional)" onChange={e => setPassword(e.target.value)}/>
                        
                     </label>
-                    <i onClick={togglePasswordVisiblity}>{eye}</i>
+                    {(passwordShown) 
+                    ? 
+                        <i onClick={togglePasswordVisiblity}><BsEyeSlashFill/></i> 
+                    : 
+                        <i onClick={togglePasswordVisiblity}><BsEyeFill/></i>
+                    }
                     <p/>
                     <button className="GameButton" type="submit" value="Crear">Crear</button> <br/>
                     * Los campos son obligatorios, deben estar entre los 5 y 20 caracteres

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-
+import {BsEyeFill} from 'react-icons/bs';
+import {BsEyeSlashFill} from 'react-icons/bs';
 
 const ListGames = () => {
 
@@ -54,7 +53,6 @@ const ListGames = () => {
     const [inputPassword, setInputPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
     const [validPassword, setValidPassword] = useState(true);
-    const eye = <FontAwesomeIcon icon={faEye} />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -108,6 +106,10 @@ const ListGames = () => {
         }
     }
 
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    }
+
     // process and display the received json
     function DisplayJson() {
         return (
@@ -157,13 +159,18 @@ const ListGames = () => {
                                                     <input className="nicknameinput" type="text" name="nickname" onChange={e => setNickName(e.target.value)}
                                                         onBlur={handleNickname} required autoComplete = "off"/>
                                                 </label>
-                                                {(listGame[i]["password"])
+                                                {(true)
                                                 ? 
                                                 <div>
                                                 <label className="popupheader"> Ingrese la contraseña de la partida <p/>
                                                     <input className="nicknameinput" type={passwordShown ? "text" : "password"} name="password"  
                                                         onChange={e => setInputPassword(e.target.value)} required autoComplete = "off"/>
-                                                     <a className="eye" onClick={() => setPasswordShown(passwordShown ? false : true)}>{eye}</a>
+                                                        {(passwordShown) 
+                                                        ? 
+                                                            <i className="eye" onClick={togglePasswordVisiblity}><BsEyeSlashFill/></i> 
+                                                        : 
+                                                            <i className="eye" onClick={togglePasswordVisiblity}><BsEyeFill/></i>
+                                                        }
                                                     </label> 
                                                     <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
                                                 </div>
