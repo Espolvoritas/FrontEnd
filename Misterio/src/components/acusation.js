@@ -96,8 +96,6 @@ const Acusation = (isPlaying) => {
     }
 }
 
-
-
 const NotifyAcusation = () =>  {
 
     const [acusationMade, setAcusationMade] = useState(false);
@@ -105,7 +103,7 @@ const NotifyAcusation = () =>  {
     const [acusationPlayer, setAcusationPlayer] = useState("");
     const [allLost, setAllLost] = useState(false);
     const history = useHistory()
-    
+
     function closeModal() {
         if (acusationRes || allLost){
             const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer};

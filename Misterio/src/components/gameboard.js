@@ -6,6 +6,7 @@ import { emitCustomEvent,  useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
+import SalemCard from "./salemcard";
 
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
@@ -59,7 +60,7 @@ const GameBoard = () => {
 
     return(
         <div className="background-image" >
-            <img src={logo} className="gameboard-img"></img>
+            <img src={logo} className="gameboard-img" alt = ""></img>
             <div>
                 {Suspicion(roomId, datahost["player_id"])}
                 {NotifySuspicion()}
@@ -85,6 +86,9 @@ const GameBoard = () => {
             <div className="Acusation-main">
                 {Acusation(isPlaying)}
                 {NotifyAcusation()}
+            </div>
+            <div className = "SalemButton">
+                {SalemCard()}
             </div>
         </div>
     );
