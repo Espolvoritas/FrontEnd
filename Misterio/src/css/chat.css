@@ -4,8 +4,7 @@
     transform: translate(300%,0%);
     position: absolute;
     display: flex;
-    color:darkorange;
-    background-color: darkorchid;
+    background-color:white;
 }
 
 .form-chat{

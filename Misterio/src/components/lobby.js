@@ -4,6 +4,8 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { AiFillHome } from 'react-icons/ai';
 import {RiArrowGoBackFill} from 'react-icons/ri';
+import Chat from "./chat";
+import { emitCustomEvent } from 'react-custom-events';
 
 
 const Lobby = () => {
@@ -53,11 +55,13 @@ const Lobby = () => {
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
+        console.log(JSON.parse(event.data))
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
+        }else if(JSON.parse(event.data)["code"] & 8192){
+          emitCustomEvent('websocket', JSON.parse(event.data));
         } else{
           setListPlayers(JSON.parse(event.data)["players"]);
-          console.log(listPlayers + "lista");
           setlistColors(JSON.parse(event.data)["colors"]);
         }
       };
@@ -115,13 +119,14 @@ const Lobby = () => {
     return (
         <div className="Background-Lobby">
         	<a classname="ref"href="/">
-                <a className="home-button"><AiFillHome/></a>
-            </a>
+              <a className="home-button"><AiFillHome/></a>
+          </a>
 
-			<a href="/listofgames">
-                <a className="return-button"><RiArrowGoBackFill/></a>
-            </a>
+			    <a href="/listofgames">
+              <a className="return-button"><RiArrowGoBackFill/></a>
+          </a>
           <div className="Title">Sala: {datahost["gameName"]}
+            {Chat(ws.current)}
             <table id="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
@@ -149,6 +154,7 @@ const Lobby = () => {
                 <button onClick={() => clickExitLobby()}>Salir de la sala</button>
               </div>
           </div>
+          
         </div>
   );
 }
