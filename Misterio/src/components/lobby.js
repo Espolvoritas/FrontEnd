@@ -14,6 +14,8 @@ const Lobby = () => {
     const [listColors, setlistColors] = useState([]); 
     let statusNextPage = useRef(false); 
     const ws = useRef(null);
+    const isLobby = false
+
     const colors = {
       '1': "#d0021b",
       '2': "#00c98d",
@@ -148,10 +150,10 @@ const Lobby = () => {
               <div className="GameButton-lobby">
                 {
                   (datahost["game_id"] !== undefined)
-                  ? <button onClick={e => clickNextPage(e)}>Iniciar partida</button>
+                  ? <button className="startgame-button" onClick={e => clickNextPage(e)}>Iniciar partida</button>
                   : <p/>
                 }
-                <button onClick={() => clickExitLobby()}>Salir de la sala</button>
+                <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
               </div>
           </div>
           

@@ -21,6 +21,7 @@ const GameBoard = () => {
     let [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
     let [roomId, setRoomId] = useState(0)
+    const isLobby = true
 
     const isPlaying = (datahost["player_name"] === actualTurn)
 
@@ -88,7 +89,7 @@ const GameBoard = () => {
                 {NotifyAcusation()}
             </div>
             <div className="Chat-component">
-                {Chat(ws.current)}
+                {Chat(ws.current, isLobby)}
             </div>
         </div>
     );
