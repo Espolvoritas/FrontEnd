@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { AiFillHome } from 'react-icons/ai';
+import {RiArrowGoBackFill} from 'react-icons/ri';
 
 
 const Lobby = () => {
@@ -112,6 +114,13 @@ const Lobby = () => {
 
     return (
         <div className="Background-Lobby">
+        	<a classname="ref"href="/">
+                <a className="home-button"><AiFillHome/></a>
+            </a>
+
+			<a href="/listofgames">
+                <a className="return-button"><RiArrowGoBackFill/></a>
+            </a>
           <div className="Title">Sala: {datahost["gameName"]}
             <table id="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>

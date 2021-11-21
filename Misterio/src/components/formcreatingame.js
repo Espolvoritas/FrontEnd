@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import {BsEyeFill} from 'react-icons/bs';
-import {BsEyeSlashFill} from 'react-icons/bs';
+import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
+import {RiArrowGoBackFill} from 'react-icons/ri';
 
 const CreatingFrom = () => {
     const [name, setName] = useState("");
@@ -63,9 +63,12 @@ const CreatingFrom = () => {
         }
     }
 
-
     return (
         <div className="Background-formgame">
+             <a href="/">
+                <a className="return-button"><RiArrowGoBackFill/></a>
+            </a>
+            
             <div id="form">
                 <h1 >Crear la partida </h1>
                 <form onSubmit={e => nicknameEmpty(e)} data-testid="form">
