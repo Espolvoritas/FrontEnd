@@ -17,6 +17,4 @@ test('renders without crashing', async () => {
     </Router>
     );
 
-    const linkElement = screen.getByText(/Esta jugando el detective: Jugador1/i)
-    expect(linkElement).toBeInTheDocument();
 })
