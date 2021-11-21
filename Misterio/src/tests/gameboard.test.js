@@ -9,12 +9,16 @@ test('renders without crashing', async () => {
 
     const history = createMemoryHistory();
     const state = { "player_name": "Jugador1" }
-    history.push("/Lobby", state);
+    history.push("/GameBoard", state);
 
     render(
-    <Router history={history}>
-        <GameBoard />
-    </Router>
+        <Router history={history}>
+            <GameBoard />
+        </Router>
     );
 
+    const linkElement = screen.getByText(/Es el turno de:/i)
+    expect(linkElement).toBeInTheDocument();
+
+    
 })
