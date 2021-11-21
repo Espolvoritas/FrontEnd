@@ -40,7 +40,7 @@ function SalemCard(player_id){
             {
                 salemBool ?
                     <button className="salemCardButton" onClick={requestCard}>
-                        Usar la bruja de Salem
+                        Usar la bruja de Salem ✉️
                     </button>
                 : <p></p>
             }
@@ -56,7 +56,7 @@ function ShowSalemCardResult(card) {
             <div className="showSalemCard">
                 <button className="closeSalemCard" onClick={close}>✖</button> <br/>
                 <div className="salemCardHeader"> El sobre misterio contiene la carta: </div>
-                <img className="envelopeCard" src={CardsImg[card]} alt={CardsName[card]}/>
+                <img className="salemCard" src={CardsImg[card]} alt={CardsName[card]}/>
             </div>
         )}
         </Popup>
@@ -69,8 +69,8 @@ function PlayerUsedSalem(playerUsedSalem) {
         {close => (
             <div className="ShowPlayerUsed">
                 <button className="closePlayerUsed" onClick={close}>✖</button> <br/>
-                <div className="PlayerUsedHeader"> 
-                El jugador {playerUsedSalem} utilizo la carta de salem UwU
+                <div className="PlayerUsedHeader">
+                    El jugador {playerUsedSalem} utilizo la bruja de Salem
                 </div>
             </div>
         )}
