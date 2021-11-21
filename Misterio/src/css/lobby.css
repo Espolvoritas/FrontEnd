@@ -45,7 +45,7 @@
     position: relative;
     font-size: 100%;
     font-weight: bold;
-    width: 100%;
+    
     font-family: 'Special Elite', serif;
     background-color:#6c232f;
     color: #eae8e8;
@@ -55,12 +55,12 @@
 .key-lobby thead, tbody{
     position: relative;
     display: block;
+    width: 96.5%;
 }
 
 .key-lobby tbody{
     position: relative;
     height: 50%;
-    width: 100%;
 }
 
 .key-lobby thead tr th { 

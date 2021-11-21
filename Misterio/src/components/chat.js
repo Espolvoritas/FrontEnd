@@ -61,7 +61,7 @@ const Chat = (ws, isLobby) => {
                 </PerfectScrollbar>
                 <form onSubmit={(e) => sendmsg(e)} className="gameboard-form-chat">
                     <input className="gameboard-send-msg" placeholder="Escribe aquí..." autoComplete="off" type="text" name="name" onChange={e => setMsg(e.target.value)}/>
-                    <input className="gameboard-send-button" type="submit" value="Submit"/>
+                    <input className="gameboard-send-button" type="submit" value="➤"/>
                 </form>
             </div>
             
@@ -86,7 +86,7 @@ const Chat = (ws, isLobby) => {
                 </PerfectScrollbar>
                 <form onSubmit={(e) => sendmsg(e)} className="lobby-form-chat">
                     <input className="lobby-send-msg" placeholder="Escribe aquí..." autoComplete="off" type="text" name="name" onChange={e => setMsg(e.target.value)}/>
-                    <input className="lobby-send-button" type="submit" value="Submit"/>
+                    <input className="lobby-send-button" type="submit" value="➤"/>
                 </form>
             </div>
             

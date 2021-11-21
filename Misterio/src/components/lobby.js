@@ -118,18 +118,39 @@ const Lobby = () => {
       ws.current.close();
     }
 
+    function canStart(ishost){
+
+      if(ishost){
+        return(
+          <div className="GameButton-lobby">
+            <button className="startgame-button" onClick={e => clickNextPage(e)}>Iniciar partida</button>
+            <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
+          </div>
+        );
+      }else{
+        return(
+          <div className="GameButton-lobby">
+            <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
+          </div>
+        );
+      }
+
+      
+    }
+
     return (
         <div className="Background-Lobby">
-        	<a classname="ref"href="/">
+        	<a classname="ref" href="/">
               <a className="home-button"><AiFillHome/></a>
           </a>
 
 			    <a href="/listofgames">
               <a className="return-button"><RiArrowGoBackFill/></a>
           </a>
+          
           <div className="Title">Sala: {datahost["gameName"]}
-            {Chat(ws.current)}
-            <table id="key-lobby" cellSpacing="0" cellPadding="0">
+            {Chat(ws.current, isLobby)}
+            <table className="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -147,14 +168,11 @@ const Lobby = () => {
             </table>
             <Dropdown className="drop-colors" options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
 
-              <div className="GameButton-lobby">
-                {
-                  (datahost["game_id"] !== undefined)
-                  ? <button className="startgame-button" onClick={e => clickNextPage(e)}>Iniciar partida</button>
-                  : <p/>
-                }
-                <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
-              </div>
+
+            {canStart(datahost["game_id"] !== undefined)}
+                  
+
+              
           </div>
           
         </div>
