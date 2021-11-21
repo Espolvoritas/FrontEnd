@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
-import {BsEyeFill} from 'react-icons/bs';
-import {BsEyeSlashFill} from 'react-icons/bs';
+import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
+
 
 const ListGames = () => {
 
