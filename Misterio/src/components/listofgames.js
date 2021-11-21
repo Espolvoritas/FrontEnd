@@ -110,6 +110,12 @@ const ListGames = () => {
         setPasswordShown(passwordShown ? false : true);
     }
 
+    function cleanStates(){
+        setPasswordShown(false);
+        setNotFormated(false);
+        setIsRepeated(false);
+    }
+
     // process and display the received json
     function DisplayJson() {
         return (
@@ -127,7 +133,7 @@ const ListGames = () => {
                         {listGame.map((block, i) => (
                             <Popup 
                             key={block.id}
-                            onClose={() => setPasswordShown(false)}
+                            onClose={() => cleanStates()}
                             trigger= {
                                 <tr className="Rows-List">
                                     <td onClick={() => {settingid(i)}}>{block.name} </td>
@@ -146,10 +152,10 @@ const ListGames = () => {
                                         <div className="popupheader"> Ingrese un apodo entre 5 y 20 caracteres </div>
                                             <form>
                                             {
-                                                (isRepeated)
-                                                ? <label className="takensign"> Apodo ya en uso </label>
-                                                : (notFormated) 
-                                                ?  <label className="takensign"> Apodo mal formateado </label>
+                                                (notFormated)
+                                                ? <label className="takensign">Apodo en formato incorrecto</label>
+                                                : (isRepeated) 
+                                                ?  <label className="takensign">Apodo ya en uso</label>
                                                 : (!validPassword)
                                                 ? <label className="takensign">Contraseña incorrecta</label>
                                                 : <b/>
@@ -159,7 +165,7 @@ const ListGames = () => {
                                                     <input className="nicknameinput" type="text" name="nickname" onChange={e => setNickName(e.target.value)}
                                                         onBlur={handleNickname} required autoComplete = "off"/>
                                                 </label>
-                                                {(true)
+                                                {(listGame[i]["password"])
                                                 ? 
                                                 <div>
                                                 <label className="popupheader"> Ingrese la contraseña de la partida <p/>
