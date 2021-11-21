@@ -32,8 +32,6 @@ const Acusation = (isPlaying) => {
         if(response.status === 200){
             closeCleanup()
         }
-        
-
     }
 
     function closeCleanup() {
