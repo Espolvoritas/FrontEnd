@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import {BsEyeFill} from 'react-icons/bs';
-import {BsEyeSlashFill} from 'react-icons/bs';
+import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
+import {RiArrowGoBackFill} from 'react-icons/ri';
 
 const CreatingFrom = () => {
     const [name, setName] = useState("");
