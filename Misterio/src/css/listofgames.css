@@ -118,9 +118,11 @@ table {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.modal {
-    width: 275px;
-    height: 200px;
+.content {
+    width: auto;
+    height: auto;
+    padding-bottom: 20px;
+    padding-left: 10px;
     background-color: #e7e8d0;
     font-size: 12px;
     border-radius: 25px;
@@ -133,8 +135,7 @@ table {
     background-color: white;
     display: right;
     border-radius: 25px;
-    margin-top: 10px;
-    margin-left: 220px;
+    transform: translate(260px, 5px);
 }
 
 .close:hover{
@@ -165,6 +166,7 @@ table {
     font-size: 14px;
     border-radius: 24px;
     outline: none;
+    margin-bottom: 10px;
 }
 
 .sendbutton{
@@ -177,4 +179,15 @@ table {
 .sendbutton:hover{
     color: red;
     background-color: #969991;
+}
+
+.eye {
+    position: absolute;
+    color: black;
+    cursor: pointer;
+    transform: translate(-30px, 8px);
+}
+
+.eye:hover {
+    color:#155b8e;
 }

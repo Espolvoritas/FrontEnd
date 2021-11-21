@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
-import {RiArrowGoBackFill} from 'react-icons/ri';
+import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
 
 const ListGames = () => {
 
@@ -17,7 +17,7 @@ const ListGames = () => {
 
     // refresh the page every ten seconds automagically
     useEffect(() => {
-        const autoRefresh = setInterval(handleGames, 10000);
+        const autoRefresh = setInterval(handleGames, 5000);
         return () => clearInterval(autoRefresh);
     }, []);
 
@@ -49,46 +49,70 @@ const ListGames = () => {
     const [isRepeated, setIsRepeated] = useState(false);
     const [notFormated, setNotFormated] = useState(false);
     const [gameName, setGameName] = useState("");
+    const [inputPassword, setInputPassword] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [validPassword, setValidPassword] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const nickNameData = {
             "lobby_id": gameid,
-            "player_nickname": nickname
+            "player_nickname": nickname,
+            "password": inputPassword
         }
-        if ((nickname !== "") && (nickname.length < 21) && (nickname.length > 4)){
-            try {
-                const joinChecked = await fetch('http://127.0.0.1:8000/lobby/joinCheck', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    body: JSON.stringify(nickNameData)
-                })
-                const response = await joinChecked.json()
-                if (joinChecked.status === 200 && response["nickname_is_valid"]){
-                    const state = {"player_id": response["player_id"], "gameName": gameName, "player_name": nickname}
-                    history.push("/lobby", state);
-                } else {
-                    setIsRepeated(!response["nicknameIsValid"])
-                    console.log("Error en joinChecked")
-                }
-            }
-            catch(error) {
-                console.log(error)
-            }
-        } else {
-            setNotFormated(true)
+        if (notFormated) return;
+        
+        const joinChecked = await fetch('http://127.0.0.1:8000/lobby/joinCheck', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(nickNameData)
+        })
+
+        const response = await joinChecked.json()
+        if (joinChecked.status === 200 && response["nickname_is_valid"]){
+            setValidPassword(response["password_is_valid"])
+            const state = {"player_id": response["player_id"], "gameName": gameName, "player_name": nickname}
+            history.push("/lobby", state);
+        }
+        // repeated nickname within the game
+        if (joinChecked.status === 400){
+            setIsRepeated(true)
+        }
+        // password check
+        if (joinChecked.status === 401){
+            setValidPassword(false)
+            setIsRepeated(false)
         }
     }
 
+    // set variables to be used in lobby
     const settingid = (i) => {
         setGameName(listGame[i]["name"])
         setGameID(listGame[i]["id"])
-        setIsRepeated(false)
-        setNotFormated(false)
+    }
+
+    // validation of the nickname format
+    const handleNickname = () => {
+        if ((nickname !== "") && (nickname.length < 21) && (nickname.length > 4)){
+            setNotFormated(false);
+        }
+        else{
+            setNotFormated(true);
+        }
+    }
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    }
+
+    function cleanStates(){
+        setPasswordShown(false);
+        setNotFormated(false);
+        setIsRepeated(false);
     }
 
     // process and display the received json
@@ -106,8 +130,11 @@ const ListGames = () => {
                     </thead>
                     <tbody>
                         {listGame.map((block, i) => (
-                            <Popup trigger= {
-                                <tr key={block.id} className="Rows-List">
+                            <Popup 
+                            key={block.id}
+                            onClose={() => cleanStates()}
+                            trigger= {
+                                <tr className="Rows-List">
                                     <td onClick={() => {settingid(i)}}>{block.name} </td>
                                     <td onClick={() => {settingid(i)}}>{block.host}</td>
                                     <td onClick={() => {settingid(i)}}>{block.players}/6</td>
@@ -119,30 +146,42 @@ const ListGames = () => {
                                 </tr>
                             } modal>
                                 {close => (
-                                    <div className="modal">
-                                        <button className="close" onClick={close}>&times;</button>
+                                    <div className="content">
+                                        <button className="close" onClick={close}>✖</button>
                                         <div className="popupheader"> Ingrese un apodo entre 5 y 20 caracteres </div>
-                                        <div className="content">
-                                            {
-                                                (isRepeated)
-                                                ? <label className="takensign"> Apodo tomado </label>
-                                                : <p/>
-                                            }
-                                            {
-                                                (notFormated) 
-                                                ?  <label className="takensign"> Apodo mal formateado </label>
-                                                : <p/>
-                                            }
                                             <form>
+                                            {
+                                                (notFormated)
+                                                ? <label className="takensign">Apodo en formato incorrecto</label>
+                                                : (isRepeated) 
+                                                ?  <label className="takensign">Apodo ya en uso</label>
+                                                : (!validPassword)
+                                                ? <label className="takensign">Contraseña incorrecta</label>
+                                                : <b/>
+                                            }
                                                 <label>
                                                     <p/>
-                                                    <input className="nicknameinput" type="text" name="nickname"  
-                                                        onClick={() => {setIsRepeated(false); setNotFormated(false)}}
-                                                        onChange={e => setNickName(e.target.value)} required autoComplete = "off"/>
+                                                    <input className="nicknameinput" type="text" name="nickname" onChange={e => setNickName(e.target.value)}
+                                                        onBlur={handleNickname} required autoComplete = "off"/>
                                                 </label>
-                                                <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                {(listGame[i]["password"])
+                                                ? 
+                                                <div>
+                                                <label className="popupheader"> Ingrese la contraseña de la partida <p/>
+                                                    <input className="nicknameinput" type={passwordShown ? "text" : "password"} name="password"  
+                                                        onChange={e => setInputPassword(e.target.value)} required autoComplete = "off"/>
+                                                        {(passwordShown) 
+                                                        ? 
+                                                            <i className="eye" onClick={togglePasswordVisiblity}><BsEyeSlashFill/></i> 
+                                                        : 
+                                                            <i className="eye" onClick={togglePasswordVisiblity}><BsEyeFill/></i>
+                                                        }
+                                                    </label> 
+                                                    <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                </div>
+                                                : <input className="sendbutton" type="submit" value="➤" onClick={handleSubmit}/>
+                                                }          
                                             </form>
-                                        </div>
                                     </div>
                                 )}
                             </Popup>

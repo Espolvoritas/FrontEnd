@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import {RiArrowGoBackFill} from 'react-icons/ri';
+import {BsEyeFill} from 'react-icons/bs';
+import {BsEyeSlashFill} from 'react-icons/bs';
 
 const CreatingFrom = () => {
-
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
+    const [password, setPassword] = useState("");
     const [isRepeated, setIsRepeated] = useState(false);
     const history = useHistory();
     const [emptyInput, setEmptyInput] = useState(false);
     const [notFormated, setNotFormated] = useState(false);
+    const [wrongPassword, setWrongPassword] = useState(false);
+    const [passwordShown, setPasswordShown] = useState(false);
 
     const handleSubmit = async () => {
-        
         const gameData = {
             "name": name,
-            "host": host
+            "host": host,
+            "password": btoa(password)
         }
         const response = await fetch('http://127.0.0.1:8000/lobby/createNew', {
             method: 'POST',
@@ -38,6 +41,10 @@ const CreatingFrom = () => {
 
     }
 
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    }
+
     const EraseError = () => {
         setIsRepeated(false);
         setEmptyInput(false);
@@ -49,6 +56,8 @@ const CreatingFrom = () => {
             setEmptyInput(true)
         }else if(!((name.length < 21) && (name.length > 4)) || !((host.length < 21) && (host.length > 4))){
             setNotFormated(true)
+        }else if(!((password.length < 21) && (password.length > 4)) && password !== ""){
+            setWrongPassword(true)
         }else{
             handleSubmit()
         }
@@ -71,23 +80,39 @@ const CreatingFrom = () => {
                         ? <label className="Error">⚠️Por favor complete todos los campos para continuar⚠️</label> 
                         : ((notFormated)
                         ? <label className="Error">⚠️El apodo o nombre de la partida no tiene el formato correcto⚠️</label> 
+                        : ((wrongPassword)
+                        ? <label className="Error">⚠️La contaseña no cumple el formato esperado⚠️</label>
                         : <p/>
-                        )) 
+                        ))) 
                     }
                     <p/>
                     <label>
-                        Nombre de la partida
+                        Nombre de la partida*
                         <p/>
                         <input type="text" name="name" autoComplete="off" placeholder="Nombre de partida" onClick={EraseError} onChange={e => setName(e.target.value)} />
                     </label>
                     <p/>
                     <label>
-                        Apodo
+                        Apodo*
                         <p/>
                         <input type="text" name="host" autoComplete="off" placeholder="Apodo" onClick={EraseError} onChange={e => setHost(e.target.value)} />
                     </label>
                     <p/>
-                    <button className="GameButton" type="submit" value="Crear">Crear</button>
+                    <label className="pass-wrapper">
+                        Contraseña
+                        <p/>
+                        <input type={passwordShown ? "text" : "password"} name="host" autoComplete="off" placeholder="Contraseña (opcional)" onChange={e => setPassword(e.target.value)}/>
+                       
+                    </label>
+                    {(passwordShown) 
+                    ? 
+                        <i onClick={togglePasswordVisiblity}><BsEyeSlashFill/></i> 
+                    : 
+                        <i onClick={togglePasswordVisiblity}><BsEyeFill/></i>
+                    }
+                    <p/>
+                    <button className="GameButton" type="submit" value="Crear">Crear</button> <br/>
+                    * Los campos son obligatorios, deben estar entre los 5 y 20 caracteres
                 </form>
             </div>
         </div>
