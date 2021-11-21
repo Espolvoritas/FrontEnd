@@ -7,6 +7,7 @@ import { useCustomEventListener , emitCustomEvent} from 'react-custom-events';
 const Cards = () => {
 
     const [cards, setCards] = useState([])
+
     useCustomEventListener('websocket', data => {
         if ((data)["code"] & 2){
             setCards((data)["cards"]);
@@ -16,7 +17,7 @@ const Cards = () => {
     const [salemRender, setSalemRender] = useState(false)
     function checkSalem(card){
         if(!salemRender){
-            if(card === 1){
+            if(card === 21){
                 emitCustomEvent("salemCardFound", true);
                 setSalemRender(true);
             }
