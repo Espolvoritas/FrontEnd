@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef} from "react";
 import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { useCustomEventListener } from 'react-custom-events';
@@ -28,12 +28,9 @@ const Acusation = (isPlaying) => {
             },
             body: JSON.stringify(acusationData)
         })
-
         if(response.status === 200){
             closeCleanup()
         }
-        
-
     }
 
     function closeCleanup() {
@@ -103,12 +100,13 @@ const NotifyAcusation = () =>  {
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
     const [acusationPlayer, setAcusationPlayer] = useState("");
+    const envelope = useRef([]);
     const [allLost, setAllLost] = useState(false);
     const history = useHistory()
-    
-    function closeModal() {
-        if (acusationRes || allLost){
-            const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer};
+    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope.current};
+
+    function updateHistory() {
+        if (acusationRes || allLost){        
             history.push('/endgame', state);
         }
     }
@@ -126,9 +124,14 @@ const NotifyAcusation = () =>  {
             setAcusationMade(true);
             setAcusationRes((data)["data"]["won"]);
             setAcusationPlayer((data)["data"]["player"])
+            if(data["data"]["won"]){
+                setEnvelope(data["data"]["envelope"])
+            }
         }
         if((data)["code"] & 1024){
             setAllLost(true);
+            console.log((data)["envelope"])
+            envelope.current = (data)["envelope"]
         }
     });
 
@@ -137,7 +140,7 @@ const NotifyAcusation = () =>  {
             modal 
             open={acusationMade} 
             closeOnDocumentClick = {false}
-            onClose = {() => closeModal()}
+            onClose = {() => updateHistory()}
         >
         {close => (
             <div className = "acusationResult">

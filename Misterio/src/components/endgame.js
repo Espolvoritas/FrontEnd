@@ -1,6 +1,7 @@
-import { React } from "react";
+import React, { useState} from "react";
 import { useHistory } from "react-router-dom";
 import {CardsImg, CardsName} from "./cardReference";
+import { useCustomEventListener } from 'react-custom-events';
 
 const EndGame = () => {
     const history = useHistory()
@@ -10,7 +11,9 @@ const EndGame = () => {
         e.preventDefault();
         history.push('/');
     }
-    
+    console.log("llegó "+ datahost["envelope"])
+    let envelope = datahost["envelope"]
+
     return (
         <div className="Background">
             <div className="endGameBox">
@@ -18,8 +21,8 @@ const EndGame = () => {
                 : <div>🎉Ganó el jugador: {datahost["acusationPlayer"]}🎉 <br/></div>}
                 Las cartas del sobre eran:
                 <div>
-                    {Object.keys(deck).map((i) => (
-                        <img key={i} className="endgame-card" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}/>
+                    {Object.keys(envelope).map((i) => (
+                        <img key={i} className="endgame-card" src={CardsImg[envelope[i]]} alt={CardsName[envelope[i]]}/>
                     ))}
                 </div>
             </div>
