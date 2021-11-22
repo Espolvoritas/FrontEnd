@@ -114,12 +114,12 @@ const Lobby = () => {
 
     return (
         <div className="Background-Lobby">
-        	<a classname="ref" href="/">
-              <a className="home-button"><AiFillHome/></a>
+        	<a className="ref" href="/">
+              <b className="home-button"><AiFillHome/></b>
           </a>
 
-			    <a href="/listofgames">
-              <a className="return-button"><RiArrowGoBackFill/></a>
+			<a href="/listofgames">
+              <b className="return-button"><RiArrowGoBackFill/></b>
           </a>
           
           <div className="Title">Sala: {datahost["gameName"]}

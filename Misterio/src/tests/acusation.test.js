@@ -18,8 +18,8 @@ test('render without crashing (Acusation)', () => {
             <div className="acusation-box">
                 <button className="close-acusation" onClick={(e) => closeCleanup(e)}>✖</button> <br/>
                     <div className="header-acusation">Realiza una acusación</div>
-                    <select data-testid="monster-dropdown" onChange={(e) => setMonster(e.target.value)}>
-                        <option value="" selected disabled hidden>Elige un monstruo</option>
+                    <select data-testid="monster-dropdown" defaultValue={'DEFAULT'} onChange={(e) => setMonster(e.target.value)}>
+                        <option value='DEFAULT' disabled hidden>Elige un monstruo</option>
                         <option value={6}>Dr. Jekyll Mr. Hyde</option>
                         <option value={1}>Drácula</option>
                         <option value={4}>Fantasma</option>
@@ -28,8 +28,8 @@ test('render without crashing (Acusation)', () => {
                         <option value={5}>Momia</option>
                     </select>
                     asesinó al/a la
-                    <select data-testid="victim-dropdown" onChange={(e) => setVictim(e.target.value)}>
-                    <option value="" selected disabled hidden>Elige una víctima</option>
+                    <select data-testid="victim-dropdown" defaultValue={'DEFAULT'} onChange={(e) => setVictim(e.target.value)}>
+                    <option value='DEFAULT' disabled hidden>Elige una víctima</option>
                         <option value={9}>Ama de Llaves</option>
                         <option value={7}>Conde</option>
                         <option value={8}>Condesa</option>
@@ -38,8 +38,8 @@ test('render without crashing (Acusation)', () => {
                         <option value={10}>Mayordomo</option>
                     </select>
                     en el/la
-                    <select data-testid="room-dropdown" onChange={(e) => setRoom(e.target.value)}>
-                        <option value="" selected disabled hidden>Elige una habitacion</option>
+                    <select data-testid="room-dropdown" defaultValue={'DEFAULT'} onChange={(e) => setRoom(e.target.value)}>
+                        <option value='DEFAULT' disabled hidden>Elige una habitacion</option>
                         <option value={17}>Alcoba</option>
                         <option value={15}>Biblioteca</option>
                         <option value={16}>Bodega</option>
