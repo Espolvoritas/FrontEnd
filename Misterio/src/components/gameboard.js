@@ -94,7 +94,7 @@ const GameBoard = () => {
             </div>
 
             <div>
-                {Report()}
+                {Report(datahost["gameName"])}
             </div>
         </div>
     );
