@@ -1,0 +1,133 @@
+/* GAMEBOARD */
+
+.gameboard-background-chat{
+
+    margin-left: 1%;
+    width: 25%;
+    height: 49%;
+    transform: translate(295%,0%);
+    font-size: 90%;
+
+}
+
+.gameboard-send-msg{
+    width: 87%;
+    height: 72%;
+}
+
+.gameboard-send-button{
+    padding-left: 5px;
+    width: 9%;
+    height: 100%;
+}
+
+.gameboard-chat-player{
+    background-color: #ffccb4;
+    border-radius: 5px;
+    padding: 1%;
+    max-width: 90%;
+    margin-left: 3.5%;
+    margin: 3.5%;
+}
+
+
+.gameboard-whom-message{
+    position: relative;
+    max-width: 100%;
+    background-color: #6c232f;
+    border-radius: 5px;
+}
+
+.gameboard-message{
+    color: #9c2f3b
+}
+
+/* LOBBY */
+
+.lobby-background-chat{
+    border: 2px solid #6c232f;
+    width: 40%;
+    height: 75%;
+    transform: translate(140%, 10.7%);
+    font-size: 80%;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+}
+
+.lobby-send-msg{
+    width: 92%;
+    height: 50%;
+}
+
+.lobby-send-button{
+    width: 5%;
+    height: 93%;
+    
+}
+
+.lobby-chat-player{
+    background-color: #ffccb4;
+    border-radius: 5px;
+    padding: 1%;
+    max-width: 90%;
+    margin-left: 3.5%;
+    margin: 3.5%;
+}
+
+.lobby-whom-message{
+    position: relative;
+    max-width: auto;
+    background-color: #6c232f;
+    border-radius: 5px;
+}
+
+.lobby-player-message{
+    color: #9c2f3b;
+}
+
+/* MIXED */ 
+
+.gameboard-background-chat, .lobby-background-chat{
+
+border-radius: 5px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family:'Times New Roman', Times, serif;
+
+}
+
+.lobby-scrollbar, .gameboard-scrollbar{
+    max-height: 89%;
+    min-height: 89%;
+    min-width: 50%;
+    max-width: 50%;
+}
+
+.lobby-send-msg:focus, .gameboard-send-msg:focus{
+    outline:none!important;
+}
+
+.lobby-send-button, .gameboard-send-button{
+    cursor: pointer;
+    border-width:0px;
+    border:none;
+    transform: translate(0%, 4%);
+
+}
+
+.lobby-send-msg{
+
+    padding: 1%;
+    border-width:0px;
+    border:none;
+    margin-right: 1%;
+}
+
+.gameboard-message, .lobby-player-message{
+
+    overflow-wrap: break-word;
+    width: 98%;
+
+}

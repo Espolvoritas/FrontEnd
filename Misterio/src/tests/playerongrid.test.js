@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import PlayerOnGrid from '../components/playerongrid'
+import {colors} from '../components/dicts'
 
 test('renders without crashing', () => {
 
@@ -12,17 +13,6 @@ test('renders without crashing', () => {
     const available = [
         {"x": 14,  "y": 7} 
     ]
-
-    const colors = {
-        '1': "#d0021b",
-        '2': "#417505",
-        '3': "#4a90e2",
-        '4': "#ffffff",
-        '5': "#000000",
-        '6': "#f2ff03",
-        '7': "#ff03fb",
-        '8': "#ffaa03"
-    }
 
     const result = render(<PlayerOnGrid>
                             {Object.keys(positions).map((i) => (

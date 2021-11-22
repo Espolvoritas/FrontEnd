@@ -95,15 +95,16 @@ const Acusation = (isPlaying) => {
 
 
 
-const NotifyAcusation = () =>  {
+const NotifyAcusation = (gameName) =>  {
 
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
     const [acusationPlayer, setAcusationPlayer] = useState("");
     const [envelope, setEnvelope] = useState([])
     const [allLost, setAllLost] = useState(false);
+  
     const history = useHistory()
-    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope};
+    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope, "gameName": gameName};
 
     function updateHistory() {
         if (acusationRes || allLost){        
