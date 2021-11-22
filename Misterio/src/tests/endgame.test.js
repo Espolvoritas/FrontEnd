@@ -10,7 +10,7 @@ test('render without crashing', () => {
 
 
     const history = createMemoryHistory();
-    const state = { "acusationPlayer": "Jugador1", "allLost": false }
+    const state = { "acusationPlayer": "Jugador1", "allLost": false, "envelope": [1,2,3]  }
     history.push("/EndGame", state);
 
     render(
@@ -33,7 +33,7 @@ test('render without crashing', () => {
 test('All players lose', () => {
 
     const history = createMemoryHistory();
-    const state = { "acusationPlayer": "Jugador1", "allLost": false }
+    const state = { "acusationPlayer": "Jugador1", "allLost": false, "envelope": [1,2,3]  }
     history.push("/EndGame", state);
 
     render(
@@ -51,7 +51,7 @@ test('All players lose', () => {
 test('One player wins', () => {
 
     const history = createMemoryHistory();
-    const state = { "acusationPlayer": "Jugador1", "allLost": true }
+    const state = { "acusationPlayer": "Jugador1", "allLost": true, "envelope": [1,2,3] }
     history.push("/EndGame", state);
 
     render(
