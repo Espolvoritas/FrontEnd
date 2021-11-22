@@ -38,7 +38,6 @@ const Lobby = () => {
           history.push("/listofgames")
         }else{
           history.push("/gameboard", state);
-          ws.current.close();
         }
       };
     }, []);
@@ -56,7 +55,7 @@ const Lobby = () => {
         body: datahost["player_id"]
       })
       if(response.status === 200){
-        history.push("/gameboard", state);
+        statusNextPage.current= true
         ws.current.close();
       }
     }
