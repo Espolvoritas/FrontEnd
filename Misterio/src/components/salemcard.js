@@ -49,7 +49,6 @@ function SalemCard(player_id){
 }
 
 function ShowSalemCardResult(card) {
-    console.log(card)
     return(
         <Popup modal open={true}>
         {close => (
