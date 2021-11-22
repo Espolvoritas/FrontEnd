@@ -100,7 +100,6 @@ const NotifyAcusation = () =>  {
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
     const [acusationPlayer, setAcusationPlayer] = useState("");
-    /*const envelope = useRef([]);*/
     const [envelope, setEnvelope] = useState([])
     const [allLost, setAllLost] = useState(false);
     const history = useHistory()
