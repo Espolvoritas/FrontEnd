@@ -9,6 +9,7 @@ import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
+import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
 
 const GameBoard = () => {
 
@@ -35,13 +36,13 @@ const GameBoard = () => {
         ws.current.onmessage = (event) => {
             console.log(event.data)
             emitCustomEvent('websocket', JSON.parse(event.data));
-            if(JSON.parse(event.data)["code"] & 1){
+            if(JSON.parse(event.data)["code"] & WS_CURR_PLAYER){
                 setTurn(JSON.parse(event.data)["current_player"]);
                 emitCustomEvent('dice', false);
             }
-            if (JSON.parse(event.data)["code"] & 2)
+            if (JSON.parse(event.data)["code"] & WS_CARD_LIST)
                 setCards(JSON.parse(event.data)["cards"]);
-            if (JSON.parse(event.data)["code"] & 8){
+            if (JSON.parse(event.data)["code"] & WS_PICK_CARD){
                 arriveSus = true
             }
         };

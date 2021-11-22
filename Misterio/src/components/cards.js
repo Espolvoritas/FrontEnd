@@ -3,12 +3,13 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import {CardsImg, CardsName} from "./cardReference";
 import { useCustomEventListener } from 'react-custom-events';
+import {WS_CARD_LIST} from './constants'
 
 const Cards = () => {
 
     const [cards, setCards] = useState([])
     useCustomEventListener('websocket', data => {
-        if ((data)["code"] & 2){
+        if ((data)["code"] & WS_CARD_LIST){
             setCards((data)["cards"]);
         }
     });
