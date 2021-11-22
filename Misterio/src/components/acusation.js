@@ -1,7 +1,8 @@
-import React, { useState,useRef} from "react";
+import React, { useState} from "react";
 import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { useCustomEventListener } from 'react-custom-events';
+import {OK, WS_ACCUSATION, WS_LOST} from './constants'
 
 const Acusation = (isPlaying) => {
     const [victim, setVictim] = useState("");
@@ -28,7 +29,7 @@ const Acusation = (isPlaying) => {
             },
             body: JSON.stringify(acusationData)
         })
-        if(response.status === 200){
+        if(response.status === OK){
             closeCleanup()
         }
     }
@@ -120,7 +121,7 @@ const NotifyAcusation = (gameName) =>  {
     }
 
     useCustomEventListener('websocket', data => {
-        if((data)["code"] & 512){
+        if((data)["code"] & WS_ACCUSATION){
             setAcusationMade(true);
             setAcusationRes((data)["data"]["won"]);
             setAcusationPlayer((data)["data"]["player"])
@@ -128,7 +129,7 @@ const NotifyAcusation = (gameName) =>  {
                 setEnvelope(data["data"]["envelope"])
             }
         }
-        if((data)["code"] & 1024){
+        if((data)["code"] & WS_LOST){
             setAllLost(true);
             setEnvelope((data)["envelope"])
         }

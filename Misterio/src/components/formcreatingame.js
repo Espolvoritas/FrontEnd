@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
 import {RiArrowGoBackFill} from 'react-icons/ri';
+import {CREATED, BAD_REQUEST} from './constants'
 
 const CreatingFrom = () => {
 
@@ -33,9 +34,9 @@ const CreatingFrom = () => {
 
         const res = await response.json()
 
-        setIsRepeated(response.status === 400)
+        setIsRepeated(response.status === BAD_REQUEST)
 
-        if (response.status === 201){
+        if (response.status === CREATED){
             const state = {"lobby_id": res["lobby_id"], "player_id": res["player_id"], "gameName": name, "player_name": host }
             history.push("/lobby", state);
         }
