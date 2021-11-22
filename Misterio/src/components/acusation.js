@@ -48,12 +48,11 @@ const Acusation = (isPlaying) => {
         return (
             <Popup trigger={<button className="acusation-button"> Acusar🔎✉️</button>}
                 modal 
-                onClose={handleSubmit}
                 closeOnDocumentClick = {false}
             >
                 {close => (
                     <div className="acusation-box">
-                        <button className="close-acusation" onClick={(e) => closeCleanup(e)}>✖</button> <br/>
+                            <button className="close-acusation" onClick={(e) => {closeCleanup(e); close();}}>✖</button> <br/>
                             <div className="header-acusation">Realiza una acusación</div>
                             <select onChange={(e) => setMonster(e.target.value)}>
                                 <option value="" selected disabled hidden>Elige un monstruo</option>
@@ -86,7 +85,7 @@ const Acusation = (isPlaying) => {
                                 <option value={19}>Salón</option>
                                 <option value={13}>Vestíbulo</option>
                             </select>
-                            {(validInput) ? <input className="send-acusation" type="submit" value="➤" onClick={close}/> : <b/>}
+                            {(validInput) ? <input className="send-acusation" type="submit" value="➤" onClick={handleSubmit}/> : <b/>}
                     </div>
                 )}
             </Popup>

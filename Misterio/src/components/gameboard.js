@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
+import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
@@ -18,6 +19,8 @@ const GameBoard = () => {
     const ws = useRef(null);
     const [actualTurn, setTurn] = useState("")
     const [cards, setCards] = useState([])
+    const [usedSalem, setUsedSalem] = useState(false)
+    const [playerUsedSalem, setPlayerUsedSalem] = useState("")
     let [card, setCard] = useState(0);
     let [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
@@ -28,6 +31,13 @@ const GameBoard = () => {
 
     useCustomEventListener('room', data => {
         setRoomId(data)
+    });
+
+    const [receibedCard, setreceibedCard] = useState(0)
+    const [showSalemBool, setShowSalemBool] = useState(false)
+    useCustomEventListener("envelopeCard", envelopeCard => {
+        setreceibedCard(envelopeCard);
+        setShowSalemBool(true);
     });
 
     useEffect(() => {
@@ -45,6 +55,10 @@ const GameBoard = () => {
             if (JSON.parse(event.data)["code"] & WS_PICK_CARD){
                 arriveSus = true
             }
+            if(JSON.parse(event.data)["code"] & 2048){
+                setUsedSalem(true)
+                setPlayerUsedSalem(JSON.parse(event.data)["current_player"])
+            }
         };
     }, []);
 
@@ -61,7 +75,7 @@ const GameBoard = () => {
 
     return(
         <div className="background-image" >
-            <img src={logo} className="gameboard-img"></img>
+            <img src={logo} className="gameboard-img" alt = ""></img>
             <div>
                 {Suspicion(roomId, datahost["player_id"])}
                 {NotifySuspicion()}
@@ -90,6 +104,27 @@ const GameBoard = () => {
             </div>
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"])}
+            </div>
+            <div className = "SalemButton">
+                {SalemCard(datahost["player_id"])}
+            </div>
+            <div>
+                {
+                    showSalemBool ? 
+                        <div>
+                            {ShowSalemCardResult(receibedCard)}
+                        </div>
+                    :   <p></p>
+                }
+            </div>
+            <div>
+                {
+                    usedSalem ?
+                        <div>
+                            {PlayerUsedSalem(playerUsedSalem)}
+                        </div>
+                    :   <p></p> 
+                }
             </div>
         </div>
     );
