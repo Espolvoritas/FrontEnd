@@ -198,7 +198,7 @@ const ListGames = () => {
     return (
         <div className="Background-List">
             <a href="/">
-                <a className="return-button"><RiArrowGoBackFill/></a>
+                <b className="return-button"><RiArrowGoBackFill/></b>
             </a>
 
             <div id="key-screen">

@@ -68,7 +68,7 @@ const CreatingFrom = () => {
     return (
         <div className="Background-formgame">
              <a href="/">
-                <a className="return-button"><RiArrowGoBackFill/></a>
+                <b className="return-button"><RiArrowGoBackFill/></b>
             </a>
             
             <div id="form">

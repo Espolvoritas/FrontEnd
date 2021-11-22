@@ -11,6 +11,8 @@ import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
+import Report from "./report";
+
 
 const GameBoard = () => {
 
@@ -93,10 +95,11 @@ const GameBoard = () => {
             {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
-                ? <h1>Es tu turno</h1>
-                : <h1>Es el turno de: {actualTurn}</h1>
-                }   
+                ? <div className="text-turn" >Es tu turno</div>
+                : <div className="text-turn">Es el turno de: {actualTurn}</div>
+                } 
             </div>
+                  
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying )}
@@ -105,6 +108,11 @@ const GameBoard = () => {
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"])}
             </div>
+
+            <div>
+                {Report(datahost["gameName"])}
+            </div>
+
             <div className = "SalemButton">
                 {SalemCard(datahost["player_id"])}
             </div>

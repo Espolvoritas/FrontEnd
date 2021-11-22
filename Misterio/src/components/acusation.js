@@ -54,8 +54,8 @@ const Acusation = (isPlaying) => {
                     <div className="acusation-box">
                             <button className="close-acusation" onClick={(e) => {closeCleanup(e); close();}}>✖</button> <br/>
                             <div className="header-acusation">Realiza una acusación</div>
-                            <select onChange={(e) => setMonster(e.target.value)}>
-                                <option value="" selected disabled hidden>Elige un monstruo</option>
+                            <select defaultValue={'DEFAULT'} onChange={(e) => setMonster(e.target.value)}>
+                                <option value='DEFAULT'disabled hidden>Elige un monstruo</option>
                                 <option value={6}>Dr. Jekyll Mr. Hyde</option>
                                 <option value={1}>Drácula</option>
                                 <option value={4}>Fantasma</option>
@@ -64,8 +64,8 @@ const Acusation = (isPlaying) => {
                                 <option value={5}>Momia</option>
                             </select>
                             asesinó al/a la
-                            <select onChange={(e) => setVictim(e.target.value)}>
-                            <option value="" selected disabled hidden>Elige una víctima</option>
+                            <select defaultValue={'DEFAULT'} onChange={(e) => setVictim(e.target.value)}>
+                            <option value='DEFAULT'disabled hidden>Elige una víctima</option>
                                 <option value={9}>Ama de Llaves</option>
                                 <option value={7}>Conde</option>
                                 <option value={8}>Condesa</option>
@@ -74,8 +74,8 @@ const Acusation = (isPlaying) => {
                                 <option value={10}>Mayordomo</option>
                             </select>
                             en el/la
-                            <select onChange={(e) => setRoom(e.target.value)}>
-                                <option value="" selected disabled hidden>Elige una habitacion</option>
+                            <select defaultValue={'DEFAULT'} onChange={(e) => setRoom(e.target.value)}>
+                                <option value='DEFAULT' disabled hidden>Elige una habitacion</option>
                                 <option value={17}>Alcoba</option>
                                 <option value={15}>Biblioteca</option>
                                 <option value={16}>Bodega</option>

@@ -6,9 +6,9 @@
     overflow: hidden;
     outline: none;
     font-size: 25px;
-    position: absolute;
+    position: fixed;
     top: 93.8%;
-    left: 24.5%;
+    left: 23%;
 }
 
 .rules-content {
@@ -26,6 +26,7 @@
     text-align: justify;
     padding-right: 10px;
     padding-left: 10px;
+    margin-bottom: 20px;
 }
 
 .close-rules {
