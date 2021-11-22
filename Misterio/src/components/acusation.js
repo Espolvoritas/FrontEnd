@@ -100,10 +100,11 @@ const NotifyAcusation = () =>  {
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
     const [acusationPlayer, setAcusationPlayer] = useState("");
-    const envelope = useRef([]);
+    /*const envelope = useRef([]);*/
+    const [envelope, setEnvelope] = useState([])
     const [allLost, setAllLost] = useState(false);
     const history = useHistory()
-    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope.current};
+    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope};
 
     function updateHistory() {
         if (acusationRes || allLost){        
@@ -125,26 +126,27 @@ const NotifyAcusation = () =>  {
             setAcusationRes((data)["data"]["won"]);
             setAcusationPlayer((data)["data"]["player"])
             if(data["data"]["won"]){
+                console.log("gano" + data["data"]["envelope"])
                 setEnvelope(data["data"]["envelope"])
             }
         }
         if((data)["code"] & 1024){
             setAllLost(true);
-            console.log((data)["envelope"])
-            envelope.current = (data)["envelope"]
+            console.log("perdieron todos" + (data)["envelope"])
+            setEnvelope((data)["envelope"])
         }
     });
 
     return (
-        <Popup 
-            modal 
-            open={acusationMade} 
+        <Popup
+            modal
+            open={acusationMade}
             closeOnDocumentClick = {false}
             onClose = {() => updateHistory()}
         >
         {close => (
             <div className = "acusationResult">
-                <button className="close-result" onClick={() => closeCleanup()}>✖</button> <br/>
+                <button className="close-result" onClick={(e) => {closeCleanup(e); close();}}>✖</button> <br/>
                 <div className = "acusationText">
                     La acusacion del jugador <b>{acusationPlayer}</b> fue 
                     {(acusationRes) ? <b>acertada, felicitaciones</b>  : <b> erronea</b>}
