@@ -27,6 +27,10 @@ const MainPage = () => {
                 <a href="/listofgames">
                     <button className="GameButton">Unirse a Partida</button>
                 </a>
+                <p/>
+                <a href="/stats">
+                    <button className="GameButton">Ver estadísticas</button>
+                </a>
             </div>
         </div>
     );

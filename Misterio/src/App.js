@@ -5,6 +5,7 @@ import ListGames from './components/listofgames';
 import Lobby from './components/lobby';
 import GameBoard from './components/gameboard';
 import EndGame from './components/endgame';
+import Stats from './components/stats';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/gameboard" component={GameBoard}></Route>
         <Route exact path="/lobby" component={Lobby}></Route>
         <Route exact path="/endgame" component={EndGame}></Route>
+        <Route exact path="/stats" component={Stats}></Route>
       </Switch>
     </Router>
   );
