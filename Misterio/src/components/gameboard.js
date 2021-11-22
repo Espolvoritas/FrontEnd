@@ -44,7 +44,6 @@ const GameBoard = () => {
             if (JSON.parse(event.data)["code"] & 8){
                 arriveSus = true
             }
-
         };
     }, []);
 

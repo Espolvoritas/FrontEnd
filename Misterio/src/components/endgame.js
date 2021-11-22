@@ -12,12 +12,13 @@ const EndGame = () => {
         history.push('/');
     }
 
+
     useEffect(() => {
         localStorage.removeItem("list_player" + datahost["gameName"])
     });
 
-    const deck = {}
-    
+    let envelope = datahost["envelope"]
+
     return (
         <div className="Background">
             <div className="endGameBox">
@@ -25,12 +26,12 @@ const EndGame = () => {
                 : <div>🎉Ganó el jugador: {datahost["acusationPlayer"]}🎉 <br/></div>}
                 Las cartas del sobre eran:
                 <div>
-                    {Object.keys(deck).map((i) => (
-                        <img key={i} className="endgame-card" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}/>
+                    {Object.keys(envelope).map((i) => (
+                        <img key={i} className="endgame-card" src={CardsImg[envelope[i]]} alt={CardsName[envelope[i]]}/>
                     ))}
                 </div>
+                <button className="gobackButton" onClick = {(e) => goBack(e)}> Volver a jugar!</button> 
             </div>
-            <button className="gobackButton" onClick = {(e) => goBack(e)}> Volver a jugar!</button> 
         </div>
     );
 }
