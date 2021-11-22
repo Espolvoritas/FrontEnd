@@ -126,13 +126,11 @@ const NotifyAcusation = () =>  {
             setAcusationRes((data)["data"]["won"]);
             setAcusationPlayer((data)["data"]["player"])
             if(data["data"]["won"]){
-                console.log("gano" + data["data"]["envelope"])
                 setEnvelope(data["data"]["envelope"])
             }
         }
         if((data)["code"] & 1024){
             setAllLost(true);
-            console.log("perdieron todos" + (data)["envelope"])
             setEnvelope((data)["envelope"])
         }
     });
@@ -148,8 +146,8 @@ const NotifyAcusation = () =>  {
             <div className = "acusationResult">
                 <button className="close-result" onClick={(e) => {closeCleanup(e); close();}}>✖</button> <br/>
                 <div className = "acusationText">
-                    La acusacion del jugador <b>{acusationPlayer}</b> fue 
-                    {(acusationRes) ? <b>acertada, felicitaciones</b>  : <b> erronea</b>}
+                    El jugador <b>{acusationPlayer}</b> 
+                    {(acusationRes) ? <b> resolvió el misterio</b>  : <b> no resolvió el misterio</b>}
                 </div>
             </div>
         )}
