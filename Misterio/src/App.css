@@ -1,16 +1,19 @@
-@import 'css/rules';
-@import 'css/listofgames.css';
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Josefin+Sans&family=Merriweather&family=Special+Elite&display=swap%27');
+@import 'css/acusation.css';
+@import 'css/cards.css';
+@import 'css/chat.css';
+@import 'css/endgame.css';
 @import 'css/formcreatingame.css';
+@import 'css/gameboard.css';
+@import 'css/listofgames.css';
 @import 'css/lobby.css';
 @import 'css/mainpage.css';
-@import 'css/gameboard.css';
-@import 'css/cards.css';
-@import 'css/suspicion.css';
 @import 'css/playerongrid.css';
-@import 'css/acusation.css';
-@import 'css/endgame.css';
-@import 'css/chat.css';
+@import 'css/report.css';
+@import 'css/rules';
 @import 'css/salemcard.css';
+@import 'css/suspicion.css';
+
 .home-button, .return-button{
     color: white;
     font-size: 225%;

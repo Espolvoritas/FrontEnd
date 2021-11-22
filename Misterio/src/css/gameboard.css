@@ -1,9 +1,7 @@
 .DiceRoll {
     position: absolute;
-    bottom: 10%;
-    left: 10%;
+    transform: translate(190%, 735%);
     width: auto;
-
 }
 
 .background-image {
@@ -16,11 +14,26 @@
 
 .Turn{
     border-radius: 8px;
-    color: white;
     border: solid 2px white;
-    width: 35%;
-    height: 20%;
-    position: absolute;
+    width: auto;
+    min-width: 12%;
+    max-width: 25.5%;
+    height: auto;
+    position: fixed;
+}
+
+.text-turn{
+    width: 95%;
+    word-wrap: break-word;
+    text-align: left;
+    padding-top: 4%;
+    padding-right: 3%;
+    padding-left: 3%;
+    padding-bottom: 1%;
+    /* padding: 3%; */
+    color: white;
+    font-size: 30px;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .gameboard-img{

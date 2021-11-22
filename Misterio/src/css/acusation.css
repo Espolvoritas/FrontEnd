@@ -9,6 +9,7 @@
     cursor: pointer;
     color: #ffffff;
     background-color: #005956;
+    transform: translate(90%, 770%);
 }
 
 .acusation-button:active {     
@@ -70,7 +71,7 @@
 /** Acusation **/
 
 .acusationResult{
-    width: 520px;
+    width: 605px;
     height: 60px;
     background-color: #e7e8d0;
     border-radius: 25px;
@@ -91,7 +92,7 @@
     color: black;
     background-color: white;
     border-radius: 25px;
-    transform: translate(480px, 20%);
+    transform: translate(570px, 20%);
     cursor: pointer;
     position: fixed;
 }
