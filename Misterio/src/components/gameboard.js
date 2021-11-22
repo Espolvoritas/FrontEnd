@@ -9,7 +9,7 @@ import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
 import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
-import PlayerOnGrid from "./playerongrid";
+import {PlayerOnGrid, Trapopup} from "./playerongrid";
 import Report from "./report";
 
 const GameBoard = () => {
@@ -46,7 +46,7 @@ const GameBoard = () => {
         ws.current.onmessage = (event) => {
             console.log(event.data)
             emitCustomEvent('websocket', JSON.parse(event.data));
-            if(JSON.parse(event.data)["code"] & 131){
+            if(JSON.parse(event.data)["code"] & 1){
                 setTurn(JSON.parse(event.data)["current_player"]);
                 emitCustomEvent('dice', false);
             }
@@ -131,6 +131,9 @@ const GameBoard = () => {
                         </div>
                     :   <p></p> 
                 }
+            </div>
+            <div>
+                {Trapopup()}
             </div>
         </div>
     );

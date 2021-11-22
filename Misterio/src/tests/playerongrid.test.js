@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
-import PlayerOnGrid from '../components/playerongrid'
+import {PlayerOnGrid} from '../components/playerongrid'
 import {colors} from '../components/dicts'
 
 test('renders without crashing', () => {
