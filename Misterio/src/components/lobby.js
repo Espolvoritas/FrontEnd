@@ -4,7 +4,9 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { AiFillHome } from 'react-icons/ai';
 import {RiArrowGoBackFill} from 'react-icons/ri';
-
+import Chat from "./chat";
+import { emitCustomEvent } from 'react-custom-events';
+import {colors, clrtostr, strtoclr} from './dicts'
 
 const Lobby = () => {
 
@@ -12,52 +14,21 @@ const Lobby = () => {
     const [listColors, setlistColors] = useState([]); 
     let statusNextPage = useRef(false); 
     const ws = useRef(null);
-    const colors = {
-      '1': "#d0021b",
-      '2': "#00c98d",
-      '3': "#4a90e2",
-      '4': "#ffffff",
-      '5': "#000000",
-      '6': "#ffca08",
-      '7': "#ff03fb",
-      '8': "#ff6208"
-    }
-
-    const clrtostr = {
-      '1': "Rojo",
-      '2': "Verde",
-      '3': "Azul",
-      '4': "Blanco",
-      '5': "Negro",
-      '6': "Amarillo",
-      '7': "Rosa",
-      '8': "Naranja"
-    }
-
-    const strtoclr = {
-      "Rojo": '1',
-      "Verde": '2',
-      "Azul": '3',
-      "Blanco": '4',
-      "Negro": '5',
-      "Amarillo": '6',
-      "Rosa": '7',
-      "Naranja": '8'
-    }
+    const isLobby = false
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
-
+    const state = {"player_id": datahost["player_id"], "player_name": datahost["player_name"], "gameName": datahost["gameName"]} // Data to next page
     // WebSocket recieve and close connection
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
+        }else if(JSON.parse(event.data)["code"] & 8192){
+          emitCustomEvent('websocket', JSON.parse(event.data));
         } else{
           setListPlayers(JSON.parse(event.data)["players"]);
-          console.log(listPlayers + "lista");
           setlistColors(JSON.parse(event.data)["colors"]);
         }
       };
@@ -95,7 +66,7 @@ const Lobby = () => {
         "player_id": datahost["player_id"],
         "color": value
       }
-      const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
+      await fetch('http://127.0.0.1:8000/lobby/pickColor', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -110,19 +81,50 @@ const Lobby = () => {
     const clickExitLobby = () => {
       history.push("/listofgames");
       ws.current.close();
+
+      localStorage.removeItem("list_player" + datahost["gameName"])
+      const list_player = []
+      for(let i = 0; i < 3; i++){
+          list_player[i] = []
+      }
+      if(datahost["lobby_id"] === undefined){
+        localStorage.setItem('list_player' + datahost["gameName"], JSON.stringify(list_player));
+      }
+    }
+
+    function canStart(ishost){
+
+      if(ishost){
+        return(
+          <div className="GameButton-lobby">
+            <button className="startgame-button" onClick={e => clickNextPage(e)}>Iniciar partida</button>
+            <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
+          </div>
+        );
+      }else{
+        return(
+          <div className="GameButton-lobby">
+            <button className="exitgame-button" onClick={() => clickExitLobby()}>Salir de la sala</button>
+          </div>
+        );
+      }
+
+      
     }
 
     return (
         <div className="Background-Lobby">
-        	<a classname="ref"href="/">
-                <a className="home-button"><AiFillHome/></a>
-            </a>
+        	<a classname="ref" href="/">
+              <a className="home-button"><AiFillHome/></a>
+          </a>
 
-			<a href="/listofgames">
-                <a className="return-button"><RiArrowGoBackFill/></a>
-            </a>
+			    <a href="/listofgames">
+              <a className="return-button"><RiArrowGoBackFill/></a>
+          </a>
+          
           <div className="Title">Sala: {datahost["gameName"]}
-            <table id="key-lobby" cellSpacing="0" cellPadding="0">
+            {Chat(ws.current, isLobby, datahost["gameName"])}
+            <table className="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -140,15 +142,13 @@ const Lobby = () => {
             </table>
             <Dropdown className="drop-colors" options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
 
-              <div className="GameButton-lobby">
-                {
-                  (datahost["game_id"] !== undefined)
-                  ? <button onClick={e => clickNextPage(e)}>Iniciar partida</button>
-                  : <p/>
-                }
-                <button onClick={() => clickExitLobby()}>Salir de la sala</button>
-              </div>
+
+            {canStart(datahost["lobby_id"] !== undefined)}
+                  
+
+              
           </div>
+          
         </div>
   );
 }

@@ -6,7 +6,7 @@ import { emitCustomEvent,  useCustomEventListener } from 'react-custom-events';
 import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
-
+import Chat from './chat'
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 
@@ -21,6 +21,7 @@ const GameBoard = () => {
     let [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
     let [roomId, setRoomId] = useState(0)
+    const isLobby = true
 
     const isPlaying = (datahost["player_name"] === actualTurn)
 
@@ -83,8 +84,11 @@ const GameBoard = () => {
             </div>
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
-                {Acusation(isPlaying)}
-                {NotifyAcusation()}
+                {Acusation(isPlaying )}
+                {NotifyAcusation(datahost["gameName"])}
+            </div>
+            <div className="Chat-component">
+                {Chat(ws.current, isLobby, datahost["gameName"])}
             </div>
         </div>
     );

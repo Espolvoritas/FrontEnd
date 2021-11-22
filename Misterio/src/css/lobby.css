@@ -6,10 +6,11 @@
     font-family: 'Merriweather', serif;
     background-image: url(../media/crime-scene.jpg);
     background-position: center;
-    background-size: auto;
+    background-size:auto;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: absolute;
+    
 }
 
 .Title {
@@ -23,7 +24,7 @@
 /** Lobby structure **/
 
 .Rows-Lobby{
-    font-size: 18px;
+    font-size: 70%;
     font-family: 'Josefin Sans', sans-serif;
     color: #474944;
 }
@@ -31,60 +32,77 @@
 .Rows-Lobby:nth-child(even) {background-color: #ffccb4;}
 .Rows-Lobby:nth-child(odd) {background-color: #ffdbca;}
 
-table { 
-    border-collapse: collapse;
-    border-spacing: 0;
+.key-lobby {
+    position: absolute;
+    transform: translate(5%, 9.7%);
+    width: 50%;
+    height: 85%;
+    text-align: center;
 }
 
-#key-lobby {
-    margin: 0 auto;
-    margin-top: 4%;
-    margin-left: 2.5%;
-    font-size: 1.2em; 
-}
-
-#key-lobby thead {
-    font-size: 23px;
+.key-lobby thead {
+    
+    
+    font-size: 100%;
     font-weight: bold;
-    width: 650px;
+    width: 100%;
     font-family: 'Special Elite', serif;
     background-color:#6c232f;
     color: #eae8e8;
+    
 }
 
-#key-lobby thead, tbody{
+.key-lobby thead, tbody{
+    
     display: block;
 }
 
-#key-lobby tbody{
-    height: 420px;
-    width: 650px;
+.key-lobby tbody{
+    
+    height: 50%;
+    width: 100%;
 }
 
-#key-lobby thead tr th { 
-    padding-bottom: 12px;
-    padding-top: 12px;
+.key-lobby thead tr th { 
+    
+    padding-bottom: 2%;
+    padding-top: 2%;
 }
 
-#key-lobby tr, th, td {
-    width: 330px;
+.key-lobby tr, th, td {
+    width: 1%;
 }
 
-#key-lobby tbody tr td {
-    padding: 12px;
+.key-lobby tbody tr td {
+    
+    padding: 3%;
 }
 
-.GameButton-lobby button{
-    padding: 15px 40px;
-    margin-right: 2.5%;
+.GameButton-lobby{
+
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    transform: translate(200%, 830%);
+}
+
+.startgame-button, .exitgame-button{
+    position: relative;
+    padding: 1.17% 2.4%;
     font-family: 'IM Fell English SC', serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 70%;
     cursor: pointer;
     color: #fdf8d4;
     background-color: #9c2f3b;
+    margin-top: 2.5%;
+    width: 45%;
+    height: 75%;
 
-    transform: translate(215%, -50%);
+}
+
+.startgame-button{
+    margin-right: 2.5%;
 }
 
 .GameButton-lobby:active {     
@@ -92,9 +110,10 @@ table {
 }
 
 .drop-colors{
+    position:fixed;
     width: 15%;
-    font-size: 18px;
-    transform: translate(260px, -530px);
+    font-size: 70%;
+    transform: translate(135%, 0%);
 }
 
 .player-color{
