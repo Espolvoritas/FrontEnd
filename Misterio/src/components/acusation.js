@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef} from "react";
 import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { useCustomEventListener } from 'react-custom-events';
@@ -28,12 +28,9 @@ const Acusation = (isPlaying) => {
             },
             body: JSON.stringify(acusationData)
         })
-
         if(response.status === 200){
             closeCleanup()
         }
-        
-
     }
 
     function closeCleanup() {
@@ -103,12 +100,14 @@ const NotifyAcusation = (gameName) =>  {
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
     const [acusationPlayer, setAcusationPlayer] = useState("");
+    const [envelope, setEnvelope] = useState([])
     const [allLost, setAllLost] = useState(false);
+  
     const history = useHistory()
-    
-    function closeModal() {
-        if (acusationRes || allLost){
-            const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "gameName": gameName};
+    const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "envelope": envelope, "gameName": gameName};
+
+    function updateHistory() {
+        if (acusationRes || allLost){        
             history.push('/endgame', state);
         }
     }
@@ -126,25 +125,29 @@ const NotifyAcusation = (gameName) =>  {
             setAcusationMade(true);
             setAcusationRes((data)["data"]["won"]);
             setAcusationPlayer((data)["data"]["player"])
+            if(data["data"]["won"]){
+                setEnvelope(data["data"]["envelope"])
+            }
         }
         if((data)["code"] & 1024){
             setAllLost(true);
+            setEnvelope((data)["envelope"])
         }
     });
 
     return (
-        <Popup 
-            modal 
-            open={acusationMade} 
+        <Popup
+            modal
+            open={acusationMade}
             closeOnDocumentClick = {false}
-            onClose = {() => closeModal()}
+            onClose = {() => updateHistory()}
         >
         {close => (
             <div className = "acusationResult">
-                <button className="close-result" onClick={() => closeCleanup()}>✖</button> <br/>
+                <button className="close-result" onClick={(e) => {closeCleanup(e); close();}}>✖</button> <br/>
                 <div className = "acusationText">
-                    La acusacion del jugador <b>{acusationPlayer}</b> fue 
-                    {(acusationRes) ? <b>acertada, felicitaciones</b>  : <b> erronea</b>}
+                    El jugador <b>{acusationPlayer}</b> 
+                    {(acusationRes) ? <b> resolvió el misterio</b>  : <b> no resolvió el misterio</b>}
                 </div>
             </div>
         )}
