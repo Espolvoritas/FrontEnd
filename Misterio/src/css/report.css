@@ -14,7 +14,7 @@
     color: white;
     clear: both;
     width: 34%;
-    margin-top: 6%;
+    margin-top: 7.5%;
     position: absolute;
 }
 
@@ -40,7 +40,7 @@
 
 .solution{
     position: absolute;
-    transform: translate(128%, 132%);
+    transform: translate(128%, 141%);
 }
 
 .solution-header{
