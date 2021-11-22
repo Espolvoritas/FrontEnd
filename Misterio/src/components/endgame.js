@@ -1,8 +1,9 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {CardsImg, CardsName} from "./cardReference";
 
 const EndGame = () => {
+
     const history = useHistory()
     const datahost = history.location.state
 
@@ -10,6 +11,10 @@ const EndGame = () => {
         e.preventDefault();
         history.push('/');
     }
+
+    useEffect(() => {
+        localStorage.removeItem("list_player" + datahost["gameName"])
+    });
 
     const deck = {}
     

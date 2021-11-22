@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-const Chat = (ws, isLobby) => {
+const Chat = (ws, isLobby, gameName) => {
 
-    let [list_player, setList_player] = useState([])
-    let [list_msg, setList_msg] = useState([])
-    let [list_color, setList_color] = useState([])
     const [msg, setMsg] = useState("")
     const [scroll, setScroll] = useState(null);
+    let [list_player, setList_chat] = useState(JSON.parse(localStorage.getItem('list_player' + gameName)));
 
+    if(list_player === null){
+        list_player = []
+        for(let i = 0; i < 3; i++){
+            list_player[i] = []
+        }
+        localStorage.setItem('list_player' + gameName, JSON.stringify(list_player));
+    }
 
     const colors = {
         '1': "#d0021b",
@@ -24,10 +29,18 @@ const Chat = (ws, isLobby) => {
 
     useCustomEventListener('websocket', data => {
         if((data)["code"] & 8192) {
+            
             const data_message = (data)["msg"];
-            setList_player([...list_player, data_message["user"]])
-            setList_msg([...list_msg, data_message["str"]])
-            setList_color([...list_color, data_message["color"]])
+
+            let player = JSON.parse(localStorage.getItem('list_player' + gameName))
+
+            player[0] = [...player[0], data_message["user"]]
+            player[1] = [...player[1], data_message["str"]]
+            player[2] = [...player[2], data_message["color"]]
+
+            localStorage.setItem('list_player' + gameName, JSON.stringify(player));
+            setList_chat(player)
+
             if (scroll) {
                 scroll.scrollTop = scroll.scrollHeight;
             }
@@ -48,13 +61,13 @@ const Chat = (ws, isLobby) => {
             
             <div className="gameboard-background-chat" >
                 <PerfectScrollbar containerRef={ref => { setScroll(ref);}} className="scrollbar">
-                    {Object.keys(list_player).map((i) => (
+                    {Object.keys(list_player[0]).map((i) => (
                         <div key={i} className="gameboard-chat-player">
-                            <div key={i+"gameboard-player"} className="gameboard-whom-message" style={{color: colors[list_color[i]]}}>
-                                {list_player[i]}:
+                            <div key={i+"gameboard-player"} className="gameboard-whom-message" style={{color: colors[list_player[2][i]]}}>
+                                {list_player[0][i]}:
                             </div>
                             <div key={i+"gameboard-message"} className="gameboard-message">
-                                {list_msg[i]}
+                                {list_player[1][i]}
                             </div>
                         </div>
                     ))}
@@ -73,13 +86,13 @@ const Chat = (ws, isLobby) => {
             
             <div className="lobby-background-chat" >
                 <PerfectScrollbar containerRef={ref => { setScroll(ref);}} className="scrollbar">
-                    {Object.keys(list_player).map((i) => (
+                    {Object.keys(list_player[0]).map((i) => (
                         <div key={i} className="lobby-chat-player">
-                            <div key={i+"lobby-player"} className="lobby-whom-message" style={{color: colors[list_color[i]]}}>
-                                {list_player[i]}:
+                            <div key={i+"lobby-player"} className="lobby-whom-message" style={{color: colors[list_player[2][i]]}}>
+                                {list_player[0][i]}:
                             </div>
                             <div key={i+"lobby-message"} className="lobby-player-message">
-                                {list_msg[i]}
+                                {list_player[1][i]}
                             </div>
                         </div>
                     ))}

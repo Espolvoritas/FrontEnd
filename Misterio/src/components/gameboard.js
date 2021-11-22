@@ -85,11 +85,11 @@ const GameBoard = () => {
             </div>
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
-                {Acusation(isPlaying)}
-                {NotifyAcusation()}
+                {Acusation(isPlaying )}
+                {NotifyAcusation(datahost["gameName"])}
             </div>
             <div className="Chat-component">
-                {Chat(ws.current, isLobby)}
+                {Chat(ws.current, isLobby, datahost["gameName"])}
             </div>
         </div>
     );

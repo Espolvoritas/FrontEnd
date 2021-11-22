@@ -9,7 +9,7 @@ import WS from "jest-websocket-mock";
 test('Render components and inputs expected', () => {
 
     const history = createMemoryHistory();
-    const state = { "gameName": "Prueba", "player_id": 1, "game_id": 1 }
+    const state = { "gameName": "Prueba", "player_id": 1, "lobby_id": 1 }
     history.push("/Lobby", state);
 
     render(
@@ -29,7 +29,7 @@ test('Render components and inputs expected', () => {
 test('Recieve data from Websocket and render it', async () => {
 
     const history = createMemoryHistory();
-    const state = { "gameName": "Prueba", "player_id": 1, "game_id": 1 }
+    const state = { "gameName": "Prueba", "player_id": 1, "lobby_id": 1 }
     history.push("/Lobby", state);
     
     const component = render(
@@ -71,7 +71,7 @@ test('Recieve data from Websocket and render it', async () => {
 test('click start game and push data to next page', async () => {
 
     const history = createMemoryHistory();
-    const state = { "gameName": "Prueba", "player_id": 1, "game_id": 1 }
+    const state = { "gameName": "Prueba", "player_id": 1, "lobby_id": 1 }
     history.push("/Lobby", state);
 
     const clickNextPage = jest.fn(() => true);

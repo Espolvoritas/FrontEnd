@@ -7,7 +7,6 @@ import {RiArrowGoBackFill} from 'react-icons/ri';
 import Chat from "./chat";
 import { emitCustomEvent } from 'react-custom-events';
 
-
 const Lobby = () => {
 
     const [listPlayers, setListPlayers] = useState([]); 
@@ -51,13 +50,11 @@ const Lobby = () => {
 
     const history = useHistory()
     const datahost = history.location.state
-    const state = {"player_id": datahost["player_id"], "player_name": datahost["player_name"]} // Data to next page
-
+    const state = {"player_id": datahost["player_id"], "player_name": datahost["player_name"], "gameName": datahost["gameName"]} // Data to next page
     // WebSocket recieve and close connection
     useEffect(() => {
       ws.current = new WebSocket("ws://localhost:8000/lobby/" + String(datahost["player_id"]))
       ws.current.onmessage = (event) => {
-        console.log(JSON.parse(event.data))
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
         }else if(JSON.parse(event.data)["code"] & 8192){
@@ -101,7 +98,7 @@ const Lobby = () => {
         "player_id": datahost["player_id"],
         "color": value
       }
-      const response = await fetch('http://127.0.0.1:8000/lobby/pickColor', {
+      await fetch('http://127.0.0.1:8000/lobby/pickColor', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -116,6 +113,15 @@ const Lobby = () => {
     const clickExitLobby = () => {
       history.push("/listofgames");
       ws.current.close();
+
+      localStorage.removeItem("list_player" + datahost["gameName"])
+      const list_player = []
+      for(let i = 0; i < 3; i++){
+          list_player[i] = []
+      }
+      if(datahost["lobby_id"] === undefined){
+        localStorage.setItem('list_player' + datahost["gameName"], JSON.stringify(list_player));
+      }
     }
 
     function canStart(ishost){
@@ -149,7 +155,7 @@ const Lobby = () => {
           </a>
           
           <div className="Title">Sala: {datahost["gameName"]}
-            {Chat(ws.current, isLobby)}
+            {Chat(ws.current, isLobby, datahost["gameName"])}
             <table className="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
@@ -169,7 +175,7 @@ const Lobby = () => {
             <Dropdown className="drop-colors" options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
 
 
-            {canStart(datahost["game_id"] !== undefined)}
+            {canStart(datahost["lobby_id"] !== undefined)}
                   
 
               

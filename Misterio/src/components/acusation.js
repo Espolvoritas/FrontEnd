@@ -98,7 +98,7 @@ const Acusation = (isPlaying) => {
 
 
 
-const NotifyAcusation = () =>  {
+const NotifyAcusation = (gameName) =>  {
 
     const [acusationMade, setAcusationMade] = useState(false);
     const [acusationRes, setAcusationRes] = useState(false);
@@ -108,7 +108,7 @@ const NotifyAcusation = () =>  {
     
     function closeModal() {
         if (acusationRes || allLost){
-            const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer};
+            const state =  {"allLost" : allLost, "acusationPlayer" : acusationPlayer, "gameName": gameName};
             history.push('/endgame', state);
         }
     }
