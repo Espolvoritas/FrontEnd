@@ -1,6 +1,6 @@
 .DiceRoll {
     position: absolute;
-    transform: translate(190%, 735%);
+    transform: translate(80%, 1100%);
     width: auto;
 }
 
@@ -30,7 +30,6 @@
     padding-right: 3%;
     padding-left: 3%;
     padding-bottom: 1%;
-    /* padding: 3%; */
     color: white;
     font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
