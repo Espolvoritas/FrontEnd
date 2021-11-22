@@ -49,7 +49,7 @@ function Suspicion(place, playerID) {
                 <h3 className="header-sus">Realiza una sospecha</h3>
 
                 <div className="suspicion-dropdown">
-                    <select defaultValue={'DEFAULT'} onChange={(e) => setMonster(e.target.value)}>
+                    <select data-testid={"monster-dropdown"} defaultValue={'DEFAULT'} onChange={(e) => setMonster(e.target.value)}>
                         <option value='DEFAULT' disabled hidden>Elige un monstruo</option>
                         <option value={6}>Dr. Jekyll Mr. Hyde</option>
                         <option value={1}>Drácula</option>
@@ -60,7 +60,7 @@ function Suspicion(place, playerID) {
                     </select>
                     asesinó a
 
-                    <select defaultValue={'DEFAULT'} onChange={(e) => setVictim(e.target.value)}>
+                    <select data-testid={"victim-dropdown"} defaultValue={'DEFAULT'} onChange={(e) => setVictim(e.target.value)}>
                         <option value='DEFAULT' disabled hidden>Elige una víctima</option>
                         <option value={9}>Ama de Llaves</option>
                         <option value={7}>Conde</option>
