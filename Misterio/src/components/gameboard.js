@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../media/MisterioBoard.jpeg";
 import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
+import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 import Report from "./report";
@@ -18,6 +19,8 @@ const GameBoard = () => {
     const ws = useRef(null);
     const [actualTurn, setTurn] = useState("")
     const [cards, setCards] = useState([])
+    const [usedSalem, setUsedSalem] = useState(false)
+    const [playerUsedSalem, setPlayerUsedSalem] = useState("")
     let [card, setCard] = useState(0);
     let [accused, setAccused] = useState("");
     let arriveSus = useRef(false)
@@ -30,20 +33,31 @@ const GameBoard = () => {
         setRoomId(data)
     });
 
+    const [receibedCard, setreceibedCard] = useState(0)
+    const [showSalemBool, setShowSalemBool] = useState(false)
+    useCustomEventListener("envelopeCard", envelopeCard => {
+        setreceibedCard(envelopeCard);
+        setShowSalemBool(true);
+    });
+
     useEffect(() => {
         ws.current = new WebSocket("ws://localhost:8000/gameBoard/"
                                 + String(datahost["player_id"]))
         ws.current.onmessage = (event) => {
             console.log(event.data)
             emitCustomEvent('websocket', JSON.parse(event.data));
-            if(JSON.parse(event.data)["code"] & 1){
+            if(JSON.parse(event.data)["code"] & 131){
                 setTurn(JSON.parse(event.data)["current_player"]);
                 emitCustomEvent('dice', false);
             }
-            if (JSON.parse(event.data)["code"] & 2)
+            if (JSON.parse(event.data)["code"] & 131)
                 setCards(JSON.parse(event.data)["cards"]);
             if (JSON.parse(event.data)["code"] & 8){
                 arriveSus = true
+            }
+            if(JSON.parse(event.data)["code"] & 2048){
+                setUsedSalem(true)
+                setPlayerUsedSalem(JSON.parse(event.data)["current_player"])
             }
         };
     }, []);
@@ -61,7 +75,7 @@ const GameBoard = () => {
 
     return(
         <div className="background-image" >
-            <img src={logo} className="gameboard-img"></img>
+            <img src={logo} className="gameboard-img" alt = ""></img>
             <div>
                 {Suspicion(roomId, datahost["player_id"])}
                 {NotifySuspicion()}
@@ -95,6 +109,28 @@ const GameBoard = () => {
 
             <div>
                 {Report(datahost["gameName"])}
+            </div>
+
+            <div className = "SalemButton">
+                {SalemCard(datahost["player_id"])}
+            </div>
+            <div>
+                {
+                    showSalemBool ? 
+                        <div>
+                            {ShowSalemCardResult(receibedCard)}
+                        </div>
+                    :   <p></p>
+                }
+            </div>
+            <div>
+                {
+                    usedSalem ?
+                        <div>
+                            {PlayerUsedSalem(playerUsedSalem)}
+                        </div>
+                    :   <p></p> 
+                }
             </div>
         </div>
     );

@@ -11,6 +11,7 @@
 @import 'css/playerongrid.css';
 @import 'css/report.css';
 @import 'css/rules';
+@import 'css/salemcard.css';
 @import 'css/suspicion.css';
 
 .home-button, .return-button{
@@ -18,8 +19,6 @@
     font-size: 225%;
     position: absolute;
 }
-
 .home-button{
     left: 40px;
 }
-
