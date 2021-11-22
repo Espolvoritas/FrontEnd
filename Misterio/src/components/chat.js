@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import {colors} from './dicts'
 
 const Chat = (ws, isLobby, gameName) => {
 

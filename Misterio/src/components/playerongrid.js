@@ -1,6 +1,7 @@
 import {React, useState} from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
+import {colors} from './dicts'
 
 const PlayerOnGrid = (player_id) => {
 
@@ -20,17 +21,6 @@ const PlayerOnGrid = (player_id) => {
     useCustomEventListener('init_moves', data => {
         setAvailable(data["moves"])
     });
-    
-    const colors = {
-        '1': "#d0021b",
-        '2': "#417505",
-        '3': "#4a90e2",
-        '4': "#ffffff",
-        '5': "#000000",
-        '6': "#f2ff03",
-        '7': "#ff03fb",
-        '8': "#ffaa03"
-    }
 
     for (let i = 0; i < 21; i++){
         for(let j = 0; j < 22; j++){
