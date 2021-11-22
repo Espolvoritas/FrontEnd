@@ -1,7 +1,7 @@
 /* GAMEBOARD */
 
 .gameboard-background-chat{
-    
+
     margin-left: 1%;
     width: 25%;
     height: 49%;
@@ -22,7 +22,7 @@
 }
 
 .gameboard-chat-player{
-    background-color: #14223d;
+    background-color: #ffccb4;
     border-radius: 5px;
     padding: 1%;
     max-width: 90%;
@@ -32,16 +32,14 @@
 
 
 .gameboard-whom-message{
-    border: 2px solid white;
-
     position: relative;
     max-width: 40%;
-    background-color: #02c0ba;
+    background-color: #6c232f;
     border-radius: 5px;
 }
 
 .gameboard-message{
-    color: #c2324a
+    color: #9c2f3b
 }
 
 /* LOBBY */
