@@ -40,8 +40,9 @@ const Chat = (ws, isLobby, gameName, player_id) => {
 
     const sendmsg = (e) => {
         e.preventDefault();
-        if(msg !== "")
-        ws.send(JSON.stringify({'code': WS_CHAT_MSG, 'msg': msg}))
+        if(msg !== ""){
+            ws.send(JSON.stringify({'code': WS_CHAT_MSG, 'msg': msg}))
+        }
         setMsg("");
         e.target.reset();
     }

@@ -4,6 +4,7 @@ import {CardsImg, CardsName} from "./cardReference";
 import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
 import {WS_SUSPICION, WS_PICK_CARD, WS_SUSPICION_STATUS, WS_SENT_CARD_NOTIFY} from './constants'
+import Counter from 'lyef-counter';
 
 function Suspicion(place, playerID) {
 
@@ -126,7 +127,7 @@ function NotifySuspicion(){
 
 function ShowSuspicionResult(nickname, card) {
 
-    if(nickname === "" || card === 0){
+    if(nickname === "" || card === null){
         return
     }
 
@@ -176,18 +177,19 @@ function ChooseCard(ws, arriveSus){
             <Popup 
             modal
             open={true}
-            onClose={handleCard}
             closeOnDocumentClick={false}
             >
                 {close => (
                     <div className="choose-card">
+                        <Counter start={30} end={0} done={close}/>
                         <div className="header-sus">Elige una carta para mostrar</div>
                         {Object.keys(deck).map((i) => (
                             <img key={i} className="card-pick" src={CardsImg[deck[i]]} alt={CardsName[deck[i]]}
                                 onClick={() => setPickedCard(deck[i])}/>
                         ))}
                         {(validInput) ? <div className="notice-card">Elegiste esta carta: {CardsName[pickedCard]}<br/>
-                            <input className="send-card" type="submit" value="Enviar" onClick={close}/></div>: <b/>}
+                            <input className="send-card" type="submit" value="Enviar" 
+                            onClick={() => {handleCard(); close();}}/></div>: <b/>}
                     </div>
                 )}
             </Popup>

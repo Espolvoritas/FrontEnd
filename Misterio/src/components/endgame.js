@@ -12,7 +12,7 @@ const EndGame = () => {
         history.push('/');
     }
 
-
+    
     useEffect(() => {
         localStorage.removeItem("list_player" + datahost["gameName"] + datahost["player_id"])
         localStorage.removeItem("list_report" + datahost["gameName"] + datahost["player_id"])
