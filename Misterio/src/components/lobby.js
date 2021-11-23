@@ -89,7 +89,7 @@ const Lobby = () => {
           list_player[i] = []
       }
       if(datahost["lobby_id"] === undefined){
-        localStorage.setItem('list_player' + datahost["gameName"], JSON.stringify(list_player));
+        localStorage.setItem('list_player' + datahost["gameName"] + datahost["player_id"], JSON.stringify(list_player));
       }
     }
 
@@ -124,7 +124,7 @@ const Lobby = () => {
           </a>
           
           <div className="Title">Sala: {datahost["gameName"]}
-            {Chat(ws.current, isLobby, datahost["gameName"])}
+            {Chat(ws.current, isLobby, datahost["gameName"], datahost["player_id"])}
             <table className="key-lobby" cellSpacing="0" cellPadding="0">
                 <thead>
                     <tr>
