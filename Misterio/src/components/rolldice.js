@@ -1,6 +1,7 @@
 import {React, useState} from "react";
 import Dice from 'react-dice-roll';
 import { emitCustomEvent,  useCustomEventListener } from 'react-custom-events';
+import {OK} from './constants'
 
 const RollDice = (player_id, isPlaying) => {
     const [thrown, setThrown] = useState(false);
@@ -25,7 +26,7 @@ const RollDice = (player_id, isPlaying) => {
             body: JSON.stringify(diceData)
         }) 
         const res = await response.json()
-        if(response.status === 200){
+        if(response.status === OK){
             setThrown(true)
             emitCustomEvent('init_moves', res)
         }

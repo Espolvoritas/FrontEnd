@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import { useHistory } from "react-router-dom";
 import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
 import {RiArrowGoBackFill} from 'react-icons/ri';
+import {OK, BAD_REQUEST, UNAUTHORIZED} from './constants'
 
 const ListGames = () => {
 
@@ -32,7 +33,7 @@ const ListGames = () => {
                     'Access-Control-Allow-Origin': '*'
                     }
             });
-            if (response.status === 200) {
+            if (response.status === OK) {
                 setListGame(await response.json())
                 setIsEmptyList(false)
             }
@@ -74,17 +75,17 @@ const ListGames = () => {
         })
 
         const response = await joinChecked.json()
-        if (joinChecked.status === 200 && response["nickname_is_valid"]){
+        if (joinChecked.status === OK && response["nickname_is_valid"]){
             setValidPassword(response["password_is_valid"])
             const state = {"player_id": response["player_id"], "gameName": gameName, "player_name": nickname}
             history.push("/lobby", state);
         }
         // repeated nickname within the game
-        if (joinChecked.status === 400){
+        if (joinChecked.status === BAD_REQUEST){
             setIsRepeated(true)
         }
         // password check
-        if (joinChecked.status === 401){
+        if (joinChecked.status === UNAUTHORIZED){
             setValidPassword(false)
             setIsRepeated(false)
         }

@@ -2,6 +2,7 @@ import {React, useState} from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
 import {colors} from './dicts'
+import {OK, WS_AVAIL_MOVES, WS_POS_LIST} from './constants'
 
 const PlayerOnGrid = (player_id) => {
 
@@ -10,10 +11,10 @@ const PlayerOnGrid = (player_id) => {
     const [positions, setPositions] = useState([])
 
     useCustomEventListener('websocket', data => {
-        if((data)["code"] & 64) {
+        if((data)["code"] & WS_AVAIL_MOVES) {
             setAvailable((data)["moves"]);
         }
-        if((data)["code"] & 128) {
+        if((data)["code"] & WS_POS_LIST) {
             setPositions((data)["positions"]);
         }
     });
@@ -66,7 +67,7 @@ const PlayerOnGrid = (player_id) => {
         })
         const res = await response.json()
 
-        if(response.status === 200){
+        if(response.status === OK){
             setAvailable(res["moves"])
             emitCustomEvent('room', res["room"]);
         }
@@ -96,7 +97,6 @@ const PlayerOnGrid = (player_id) => {
             {component}
         </div> 
     );
-
 
 }
 

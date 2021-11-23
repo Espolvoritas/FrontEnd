@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
-const Report = () => {
+const Report = (gameName) => {
 
-  let list_c = JSON.parse(localStorage.getItem('list_report'))
-  let list_s = JSON.parse(localStorage.getItem('list_solution'))
+  let list_c = JSON.parse(localStorage.getItem('list_report' + gameName))
+  let list_s = JSON.parse(localStorage.getItem('list_solution' + gameName))
 
   if(list_s === null){
     list_s = []
     for(let i = 0; i < 3; i++){
       list_s[i] = 0
     }
+    localStorage.setItem('list_solution' + gameName, JSON.stringify(list_s));
   }
 
   function Counter(i) {
@@ -19,20 +20,21 @@ const Report = () => {
       for(let i = 0; i < 20; i++){
         list_c[i] = 0
       }
+      localStorage.setItem('list_report' + gameName, JSON.stringify(list_c));
     }
 
     const [count, setCount] = useState(list_c[i])
     
     const incrementCounter = () => {
       list_c[i] += 1;
-      localStorage.setItem('list_report', JSON.stringify(list_c));
+      localStorage.setItem('list_report' + gameName, JSON.stringify(list_c));
       setCount(list_c[i])
     }
 
     const decrementCounter = () => {
       if(list_c[i] >= 1) {  
         list_c[i] -= 1;
-        localStorage.setItem('list_report', JSON.stringify(list_c));
+        localStorage.setItem('list_report' + gameName, JSON.stringify(list_c));
         setCount(list_c[i])
       }
     }
@@ -51,7 +53,7 @@ const Report = () => {
   function save_solution(i, data) {
 
     list_s[i] = data
-    localStorage.setItem('list_solution', JSON.stringify(list_s));
+    localStorage.setItem('list_solution' + gameName, JSON.stringify(list_s));
     
   }
 

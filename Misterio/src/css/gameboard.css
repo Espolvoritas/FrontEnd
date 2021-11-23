@@ -46,3 +46,8 @@
     position: absolute;
     transform: translate(0%, 200%);
 }
+
+.SalemButton{
+    position: fixed;
+    transform: translate(100%, 500%);
+}

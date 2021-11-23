@@ -7,6 +7,7 @@ import {RiArrowGoBackFill} from 'react-icons/ri';
 import Chat from "./chat";
 import { emitCustomEvent } from 'react-custom-events';
 import {colors, clrtostr, strtoclr} from './dicts'
+import {OK, WS_CHAT_MSG} from './constants'
 
 const Lobby = () => {
 
@@ -25,7 +26,7 @@ const Lobby = () => {
       ws.current.onmessage = (event) => {
         if(JSON.parse(event.data) === "STATUS_GAME_STARTED"){
           statusNextPage.current = true
-        }else if(JSON.parse(event.data)["code"] & 8192){
+        }else if(JSON.parse(event.data)["code"] & WS_CHAT_MSG){
           emitCustomEvent('websocket', JSON.parse(event.data));
         } else{
           setListPlayers(JSON.parse(event.data)["players"]);
@@ -38,7 +39,6 @@ const Lobby = () => {
           history.push("/listofgames")
         }else{
           history.push("/gameboard", state);
-          ws.current.close();
         }
       };
     }, []);
@@ -55,8 +55,9 @@ const Lobby = () => {
         },
         body: datahost["player_id"]
       })
-      if(response.status === 200){
-        history.push("/gameboard", state);
+
+      if(response.status === OK){
+        statusNextPage.current= true
         ws.current.close();
       }
     }
@@ -142,11 +143,8 @@ const Lobby = () => {
             </table>
             <Dropdown className="drop-colors" options={Object.keys(listColors).map((i) => (clrtostr[listColors[i]]))} onChange={(value) => chooseColor(strtoclr[value.value])} placeholder={"Cambia el color"}/>
 
-
             {canStart(datahost["lobby_id"] !== undefined)}
-                  
 
-              
           </div>
           
         </div>
