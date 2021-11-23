@@ -83,7 +83,7 @@ const Lobby = () => {
       history.push("/listofgames");
       ws.current.close();
 
-      localStorage.removeItem("list_player" + datahost["gameName"])
+      localStorage.removeItem("list_player" + datahost["gameName"] + datahost["player_id"])
       const list_player = []
       for(let i = 0; i < 3; i++){
           list_player[i] = []
