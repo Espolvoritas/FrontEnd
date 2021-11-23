@@ -36,6 +36,7 @@ const Lobby = () => {
 
       ws.current.onclose = () => {
         if(!statusNextPage.current){
+          localStorage.removeItem("list_player" + datahost["gameName"] + datahost["player_id"])
           history.push("/listofgames")
         }else{
           history.push("/gameboard", state);
@@ -82,15 +83,6 @@ const Lobby = () => {
     const clickExitLobby = () => {
       history.push("/listofgames");
       ws.current.close();
-
-      localStorage.removeItem("list_player" + datahost["gameName"] + datahost["player_id"])
-      const list_player = []
-      for(let i = 0; i < 3; i++){
-          list_player[i] = []
-      }
-      if(datahost["lobby_id"] === undefined){
-        localStorage.setItem('list_player' + datahost["gameName"] + datahost["player_id"], JSON.stringify(list_player));
-      }
     }
 
     function canStart(ishost){
