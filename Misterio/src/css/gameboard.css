@@ -1,9 +1,3 @@
-.DiceRoll {
-    position: absolute;
-    transform: translate(80%, 1100%);
-    width: auto;
-}
-
 .background-image {
     background-color: black;
     background-size: contain;
@@ -43,11 +37,33 @@
 }
 
 .Acusation-main{
-    position: absolute;
-    transform: translate(0%, 200%);
+
+    float: left;
 }
 
 .SalemButton{
-    position: fixed;
-    transform: translate(100%, 500%);
+
+    float: left;
+}
+
+.dice-box{
+    float: left;
+}
+
+.DiceRoll {
+    position: absolute;
+    transform: translate(80%, 120%);   
+}
+
+.buttons-AnS{
+    width: 20%;
+    height: 29%;
+    transform: translate(20%, 240%);
+}
+
+.rules-box{
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    transform: translate(450%, 1300%);
 }

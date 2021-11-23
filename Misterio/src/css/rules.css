@@ -6,9 +6,7 @@
     overflow: hidden;
     outline: none;
     font-size: 25px;
-    position: fixed;
-    top: 93.8%;
-    left: 23%;
+    position: absolute;
 }
 
 .rules-content {

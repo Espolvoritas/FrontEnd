@@ -1,12 +1,11 @@
 .salemCardButton{
-    position: relative;
+    position: absolute;
     font-family: 'IM Fell English SC', serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 100%;
     cursor: pointer;
     color: #ffffff;
     background-color: #9f2e51;
-    margin-top: 55%;
 }
 
 .showSalemCard{

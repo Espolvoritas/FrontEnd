@@ -85,12 +85,9 @@ const GameBoard = () => {
                 {ShowSuspicionResult(accused, card)}
             </div>
             <div>
-                {Rules()}
-            </div>
-            <div>
                 {Cards(cards)}
             </div>
-                {RollDice(datahost["player_id"], isPlaying)}
+                
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <div className="text-turn" >Es tu turno</div>
@@ -98,21 +95,36 @@ const GameBoard = () => {
                 } 
             </div>
                 {PlayerOnGrid(datahost["player_id"])}
-            <div className="Acusation-main">
-                {Acusation(isPlaying )}
-                {NotifyAcusation(datahost["gameName"])}
-            </div>
+            
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"])}
             </div>
 
-            <div>
+            <div className="Report-comp">
                 {Report(datahost["gameName"])}
             </div>
 
-            <div className = "SalemButton">
-                {SalemCard(datahost["player_id"])}
+            <div className="buttons-AnS">
+
+                <div className="Acusation-main">
+                    {Acusation(isPlaying )}
+                    {NotifyAcusation(datahost["gameName"])}
+                </div>
+
+                <div className="SalemButton">
+                    {SalemCard(datahost["player_id"])}
+                </div>
+
+                <div className="dice-box">
+                    {RollDice(datahost["player_id"], isPlaying)}
+                </div>
+
             </div>
+
+            <div className="rules-box">
+                {Rules()}
+            </div>
+
             <div>
                 {
                     showSalemBool ? 
