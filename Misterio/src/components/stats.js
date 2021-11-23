@@ -80,7 +80,7 @@ const Stats = () => {
                     <a style={{color: colors[stats["most_chosen_color"]["color_id"]]}}>
                         <BsDropletFill/>
                     </a>
-                    <a> se eligió el {stats["most_chosen_color"]["percentage"]}% de las partidas</a>
+                    <a> se eligió por el {stats["most_chosen_color"]["percentage"]}% de los jugadores</a>
                 </div> : <a></a>
             }
 
