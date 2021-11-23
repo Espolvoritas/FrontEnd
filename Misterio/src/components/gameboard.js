@@ -106,8 +106,6 @@ const GameBoard = () => {
                 {Cards(cards)}
             </div>
 
-            {RollDice(datahost["player_id"], isPlaying)}
-
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <div className="text-turn">
@@ -132,7 +130,7 @@ const GameBoard = () => {
 
                 <div className="Acusation-main">
                     {Acusation(isPlaying )}
-                    {NotifyAcusation(datahost["gameName"])}
+                    {NotifyAcusation(datahost["gameName"], datahost["player_id"])}
                 </div>
 
                 <div className="SalemButton">
