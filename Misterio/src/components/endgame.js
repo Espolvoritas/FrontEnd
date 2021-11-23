@@ -14,7 +14,9 @@ const EndGame = () => {
 
 
     useEffect(() => {
-        localStorage.removeItem("list_player" + datahost["gameName"])
+        localStorage.removeItem("list_player" + datahost["gameName"] + datahost["player_id"])
+        localStorage.removeItem("list_report" + datahost["gameName"] + datahost["player_id"])
+        localStorage.removeItem("list_solution" + datahost["gameName"] + datahost["player_id"])
     });
 
     let envelope = datahost["envelope"]

@@ -3,7 +3,7 @@ import Popup from "reactjs-popup";
 import {CardsImg, CardsName} from "./cardReference";
 import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
-
+import {WS_SUSPICION, WS_PICK_CARD, WS_SUSPICION_STATUS, WS_SENT_CARD_NOTIFY} from './constants'
 
 function Suspicion(place, playerID) {
 
@@ -86,7 +86,7 @@ function NotifySuspicion(){
     const [place, setPlace] = useState(0);
 
     useCustomEventListener('websocket', data => {
-        if ((data["code"] & 4)){
+        if ((data["code"] & WS_SUSPICION)){
             setPlayer(data["current_player"]);
             setVictim(data["victim"]);
             setMonster(data["monster"]);
@@ -152,7 +152,7 @@ function ChooseCard(ws, arriveSus){
     const validInput = pickedCard !== 0;
 
     useCustomEventListener('websocket', data => {
-        if ((data["code"] & 8)){
+        if ((data["code"] & WS_PICK_CARD)){
             setDeck(data["matching_cards"]);
         }else{
             if(deck !== ""){
@@ -201,7 +201,7 @@ function ShowStatus(){
     const [sus, setSus] = useState("");
 
     useCustomEventListener('websocket', data => {
-        if (data["code"] & 16){
+        if (data["code"] & WS_SUSPICION_STATUS){
 
             setHasCard(data["responded"])
             setNickname(data["response_player"])
@@ -242,7 +242,7 @@ function NotifySend(){
     const [nickname, setNickname] = useState("");
 
     useCustomEventListener('websocket', data => {
-        if (data["code"] & 32){
+        if (data["code"] & WS_SENT_CARD_NOTIFY){
             setCard(data["card"])
             setNickname(data["suspicion_player"])
         }

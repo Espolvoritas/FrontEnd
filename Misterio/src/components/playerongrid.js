@@ -3,6 +3,8 @@ import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
 import {colors} from './dicts'
 import Popup from "reactjs-popup";
+import {OK, WS_AVAIL_MOVES, WS_POS_LIST} from './constants'
+
 
 const PlayerOnGrid = (player_id) => {
 
@@ -11,10 +13,10 @@ const PlayerOnGrid = (player_id) => {
     const [positions, setPositions] = useState([])
 
     useCustomEventListener('websocket', data => {
-        if((data)["code"] & 64) {
+        if((data)["code"] & WS_AVAIL_MOVES) {
             setAvailable((data)["moves"]);
         }
-        if((data)["code"] & 128) {
+        if((data)["code"] & WS_POS_LIST) {
             setPositions((data)["positions"]);
         }
     });
@@ -67,7 +69,7 @@ const PlayerOnGrid = (player_id) => {
         })
         const res = await response.json()
 
-        if(response.status === 200){
+        if(response.status === OK){
             setAvailable(res["moves"])
             emitCustomEvent('room', res["room"]);
             emitCustomEvent('trap', res["trapped"]);
@@ -99,14 +101,13 @@ const PlayerOnGrid = (player_id) => {
         </div> 
     );
 
+
 }
 
 
 const Trapopup = () => {
 
     const [trap, setTrap] = useState(false)
-
-    
 
     useCustomEventListener('trap', data => {
         console.log(data)
@@ -136,7 +137,6 @@ const Trapopup = () => {
         )}
         </Popup>
     )
-
 }
 
 export {PlayerOnGrid, Trapopup};

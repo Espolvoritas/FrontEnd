@@ -10,7 +10,10 @@ import Chat from './chat'
 import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
 import {PlayerOnGrid, Trapopup} from "./playerongrid";
+import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD, WS_SALEM} from './constants'
 import Report from "./report";
+
+
 
 const GameBoard = () => {
 
@@ -46,16 +49,16 @@ const GameBoard = () => {
         ws.current.onmessage = (event) => {
             console.log(event.data)
             emitCustomEvent('websocket', JSON.parse(event.data));
-            if(JSON.parse(event.data)["code"] & 1){
+            if(JSON.parse(event.data)["code"] & WS_CURR_PLAYER){
                 setTurn(JSON.parse(event.data)["current_player"]);
                 emitCustomEvent('dice', false);
             }
-            if (JSON.parse(event.data)["code"] & 131)
+            if (JSON.parse(event.data)["code"] & WS_CARD_LIST)
                 setCards(JSON.parse(event.data)["cards"]);
-            if (JSON.parse(event.data)["code"] & 8){
+            if (JSON.parse(event.data)["code"] & WS_PICK_CARD){
                 arriveSus = true
             }
-            if(JSON.parse(event.data)["code"] & 2048){
+            if(JSON.parse(event.data)["code"] & WS_SALEM){
                 setUsedSalem(true)
                 setPlayerUsedSalem(JSON.parse(event.data)["current_player"])
             }
@@ -94,14 +97,15 @@ const GameBoard = () => {
                 : <div className="text-turn">Es el turno de: {actualTurn}</div>
                 } 
             </div>
-                {PlayerOnGrid(datahost["player_id"])}
-            
+       
+            {PlayerOnGrid(datahost["player_id"])}
+
             <div className="Chat-component">
-                {Chat(ws.current, isLobby, datahost["gameName"])}
+                {Chat(ws.current, isLobby, datahost["gameName"], datahost["player_id"])}
             </div>
 
             <div className="Report-comp">
-                {Report(datahost["gameName"])}
+                {Report(datahost["gameName"], datahost["player_id"])}
             </div>
 
             <div className="buttons-AnS">
