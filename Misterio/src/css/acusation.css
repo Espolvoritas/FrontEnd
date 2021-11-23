@@ -1,16 +1,15 @@
 .acusation-button{
-    padding: 8px 12px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    display: inline-block;
     font-family: 'IM Fell English SC', serif;
+    position: absolute;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 100%;
     cursor: pointer;
     color: #ffffff;
     background-color: #005956;
-    transform: translate(90%, 770%);
+    width: 193px;
+    transform: translate(0%, 170%);
 }
+
 
 .acusation-button:active {     
     background-color:#002234;

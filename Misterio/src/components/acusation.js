@@ -46,7 +46,7 @@ const Acusation = (isPlaying) => {
         return
     } else {
         return (
-            <Popup trigger={<button className="acusation-button"> Acusar🔎✉️</button>}
+            <Popup trigger={<div className="acusationbutton-box"> <button className="acusation-button"> Acusar🔎✉️</button> </div>}
                 modal 
                 closeOnDocumentClick = {false}
             >

@@ -2,7 +2,9 @@ import {React, useState} from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import { emitCustomEvent } from 'react-custom-events';
 import {colors} from './dicts'
+import Popup from "reactjs-popup";
 import {OK, WS_AVAIL_MOVES, WS_POS_LIST} from './constants'
+
 
 const PlayerOnGrid = (player_id) => {
 
@@ -70,6 +72,7 @@ const PlayerOnGrid = (player_id) => {
         if(response.status === OK){
             setAvailable(res["moves"])
             emitCustomEvent('room', res["room"]);
+            emitCustomEvent('trap', res["trapped"]);
         }
 
       }
@@ -98,6 +101,42 @@ const PlayerOnGrid = (player_id) => {
         </div> 
     );
 
+
 }
 
-export default PlayerOnGrid;
+
+const Trapopup = () => {
+
+    const [trap, setTrap] = useState(false)
+
+    useCustomEventListener('trap', data => {
+        console.log(data)
+        setTrap(data)
+    });
+
+    function closeCleanup() {
+        if(trap){
+            setTrap(false)
+        }
+    }
+
+    return(
+        <Popup 
+        modal
+        open={trap}
+        onClose={() => closeCleanup()}
+        >
+        {close => (
+            <div className="trapped">
+                <div className="trapped-text">
+                    Caiste en una trampa,<br/>
+                    perderás el próximo turno.
+                </div>
+                <button className="close-trapped" onClick={close}>✖</button> 
+            </div>
+        )}
+        </Popup>
+    )
+}
+
+export {PlayerOnGrid, Trapopup};

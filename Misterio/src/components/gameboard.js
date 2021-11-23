@@ -9,12 +9,12 @@ import {Acusation, NotifyAcusation} from "./acusation"
 import Chat from './chat'
 import {SalemCard, ShowSalemCardResult, PlayerUsedSalem} from "./salemcard";
 import RollDice from './rolldice'
-import PlayerOnGrid from "./playerongrid";
-import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
+import {PlayerOnGrid, Trapopup} from "./playerongrid";
+import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD, WS_SALEM} from './constants'
 import Report from "./report";
 import Counter from 'lyef-counter';
 import {MdTimer} from 'react-icons/md'
-import {WS_SALEM} from "./constants"
+
 
 const GameBoard = () => {
 
@@ -103,12 +103,11 @@ const GameBoard = () => {
                 {ShowSuspicionResult(accused, card)}
             </div>
             <div>
-                {Rules()}
-            </div>
-            <div>
                 {Cards(cards)}
             </div>
-                {RollDice(datahost["player_id"], isPlaying)}
+
+            {RollDice(datahost["player_id"], isPlaying)}
+
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <div className="text-turn">
@@ -118,21 +117,38 @@ const GameBoard = () => {
                 : <div className="text-turn">Es el turno de: {actualTurn}</div>
                 }
             </div>
-                {PlayerOnGrid(datahost["player_id"])}
-            <div className="Acusation-main">
-                {Acusation(isPlaying )}
-                {NotifyAcusation(datahost["gameName"], datahost["player_id"])}
-            </div>
+
+            {PlayerOnGrid(datahost["player_id"])}
+
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"], datahost["player_id"])}
             </div>
-            <div>
+
+            <div className="Report-comp">
                 {Report(datahost["gameName"], datahost["player_id"])}
             </div>
 
-            <div className = "SalemButton">
-                {SalemCard(datahost["player_id"])}
+            <div className="buttons-AnS">
+
+                <div className="Acusation-main">
+                    {Acusation(isPlaying )}
+                    {NotifyAcusation(datahost["gameName"])}
+                </div>
+
+                <div className="SalemButton">
+                    {SalemCard(datahost["player_id"])}
+                </div>
+
+                <div className="dice-box">
+                    {RollDice(datahost["player_id"], isPlaying)}
+                </div>
+
             </div>
+
+            <div className="rules-box">
+                {Rules()}
+            </div>
+
             <div>
                 {
                     showSalemBool ? 
@@ -150,6 +166,9 @@ const GameBoard = () => {
                         </div>
                     :   <p></p> 
                 }
+            </div>
+            <div>
+                {Trapopup()}
             </div>
         </div>
     );

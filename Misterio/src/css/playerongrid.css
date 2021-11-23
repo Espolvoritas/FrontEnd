@@ -44,3 +44,31 @@
     z-index: 1;
     align-items: center;
 }
+
+.trapped{
+    width: 300px;
+    height: 80px;
+    background-color: #e7e8d0;
+    border-radius: 25px;
+    border: 2px solid #d1ccc1;
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'IM Fell English SC', serif;
+}
+
+.close-trapped{
+    width: 30px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    transform: translate(360%, -70%);
+    cursor: pointer;
+
+}
+
+.trapped-text{
+    transform: translate(-10%, 40%);
+}

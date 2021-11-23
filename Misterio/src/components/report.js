@@ -60,7 +60,7 @@ const Report = (gameName, player_id) => {
   return(
     <div>
       <div className="Report">
-        <div className="column-mis">
+      <div className="column-mis">
           <h3>"MIS"</h3>
         <p>Dr. Jekyll Mr. Hyde {Counter(0)}<br/>
           Drácula {Counter(1)}<br/>
@@ -93,39 +93,39 @@ const Report = (gameName, player_id) => {
           Vestíbulo {Counter(19)}<br/>
         </div>
 
-      </div>
-      
-      <div className="solution">
-        <h3 className="solution-header">Solución</h3>
-          <select className="select" defaultValue={list_s[0]} onChange={(e) => {save_solution(0, e.target.value)}}>
-            <option value="0" disabled hidden>Monstruo</option>
-            <option value='Dr. Jekyll Mr. Hyde'>Dr. Jekyll Mr. Hyde</option>
-            <option value='Drácula'>Drácula</option>
-            <option value='Fantasma'>Fantasma</option>
-            <option value='Frankenstein'>Frankenstein</option>
-            <option value='Hombre Lobo'>Hombre Lobo</option>
-            <option value='Momia'>Momia</option>
-          </select> <br/>
-          <select className="select" defaultValue={list_s[1]} onChange={(e) => save_solution(1, e.target.value)}>
-            <option value="1" disabled hidden>Víctima</option>
-            <option value='Ama de Llaves'>Ama de Llaves</option>
-            <option value='Conde'>Conde</option>
-            <option value='Condesa'>Condesa</option>
-            <option value='Doncella'>Doncella</option>
-            <option value='Jardinero'>Jardinero</option>
-            <option value='Mayordomo'>Mayordomo</option>
-          </select>  <br/>
-          <select className="select" defaultValue={list_s[2]} onChange={(e) => save_solution(2, e.target.value)}>
-            <option value="2" disabled hidden>Recinto</option>
-            <option value='Alcoba'>Alcoba</option>
-            <option value='Biblioteca'>Biblioteca</option>
-            <option value='Bodega'>Bodega</option>
-            <option value='Cochera'>Cochera</option>
-            <option value='Laboratorio'>Laboratorio</option>
-            <option value='Panteón17'>Panteón</option>
-            <option value='Salón'>Salón</option>
-            <option value='Vestíbulo'>Vestíbulo</option>
-          </select>
+        <div className="solution-box">
+          <h3 className="solution-header">Solución</h3>
+            <select className="select" defaultValue={list_s[0]} onChange={(e) => {save_solution(0, e.target.value)}}>
+              <option value="0" disabled hidden>Monstruo</option>
+              <option value='Dr. Jekyll Mr. Hyde'>Dr. Jekyll Mr. Hyde</option>
+              <option value='Drácula'>Drácula</option>
+              <option value='Fantasma'>Fantasma</option>
+              <option value='Frankenstein'>Frankenstein</option>
+              <option value='Hombre Lobo'>Hombre Lobo</option>
+              <option value='Momia'>Momia</option>
+            </select> <br/>
+            <select className="select" defaultValue={list_s[1]} onChange={(e) => save_solution(1, e.target.value)}>
+              <option value="1" disabled hidden>Víctima</option>
+              <option value='Ama de Llaves'>Ama de Llaves</option>
+              <option value='Conde'>Conde</option>
+              <option value='Condesa'>Condesa</option>
+              <option value='Doncella'>Doncella</option>
+              <option value='Jardinero'>Jardinero</option>
+              <option value='Mayordomo'>Mayordomo</option>
+            </select>  <br/>
+            <select className="select" defaultValue={list_s[2]} onChange={(e) => save_solution(2, e.target.value)}>
+              <option value="2" disabled hidden>Recinto</option>
+              <option value='Alcoba'>Alcoba</option>
+              <option value='Biblioteca'>Biblioteca</option>
+              <option value='Bodega'>Bodega</option>
+              <option value='Cochera'>Cochera</option>
+              <option value='Laboratorio'>Laboratorio</option>
+              <option value='Panteón17'>Panteón</option>
+              <option value='Salón'>Salón</option>
+              <option value='Vestíbulo'>Vestíbulo</option>
+            </select>
+        </div>
+
       </div>
     </div>
   );

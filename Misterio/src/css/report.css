@@ -5,53 +5,46 @@
 .Counter button{
     background-color: #02c0ba;
     border: none;
-    font-size: 11px;
+    font-size: 80%;
     cursor: pointer;
     border-radius: 10px;
 }
 
 .Report {
     color: white;
-    clear: both;
-    width: 34%;
-    margin-top: 7.5%;
+    width: 25%;
+    height: 65%;
+    transform: translate(0%, 17%);
     position: absolute;
 }
 
 .Report h3 {
     font-family: 'Special Elite', cursive;
-    font-size: 18px;
+    font-size: 100%;
 }
 
-.column-mis, .column-te {
+.column-mis, .column-te, .column-rio, .solution-box{
     float: left;
-    width: 41%;
+    width: 50%;
+    height: 170px;
 }
 
-.column-rio{
-    float: center;
-    width: 41%; 
-}
 
 .column-mis, .column-te, .column-rio {
-    font-size: 14px;
+    position: relative;
+    font-size: 80%;
     font-family: 'Merriweather', serif;
 }
 
-.solution{
-    position: absolute;
-    transform: translate(128%, 141%);
-}
-
 .solution-header{
-    margin-bottom: 40px;
+    position: relative;
     color: white;
-    font-size: 18px;
+    font-size: 80%;
     font-family: 'Special Elite', cursive;
 }
 
 .select{
-    width: 145px;
-    padding: 3px;
-    margin-bottom: 10px;
+    width: 100%;
+    font-size: 80%;
+    margin-top: 5%;
 }

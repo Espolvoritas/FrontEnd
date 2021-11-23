@@ -36,11 +36,11 @@ function SalemCard(player_id){
     }
 
     return(
-        <div>
+        <div className="salemCard-box">
             {
                 salemBool ?
                     <button className="salemCardButton" onClick={requestCard}>
-                        Usar la bruja de Salem ✉️
+                        Usar bruja de Salem 🔮✉️
                     </button>
                 : <p></p>
             }
