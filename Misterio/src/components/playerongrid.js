@@ -127,11 +127,11 @@ const Trapopup = () => {
         >
         {close => (
             <div className="trapped">
-                <button className="close-trapped" onClick={close}>✖</button> 
                 <div className="trapped-text">
                     Caiste en una trampa,<br/>
                     perderás el próximo turno.
                 </div>
+                <button className="close-trapped" onClick={close}>✖</button> 
             </div>
         )}
         </Popup>

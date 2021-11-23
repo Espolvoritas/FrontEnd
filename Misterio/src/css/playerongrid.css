@@ -64,11 +64,11 @@
     color: black;
     background-color: white;
     border-radius: 25px;
-    transform: translate(330%, 80%);
+    transform: translate(360%, -70%);
     cursor: pointer;
-    position: fixed;
+
 }
 
 .trapped-text{
-    transform: translate(-8%, 40%);
+    transform: translate(-10%, 40%);
 }
