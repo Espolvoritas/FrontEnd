@@ -12,8 +12,9 @@ import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
 import Report from "./report";
+import Counter from 'lyef-counter';
+import {MdTimer} from 'react-icons/md'
 import {WS_SALEM} from "./constants"
-
 
 const GameBoard = () => {
 
@@ -29,15 +30,15 @@ const GameBoard = () => {
     let arriveSus = useRef(false)
     let [roomId, setRoomId] = useState(0)
     const isLobby = true
-
+    const [receibedCard, setreceibedCard] = useState(0)
+    const [showSalemBool, setShowSalemBool] = useState(false)
     const isPlaying = (datahost["player_name"] === actualTurn)
 
     useCustomEventListener('room', data => {
         setRoomId(data)
     });
 
-    const [receibedCard, setreceibedCard] = useState(0)
-    const [showSalemBool, setShowSalemBool] = useState(false)
+
     useCustomEventListener("envelopeCard", envelopeCard => {
         setreceibedCard(envelopeCard);
         setShowSalemBool(true);
@@ -75,6 +76,20 @@ const GameBoard = () => {
         setAccused(resSus[0])
         setCard(resSus[1])
     })
+    
+    function turnYield(){
+        console.log("se fue el turno")
+        fetch ('http://127.0.0.1:8000/gameBoard/turnYield', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+            },
+            body: (datahost["player_id"])
+        })
+        setTurn("");
+    }
 
     return(
         <div className="background-image" >
@@ -93,15 +108,17 @@ const GameBoard = () => {
             <div>
                 {Cards(cards)}
             </div>
-            {RollDice(datahost["player_id"], isPlaying)}
+                {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
-                ? <div className="text-turn" >Es tu turno</div>
+                ? <div className="text-turn">
+                    <a>
+                    <MdTimer />:<Counter start={180} end={0} done={turnYield}/>s </a>
+                     Es tu turno</div>
                 : <div className="text-turn">Es el turno de: {actualTurn}</div>
-                } 
+                }
             </div>
-                  
-            {PlayerOnGrid(datahost["player_id"])}
+                {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying )}
                 {NotifyAcusation(datahost["gameName"], datahost["player_id"])}
@@ -109,7 +126,6 @@ const GameBoard = () => {
             <div className="Chat-component">
                 {Chat(ws.current, isLobby, datahost["gameName"], datahost["player_id"])}
             </div>
-
             <div>
                 {Report(datahost["gameName"], datahost["player_id"])}
             </div>

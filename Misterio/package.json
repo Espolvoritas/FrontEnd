@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/user-event": "^12.8.3",
+    "lyef-counter": "^1.0.2",
     "react": "^17.0.2",
     "react-dice-roll": "^1.2.2",
     "react-dom": "^17.0.2",
