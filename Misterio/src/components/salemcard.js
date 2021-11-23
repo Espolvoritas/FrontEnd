@@ -5,7 +5,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import {CardsImg, CardsName} from "./cardReference";
 import { emitCustomEvent, useCustomEventListener } from 'react-custom-events';
 
-function SalemCard(player_id){
+function SalemCard(player_id, isPlaying){
     const [salemBool, setSalemBool] = useState(false)
     const [foundSalem, setFoundSalem] = useState(false)
 
@@ -35,17 +35,21 @@ function SalemCard(player_id){
         }
     }
 
-    return(
-        <div className="salemCard-box">
-            {
-                salemBool ?
-                    <button className="salemCardButton" onClick={requestCard}>
-                        Usar bruja de Salem 🔮✉️
-                    </button>
-                : <p></p>
-            }
-        </div>
-    )
+    if (!isPlaying) {
+        return
+    } else {
+            return (
+            <div className="salemCard-box">
+                {
+                    salemBool ?
+                        <button className="salemCardButton" onClick={requestCard}>
+                            Usar bruja de Salem 🔮✉️
+                        </button>
+                    : <p></p>
+                }
+            </div>
+        )
+    }
 }
 
 function ShowSalemCardResult(card) {

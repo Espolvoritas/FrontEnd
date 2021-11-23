@@ -134,7 +134,7 @@ const GameBoard = () => {
                 </div>
 
                 <div className="SalemButton">
-                    {SalemCard(datahost["player_id"])}
+                    {SalemCard(datahost["player_id"], isPlaying)}
                 </div>
 
                 <div className="dice-box">
