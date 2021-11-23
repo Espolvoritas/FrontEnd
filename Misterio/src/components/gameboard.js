@@ -12,6 +12,7 @@ import RollDice from './rolldice'
 import PlayerOnGrid from "./playerongrid";
 import {WS_CURR_PLAYER, WS_CARD_LIST, WS_PICK_CARD} from './constants'
 import Report from "./report";
+import {WS_SALEM} from "./constants"
 
 
 const GameBoard = () => {
@@ -57,7 +58,7 @@ const GameBoard = () => {
             if (JSON.parse(event.data)["code"] & WS_PICK_CARD){
                 arriveSus = true
             }
-            if(JSON.parse(event.data)["code"] & 2048){
+            if(JSON.parse(event.data)["code"] & WS_SALEM){
                 setUsedSalem(true)
                 setPlayerUsedSalem(JSON.parse(event.data)["current_player"])
             }
@@ -103,14 +104,14 @@ const GameBoard = () => {
             {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying )}
-                {NotifyAcusation(datahost["gameName"])}
+                {NotifyAcusation(datahost["gameName"], datahost["player_id"])}
             </div>
             <div className="Chat-component">
-                {Chat(ws.current, isLobby, datahost["gameName"])}
+                {Chat(ws.current, isLobby, datahost["gameName"], datahost["player_id"])}
             </div>
 
             <div>
-                {Report(datahost["gameName"])}
+                {Report(datahost["gameName"], datahost["player_id"])}
             </div>
 
             <div className = "SalemButton">

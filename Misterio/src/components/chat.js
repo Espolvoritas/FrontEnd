@@ -2,44 +2,34 @@ import React, { useState } from "react";
 import { useCustomEventListener } from 'react-custom-events';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import {colors} from './dicts'
+import {WS_CHAT_MSG} from './constants'
 
-const Chat = (ws, isLobby, gameName) => {
+const Chat = (ws, isLobby, gameName, player_id) => {
 
     const [msg, setMsg] = useState("")
     const [scroll, setScroll] = useState(null);
-    let [list_player, setList_chat] = useState(JSON.parse(localStorage.getItem('list_player' + gameName)));
+    let [list_player, setList_chat] = useState(JSON.parse(localStorage.getItem('list_player' + gameName + player_id)));
 
     if(list_player === null){
         list_player = []
         for(let i = 0; i < 3; i++){
             list_player[i] = []
         }
-        localStorage.setItem('list_player' + gameName, JSON.stringify(list_player));
-    }
-
-    const colors = {
-        '1': "#d0021b",
-        '2': "#00c98d",
-        '3': "#4a90e2",
-        '4': "#ffffff",
-        '5': "#000000",
-        '6': "#ffca08",
-        '7': "#ff03fb",
-        '8': "#ff6208"
+        localStorage.setItem('list_player' + gameName + player_id, JSON.stringify(list_player));
     }
 
     useCustomEventListener('websocket', data => {
-        if((data)["code"] & 8192) {
+        if((data)["code"] & WS_CHAT_MSG) {
             
             const data_message = (data)["msg"];
 
-            let player = JSON.parse(localStorage.getItem('list_player' + gameName))
+            let player = JSON.parse(localStorage.getItem('list_player' + gameName + player_id))
 
             player[0] = [...player[0], data_message["user"]]
             player[1] = [...player[1], data_message["str"]]
             player[2] = [...player[2], data_message["color"]]
 
-            localStorage.setItem('list_player' + gameName, JSON.stringify(player));
+            localStorage.setItem('list_player' + gameName + player_id, JSON.stringify(player));
             setList_chat(player)
 
             if (scroll) {
@@ -51,7 +41,7 @@ const Chat = (ws, isLobby, gameName) => {
     const sendmsg = (e) => {
         e.preventDefault();
         if(msg !== "")
-        ws.send(JSON.stringify({'code': 8192, 'msg': msg}))
+        ws.send(JSON.stringify({'code': WS_CHAT_MSG, 'msg': msg}))
         setMsg("");
         e.target.reset();
     }
