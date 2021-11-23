@@ -90,15 +90,14 @@ const GameBoard = () => {
             <div>
                 {Cards(cards)}
             </div>
-            {RollDice(datahost["player_id"], isPlaying)}
+                {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <div className="text-turn" >Es tu turno</div>
                 : <div className="text-turn">Es el turno de: {actualTurn}</div>
                 } 
             </div>
-                  
-            {PlayerOnGrid(datahost["player_id"])}
+                {PlayerOnGrid(datahost["player_id"])}
             <div className="Acusation-main">
                 {Acusation(isPlaying )}
                 {NotifyAcusation(datahost["gameName"])}
