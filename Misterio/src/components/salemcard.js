@@ -40,7 +40,7 @@ function SalemCard(player_id){
             {
                 salemBool ?
                     <button className="salemCardButton" onClick={requestCard}>
-                        Usar la bruja de Salem ✉️
+                        Usar bruja de Salem 🔮✉️
                     </button>
                 : <p></p>
             }
