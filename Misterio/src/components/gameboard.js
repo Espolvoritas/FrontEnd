@@ -110,9 +110,8 @@ const GameBoard = () => {
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
                 ? <div className="text-turn" >
-                    <div>
-                    <MdTimer />:<Counter start={180} end={0} done={turnYield}/> 
-                    </div>
+                    <a>
+                    <MdTimer />:<Counter start={180} end={0} done={turnYield}/>s </a>
                      Es tu turno</div>
                 : <div className="text-turn">Es el turno de: {actualTurn}</div>
                 }

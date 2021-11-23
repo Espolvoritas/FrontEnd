@@ -127,7 +127,7 @@ function NotifySuspicion(){
 
 function ShowSuspicionResult(nickname, card) {
 
-    if(nickname === "" || card === 0){
+    if(nickname === "" || card === null){
         return
     }
 
