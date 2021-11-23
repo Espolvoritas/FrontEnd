@@ -87,6 +87,7 @@ const GameBoard = () => {
             },
             body: (datahost["player_id"])
         })
+        setTurn("");
     }
 
     return(
@@ -109,7 +110,7 @@ const GameBoard = () => {
                 {RollDice(datahost["player_id"], isPlaying)}
             <div className="Turn">
                 {((datahost["player_name"] === actualTurn))
-                ? <div className="text-turn" >
+                ? <div className="text-turn">
                     <a>
                     <MdTimer />:<Counter start={180} end={0} done={turnYield}/>s </a>
                      Es tu turno</div>
