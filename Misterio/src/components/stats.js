@@ -126,6 +126,9 @@ const Stats = () => {
     }else {
         return (
             <div className="stats-background">
+            <a className="ref" href="/">
+                <b className="return-button"><RiArrowGoBackFill/></b>
+            </a>
                 <h1>Estadísticas</h1>
                 <div className="Warning">⚠️No hay estadísticas disponibles. Prueba jugando algunas partidas⚠️</div>
             </div>
